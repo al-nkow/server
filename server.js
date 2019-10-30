@@ -6,6 +6,9 @@ const app = express();
 // Connect Database
 connectDb();
 
+// Init Middleware
+app.use(express.json({ extended: false })); // body parser (req.body)
+
 app.get('/', (req, res) => {
   res.send('API Running');
 });
@@ -20,6 +23,7 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`=== SERVER STARTED ON PORT ${PORT} ===`);
+  console.log(`=== Open: http://localhost:${PORT} ===`);
 });
 
 // mongoose.connect('mongodb://localhost:27017/myapi', { // proka4
@@ -33,7 +37,6 @@ app.listen(PORT, () => {
 //   }
 // });
 
-
 // var address = process.env.MONGO_PORT_27017_TCP_ADDR || '127.0.0.1';
 // var port = process.env.MONGO_PORT_27017_TCP_PORT || '27017';
 // var dbName = process.env.MONGO_DATABASE_NAME || 'hrbase';
@@ -43,6 +46,3 @@ app.listen(PORT, () => {
 //
 // // Create the database connection
 // var connection = mongoose.createConnection(dbURI);
-
-
-
