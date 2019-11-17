@@ -6,11 +6,35 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
+const auth = require('../../middleware/auth');
+
+// ======
+const UsersController = require('../../controllers/users');
+// =====
 
 // @route   GET api/users
-// @desc    Test route
+// @desc    Get users list
 // @access  Public
-router.get('/', (req, res) => res.send('User route'));
+router.get('/', auth, async (req, res) => {
+  try {
+    const users = await User.find().select('name email _id');
+    res.status(200).json({ users: users });
+  } catch (err) {
+    return res.status(500).send('Server error');
+  }
+});
+
+// @route   DELETE api/users
+// @desc    Delete user
+// @access  Public
+router.delete('/:userId', auth, async (req, res) => {
+  try {
+    await User.remove({ _id: req.params.userId });
+    return res.status(200).json({ message: 'User deleted' });
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+});
 
 // @route   POST api/users
 // @desc    Register user
@@ -42,7 +66,7 @@ router.post(
       const user = await User.findOne({ email });
       if (user) {
         return res
-          .status(400)
+          .status(409)
           .send({ errors: [{ msg: 'User already exists' }] });
       }
 

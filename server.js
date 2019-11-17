@@ -1,13 +1,40 @@
 const express = require('express');
 const connectDb = require('./config/db');
+const addDefaultUser = require('./config/defaultAdmin');
 
 const app = express();
 
 // Connect Database
 connectDb();
 
+// Create default admin account if not exists
+addDefaultUser();
+
+// static folder
+app.use(express.static('static'));
+
 // Init Middleware
 app.use(express.json({ extended: false })); // body parser (req.body)
+
+// TODO: разрешить только localhost или какой-то адрес
+app.use((req, res, next) => {
+  // Allow CORS
+  res.header('Access-Control-Allow-Origin', '*'); // * - allow from any url
+  // res.header('Access-Control-Allow-Origin', 'http://my-cool-page.com')
+  // res.header('Access-Control-Allow-Headers', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth-token',
+  );
+  if (req.method === 'OPTIONS') {
+    res.header(
+      'Access-Control-Allow-Methods',
+      'PUT, POST, PATCH, DELETE, GET',
+    );
+    return res.status(200).json({});
+  }
+  next();
+});
 
 app.get('/', (req, res) => {
   res.send('API Running');
@@ -18,6 +45,7 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/shops', require('./routes/api/shops'));
 
 const PORT = process.env.PORT || 5000;
 

@@ -2,10 +2,14 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const User = require('../../models/User');
-const { check, validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const bcrypt = require('bcryptjs');
+const { check } = require('express-validator');
+
+const AuthController = require('../../controllers/auth');
+
+const errorHandler = (res, message) => {
+  console.error(`ERROR: ${message}`);
+  res.status(500).send('Server error');
+};
 
 // @route   GET api/auth
 // @desc    Test route
@@ -15,68 +19,36 @@ router.get('/', auth, async (req, res) => {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
   } catch (error) {
-    console.error(`ERROR: ${error.message}`);
-    res.status(500).send('Server error');
+    errorHandler(res, error.message);
   }
 });
 
-// @route   POST api/auth
-// @desc    Authenticate user & get token
-// @access  Public
+/**
+ * Authenticate user & get token
+ * @route POST api/auth
+ * @access Public
+ */
 router.post(
   '/',
   [
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Password is required').exists(),
   ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array(),
-      });
-    }
-
-    const { email, password } = req.body;
-
-    try {
-      // See if user exist
-      const user = await User.findOne({ email });
-      if (!user) {
-        return res
-          .status(400)
-          .send({ errors: [{ msg: 'Invalid Credentials' }] });
-      }
-
-      const isMatch = await bcrypt.compare(password, user.password);
-
-      if (!isMatch) {
-        return res
-          .status(400)
-          .send({ errors: [{ msg: 'Invalid Credentials' }] });
-      }
-
-      // Return jsonwebtoken
-      const payload = {
-        user: {
-          id: user.id, // _id
-        },
-      };
-
-      jwt.sign(
-        payload,
-        config.get('jwtSecret'),
-        { expiresIn: 3600 * 100 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        },
-      );
-    } catch (error) {
-      console.error(`ERROR: ${error.message}`);
-      res.status(500).send('Server error');
-    }
-  },
+  AuthController.login,
 );
+
+/**
+ * Refresh token
+ * @route POST api/auth/token
+ * @access Public
+ */
+router.post('/token', AuthController.token);
+
+/**
+ * Logout user
+ * @route POST api/auth/logout
+ * @access Public
+ */
+router.post('/logout', AuthController.logout);
 
 module.exports = router;

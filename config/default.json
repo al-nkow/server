@@ -1,4 +1,7 @@
 {
   "mongoURI": "mongodb://localhost:27017/boco",
-  "jwtSecret": "Z6oVSPlwSOWv"
+  "jwtSecret": "Z6oVSPlwSOWv",
+  "defaultUserEmail": "admin@admin.com",
+  "defaultUserPassword": "qwerty",
+  "jwtSecretRefreshToken": "Fds6@g89jKi956h"
 }
