@@ -46,6 +46,9 @@ app.use('/api/users', require('./routes/api/users'));
 app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/shops', require('./routes/api/shops'));
+app.use('/api/categories', require('./routes/api/categories'));
+app.use('/api/products', require('./routes/api/products'));
+app.use('/api/positions', require('./routes/api/positions'));
 
 const PORT = process.env.PORT || 5000;
 

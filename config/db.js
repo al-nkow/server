@@ -21,4 +21,6 @@ const connectDb = async () => {
   }
 };
 
+mongoose.set('useFindAndModify', false);
+
 module.exports = connectDb;

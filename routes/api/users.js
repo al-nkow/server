@@ -29,7 +29,7 @@ router.get('/', auth, async (req, res) => {
 // @access  Public
 router.delete('/:userId', auth, async (req, res) => {
   try {
-    await User.remove({ _id: req.params.userId });
+    await User.deleteOne({ _id: req.params.userId });
     return res.status(200).json({ message: 'User deleted' });
   } catch (err) {
     return res.status(500).json({ error: err });

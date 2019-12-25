@@ -1,21 +1,29 @@
-const config = require('config');
+const multer = require('multer');
 
-module.exports = (req, res, next) => {
-  // Get token from header
-  // const token = req.header('x-auth-token');
-  //
-  // // Check if no token
-  // if (!token) {
-  //   return res
-  //     .status(401)
-  //     .json({ msg: 'No token, authorization denied!' });
-  // }
-  // // Verify token
-  // try {
-  //   const decoded = jwt.verify(token, config.get('jwtSecret'));
-  //   req.user = decoded.user;
-  //   next();
-  // } catch (error) {
-  //   res.status(401).json({ msg: 'Token is not valid!' });
-  // }
-};
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './static/uploads');
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + file.originalname); // cb(null, file.filename)
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 2, // 2 mb file size allowed
+  },
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype === 'image/jpeg' ||
+      file.mimetype === 'image/png'
+    ) {
+      cb(null, true); // accept file
+    } else {
+      cb(null, false); // reject file
+    }
+  },
+});
+
+module.exports = upload;
