@@ -17,15 +17,26 @@ const addProductAndShopDataToPosition = async positions => {
   console.log('============================');
   console.log('============================');
 
-  const respPositions = positions.toJSON();
+  // author.set('thumbnail', 'test', {strict: false});
 
-  respPositions.forEach(item => {
-    const foundProduct = products.find(
-      prod => prod._id === item.productId,
-    );
-    console.log('>>>>>>', foundProduct);
-    item.product = { test: 'pizda' };
+  positions.forEach(item => {
+    // const foundProduct = products.find(
+    //   prod => prod._id === item.productId,
+    // );
+    // console.log('>>>>>>', foundProduct);
+    // const addInfo = { test: 'test' };
+    // item.set('product', addInfo, { strict: false });
+    item.product = { test: 'test' };
   });
+
+  // positions.lean();
+
+  // positions.lean().exec(function(err, data) {
+  //   data = data.map(function(author) {
+  //     author.thumbnail = 'test';
+  //     return author;
+  //   });
+  // });
 };
 
 /**

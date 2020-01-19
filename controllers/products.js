@@ -36,13 +36,21 @@ exports.getById = async (req, res) => {
  * GET ALL PRODUCTS
  */
 exports.getAll = async (req, res) => {
-  const page = req.query.page || 1;
-  const limit = +req.query.limit || 10;
+  const page = req.query.page || 0;
+  const limit = +req.query.limit || 1000;
   const skip = limit * page;
+
+  const filter = {};
+  const productIds = req.query.id;
+
+  if (productIds) {
+    const ids = productIds.map(item => mongoose.Types.ObjectId(item));
+    filter._id = { $in: ids };
+  }
 
   try {
     const count = await Product.count();
-    const products = await Product.find()
+    const products = await Product.find(filter)
       .skip(skip)
       .limit(limit);
     res.status(200).json({ list: products, count });

@@ -32,8 +32,16 @@ exports.create = async (req, res) => {
  * GET ALL SHOPS
  */
 exports.getAll = async (req, res) => {
+  const filter = {};
+  const shopIds = req.query.id;
+
+  if (shopIds) {
+    const ids = shopIds.map(item => mongoose.Types.ObjectId(item));
+    filter._id = { $in: ids };
+  }
+
   try {
-    const shops = await Shop.find().sort({ date: -1 }); // .select('title _id')
+    const shops = await Shop.find(filter).sort({ date: -1 }); // .select('title _id')
     res.status(200).json({ list: shops });
   } catch (err) {
     return res.status(500).json({ error: err });
