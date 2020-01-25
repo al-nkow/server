@@ -49,6 +49,7 @@ app.use('/api/shops', require('./routes/api/shops'));
 app.use('/api/categories', require('./routes/api/categories'));
 app.use('/api/products', require('./routes/api/products'));
 app.use('/api/positions', require('./routes/api/positions'));
+app.use('/api/import', require('./routes/api/import'));
 
 const PORT = process.env.PORT || 5000;
 

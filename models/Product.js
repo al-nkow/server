@@ -16,8 +16,7 @@ let ProductSchema = new Schema({
   category: {
     type: ObjectId, // a product references a category _id with type ObjectId
   },
-  link: {
-    // TODO: заменить на IMAGE!!!!!!!
+  image: {
     type: String,
   },
   height: {

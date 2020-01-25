@@ -1,52 +1,15 @@
 const Position = require('../models/Position');
-const Product = require('../models/Product');
 const mongoose = require('mongoose');
-
-const addProductAndShopDataToPosition = async positions => {
-  // Здесь добавить информацию о товарах
-  const productIds = positions.map(pos =>
-    mongoose.Types.ObjectId(pos.productId),
-  );
-  const products = await Product.find({ _id: { $in: productIds } });
-  // const products = await Product.find();
-  console.log('============================');
-  console.log('============================');
-  console.log('============================');
-  console.log('====================', products);
-  console.log('============================');
-  console.log('============================');
-  console.log('============================');
-
-  // author.set('thumbnail', 'test', {strict: false});
-
-  positions.forEach(item => {
-    // const foundProduct = products.find(
-    //   prod => prod._id === item.productId,
-    // );
-    // console.log('>>>>>>', foundProduct);
-    // const addInfo = { test: 'test' };
-    // item.set('product', addInfo, { strict: false });
-    item.product = { test: 'test' };
-  });
-
-  // positions.lean();
-
-  // positions.lean().exec(function(err, data) {
-  //   data = data.map(function(author) {
-  //     author.thumbnail = 'test';
-  //     return author;
-  //   });
-  // });
-};
 
 /**
  * CREATE NEW POSITION
  */
 exports.create = async (req, res) => {
-  /*
-  !!!! TODO ОБЯЗАТЕЛЬНО проверять что такой позиции нет !!!!!
-  И не вздумай этого не сделать!
-   */
+  const foundPosition = await Position.findOne({ ...req.body });
+  if (foundPosition) {
+    return res.status(409).json({ error: 'Position already exists' });
+  }
+
   try {
     const newPosition = new Position({
       ...req.body,
@@ -66,22 +29,21 @@ exports.create = async (req, res) => {
  * GET ALL POSITIONS
  */
 exports.getAll = async (req, res) => {
-  const { productId } = req.query;
+  const { productId, article } = req.query;
   const filter = {};
   if (productId) filter.productId = productId;
+  if (article) filter.article = article;
 
   const page = req.query.page || 1;
   const limit = +req.query.limit || 10;
   const skip = limit * page;
 
   try {
-    const count = await Position.count();
+    const count = await Position.countDocuments();
     const positions = await Position.find(filter)
+      .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);
-
-    // if (positions && positions.length)
-    //   await addProductAndShopDataToPosition(positions);
 
     res.status(200).json({ list: positions, count });
   } catch (err) {
