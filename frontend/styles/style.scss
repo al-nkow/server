@@ -1,0 +1,9 @@
+$body-color: red;
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  color: $body-color;
+  font-size: 55px;
+  border-radius: 33px;
+  box-shadow: 20px 2px 15px 0px rgba(0,0,0,0.85);
+}

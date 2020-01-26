@@ -7,6 +7,10 @@ const app = express();
 // Connect Database
 connectDb();
 
+// Set default engine
+app.set('views', './views');
+app.set('view engine', 'pug');
+
 // Create default admin account if not exists
 addDefaultUser();
 
@@ -36,9 +40,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.send('API Running');
-});
+// app.get('/', (req, res) => {
+//   res.send('API Running');
+// });
 
 // Define routes
 app.use('/api/auth', require('./routes/api/auth'));
@@ -78,3 +82,48 @@ app.listen(PORT, () => {
 //
 // // Create the database connection
 // var connection = mongoose.createConnection(dbURI);
+
+// LANDING PAGE ======
+app.get('/', async (req, res) => {
+  // const content = await Content.findOne({ key: 'main_content' })
+  //   .select('season main about programs benefits prizes teachers contacts');
+  // const reviews = await Review.find().sort({ 'order': -1 });
+  // const news = await News.find().sort({ 'date': -1 });
+  // const faq = await Faq.find().select('_id answer question');
+  // const partners = await Partners.find();
+  // const docsList = await Doc.find();
+  //
+  // const docs = { policy: {}, offer: {}};
+  // if (docsList) docsList.forEach(item => docs[item.name] = item);
+  //
+  // const data = { content, reviews, news, faq, partners, docs };
+  // res.render('landing/index', data, function(err, html) {
+
+  res.render('index', function(err, html) {
+    res.send(html);
+  });
+});
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  res.status(404);
+
+  // respond with html page
+  if (req.accepts('html')) {
+    res.render('404', { url: req.url });
+    return;
+  }
+
+  // respond with json
+  // if (req.accepts('json')) {
+  //   res.send({ error: 'Not found' });
+  //   return;
+  // }
+
+  // default to plain-text. send()
+  // res.type('txt').send('Not found');
+
+  const error = new Error('Not found');
+  error.status = 404;
+  next(error);
+});
