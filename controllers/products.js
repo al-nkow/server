@@ -107,3 +107,34 @@ exports.update = async (req, res) => {
     return res.status(500).json({ error: err });
   }
 };
+
+/**
+ * SEARCH PRODUCT
+ */
+exports.search = async (req, res) => {
+  const searchStr = req.body.search;
+
+  // db.messages.find({$text: {$search: "\"cook food\""}}, {score: {$meta: "textScore"}}).sort({score:{$meta:"textScore"}})
+
+  const result = await Product.find(
+    {
+      $text: { $search: searchStr },
+    },
+    { score: { $meta: 'textScore' } },
+  ).sort({ score: { $meta: 'textScore' } });
+  // .skip(20)
+  // .limit(10)
+  // .exec(function(err, docs) { ... });
+
+  res.status(200).json({ searchResult: result });
+
+  // const { productId } = req.params;
+  // const updates = { ...req.body };
+  //
+  // try {
+  //   await Product.findByIdAndUpdate(productId, updates);
+  //   res.status(200).json({ message: 'Product updated' });
+  // } catch (err) {
+  //   return res.status(500).json({ error: err });
+  // }
+};

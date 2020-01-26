@@ -127,3 +127,7 @@ app.use((req, res, next) => {
   error.status = 404;
   next(error);
 });
+
+// app.use(express.favicon("public/images/favicon.ico"));
+// or
+// app.use('/favicon.ico', express.static('images/favicon.ico'));

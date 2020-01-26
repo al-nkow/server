@@ -4,11 +4,18 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1, user-scalable=0')
     title BOCO
     //link(rel="shortcut icon" type="image/png" href="landing/favicon.png")
-    script(src="/frontend/main.js")
     //link(
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css")
     //link(href="landing/styles.css" rel="stylesheet")
     link(rel="stylesheet" href="/frontend/style.css")
   body
-    h1  TEST
+    .header
+    .container
+      input.search-inp(id="searchInp" type="text" name="search")
+      button(id="searchBtn") отправить
+
+
+
+    // ===============================================================
+    script(src="/frontend/main.js")

@@ -45,5 +45,8 @@
     "last 4 version",
     "> 1%",
     "ie >= 8"
-  ]
+  ],
+  "nodemonConfig": {
+    "ignore": ["frontend/", "static/frontend/"]
+  }
 }

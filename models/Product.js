@@ -39,4 +39,7 @@ let ProductSchema = new Schema({
   },
 });
 
+ProductSchema.index({ name: 'text' });
+// ProductSchema.index({name: 'text', 'profile.something': 'text'});
+
 module.exports = mongoose.model('Product', ProductSchema);

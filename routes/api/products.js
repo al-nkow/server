@@ -12,6 +12,13 @@ const ProductsController = require('../../controllers/products');
 router.get('/', ProductsController.getAll);
 
 /**
+ * Full text search products
+ * @route POST api/products/search
+ * @access Public
+ */
+router.post('/search', ProductsController.search);
+
+/**
  * Create new product
  * @route POST api/products
  * @access Private
