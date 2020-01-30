@@ -1,5 +1,8 @@
 import Home from './js/home';
 
+// import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { bro } from './js/bro';
 import './styles/style.scss';
 

@@ -4,7 +4,9 @@ const Home = () => {
   btn.addEventListener('click', searchClickHandler);
 
   function searchClickHandler() {
+    const wrap = document.getElementById('productsList');
     const inp = document.getElementById('searchInp');
+    wrap.innerHTML = '';
     searchRequest(inp.value);
   }
 
@@ -22,11 +24,29 @@ const Home = () => {
     fetch(SEARCH_URL, fetchData)
       .then(response => response.json())
       .then(function(res) {
-        console.log('>>>>>>', res);
+        if (res && res.searchResult && res.searchResult.length) {
+          renderProductsList(res.searchResult);
+        }
       })
       .catch(function(error) {
         console.log('ERROR >>>>>>', error);
       });
+  }
+
+  function renderProductsList(data) {
+    console.log('>>>>>>', data);
+    const wrap = document.getElementById('productsList');
+    const fragment = document.createDocumentFragment();
+
+    data.forEach(item => {
+      const card = document.createElement('div');
+      card.classList.add('product-card');
+      const name = document.createTextNode(item.name);
+      card.appendChild(name);
+      fragment.appendChild(card);
+    });
+
+    wrap.appendChild(fragment);
   }
 };
 

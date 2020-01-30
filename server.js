@@ -2,6 +2,9 @@ const express = require('express');
 const connectDb = require('./config/db');
 const addDefaultUser = require('./config/defaultAdmin');
 
+const Category = require('./models/Category');
+const Shop = require('./models/Shop');
+
 const app = express();
 
 // Connect Database
@@ -99,7 +102,17 @@ app.get('/', async (req, res) => {
   // const data = { content, reviews, news, faq, partners, docs };
   // res.render('landing/index', data, function(err, html) {
 
-  res.render('index', function(err, html) {
+  const data = {};
+
+  try {
+    data.categories = await Category.find();
+    data.shops = await Shop.find();
+    console.log('>>>>>>', data);
+  } catch (e) {
+    console.log('>>>>>>', e);
+  }
+
+  res.render('index', data, function(err, html) {
     res.send(html);
   });
 });
