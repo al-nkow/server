@@ -1,25 +1,7 @@
-meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
-title BOCO
-//link(rel="shortcut icon" type="image/png" href="landing/favicon.png")
-//link(
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css")
-//link(href="landing/styles.css" rel="stylesheet")
-link(href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet")
-link(rel="stylesheet" href="/frontend/style.css")
-
+include parts/meta.pug
++my-include('BOCO: Search results')
 body
-  nav.site-header.navbar.shadow-sm
-    div.container.d-flex.justify-content-between
-      a.site-header__link.navbar-brand.d-flex.align-items-center(href="/")
-        img.site-header__logo(src="/images/logo_long.png")
-      div
-        span.site-header__city.mr-5.p-2.d-none.d-sm-inline-block
-          include parts/point.pug
-          span.ml-2 Санкт-Петербург
-        a.site-header__link(class="p-2" href="/admin") Авторизоваться
-
-
+  include parts/header.pug
   .container.p-3
     .row
       .col-6
@@ -42,7 +24,7 @@ body
       if products
         each product in products
           .col-4
-            .card.mb-3
+            a.product-card.card.mb-3(href= "/prices?product=" + product._id)
               if product.image
                 img.card-img-top(src=product.image alt="")
               else
@@ -54,13 +36,13 @@ body
                   .row
                     if product.width
                       .col-6 Ширина:
-                      .col-6=product.width + 'см'
+                      .col-6=product.width + 'мм'
                     if product.height
                       .col-6 Высота:
-                      .col-6=product.height + 'см'
+                      .col-6=product.height + 'мм'
                     if product.thickness
                       .col-6 Толщина:
-                      .col-6=product.thickness + 'см'
+                      .col-6=product.thickness + 'мм'
                     if product.volumeL
                       .col-6 Объем:
                       .col-6=product.volumeL + 'л'

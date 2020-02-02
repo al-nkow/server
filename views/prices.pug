@@ -1,0 +1,60 @@
+include parts/meta.pug
++my-include('BOCO: Prices')
+body
+  include parts/header.pug
+  .container.p-3
+    .card.mb-3
+      div.row.no-gutters
+        div.col-md-3
+          img(src=(product.image ? product.image : "/images/noimg.png") class="card-img" alt="")
+        div.col-md-9
+          div.card-body
+            h5.card-title=product.name
+            h6.card-subtitle.mb-2.text-muted=product.brand
+            //p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+            p.card-text
+              .row
+                if product.width
+                  .col-6 Ширина:
+                  .col-6=product.width + 'мм'
+                if product.height
+                  .col-6 Высота:
+                  .col-6=product.height + 'мм'
+                if product.thickness
+                  .col-6 Толщина:
+                  .col-6=product.thickness + 'мм'
+                if product.volumeL
+                  .col-6 Объем:
+                  .col-6=product.volumeL + 'л'
+                if product.volumeM
+                  .col-6 Объем:
+                  .col-6=product.volumeM + 'м.куб'
+                if product.weight
+                  .col-6 Вес:
+                  .col-6=product.weight + 'кг'
+                if product.area
+                  .col-6 Площадь:
+                  .col-6=product.area + 'м.кв'
+            if category
+              p.card-text
+                small.text-muted=category.name
+
+    if positions && positions.length
+      table.table.prices-table
+        thead
+          tr
+            th(scope="col") Магазин
+            th(scope="col") Цена
+            th(scope="col") Артикул
+            th(scope="col") Ссылка
+        tbody
+          each position in positions
+            tr
+              th(scope="row")
+                img.prices-table__image(src=position.shop.image alt="")
+              td=position.price + ' руб.'
+              td=position.article
+              td
+                a.btn.btn-success(href=position.link target="_blank") В магазин
+    else
+      div К сожалению, в настоящее время этот товар не представлен в ассортименте магазинов

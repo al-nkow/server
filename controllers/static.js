@@ -1,10 +1,11 @@
 const Product = require('../models/Product');
 const Category = require('../models/Category');
 const Shop = require('../models/Shop');
-// const Position = require('../models/Position');
+const Position = require('../models/Position');
 // const mongoose = require('mongoose');
 const { redConsoleColor } = require('../config/constants');
 const ProductService = require('../services/products');
+const PositionService = require('../services/positions');
 
 /**
  * PRODUCTS PAGE
@@ -69,4 +70,28 @@ exports.home = async (req, res) => {
   res.render('index', data, function(err, html) {
     res.send(html);
   });
+};
+
+/**
+ * PRICES PAGE
+ */
+exports.prices = async (req, res) => {
+  try {
+    const { product: productId } = req.query;
+    const product = await Product.findById(productId);
+    const category = await Category.findById(product.category);
+
+    const positions = await Position.find({
+      productId: product._id,
+    }).sort({ price: 1 });
+
+    const data = { product, category };
+    data.positions = await PositionService.addShopData(positions);
+
+    res.render('prices', data, function(err, html) {
+      res.send(html);
+    });
+  } catch (err) {
+    console.log(redConsoleColor, 'ERROR GET PRODUCT BY ID', err);
+  }
 };

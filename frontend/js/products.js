@@ -51,10 +51,7 @@ const Products = () => {
     fetch(SEARCH_URL, fetchData)
       .then(response => response.json())
       .then(function(res) {
-        if (res && res.searchResult && res.searchResult.length) {
-          // if no - shoe message "no items"
-          renderProductsList(res.searchResult);
-        }
+        renderProductsList(res);
       })
       .catch(function(error) {
         console.log('ERROR >>>>>>', error);

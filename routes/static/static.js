@@ -16,4 +16,11 @@ router.get('/', StaticController.home);
  */
 router.get('/products', StaticController.products);
 
+/**
+ * Prices page
+ * @route GET /prices
+ * @access Public
+ */
+router.get('/prices', StaticController.prices);
+
 module.exports = router;
