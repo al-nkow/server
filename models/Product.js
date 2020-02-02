@@ -25,17 +25,20 @@ let ProductSchema = new Schema({
   width: {
     type: Number,
   },
-  length: {
+  thickness: {
     type: Number,
   },
-  value: {
+  volumeL: {
+    type: Number,
+  },
+  volumeM: {
     type: Number,
   },
   weight: {
     type: Number,
   },
-  color: {
-    type: String,
+  area: {
+    type: Number,
   },
 });
 

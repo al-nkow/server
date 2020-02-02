@@ -1,67 +1,58 @@
-//.header {
-//  height: 40px;
-//  background: #84bae2;
-//  margin-bottom: 20px;
-//}
+@import 'config';
+@import 'header';
+
 body {
   font-family: 'Ubuntu', sans-serif;
 }
 
-.search-inp {
-  width: 400px;
-  font-size: 16px;
-  padding: 5px;
-  color: #333333;
-  border-radius: 4px;
-  box-shadow: none;
-  background: none;
-  border: 2px solid #a5a5a5;
-  margin-right: 10px;
-}
-
-.product-card {
-  border: 1px solid #dedede;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.main-logo {
-  width: 40px;
-  height: 40px;
-  fill: #ffffff;
-}
-
-.site-header {
-  background: #986546;
-  a {
-    color: #ffffff;
-  }
-}
-
-.main-search-input {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.search-wrap {
-  background: url('/images/bobr.png') no-repeat;
-}
-
-.shops-section {
-  background: #dedede;
-}
-
-.categories-section {
-  background: url(https://www.toptal.com/designers/subtlepatterns/patterns/gplaypattern.png);
-}
-
-.shop-img {
-  max-width: 100%;
-  max-height: 60px;
+.footer-section {
+  background: $text;
+  color: $white;
 }
 
 .underfooter {
-  background: #333333;
-  color: #ffffff;
+  background: $black;
+  color: $white;
   padding: 10px 20px;
+}
+
+.shops-section {
+  background: $light-grey;
+  &__item {
+    width: 100%;
+  }
+  &__image {
+    max-width: 100%;
+    max-height: 60px;
+  }
+}
+
+.categories-section {
+  background: url('/images/gplaypattern.png');
+  &__item {
+    color: $text;
+    position: relative;
+    padding: 10px 10px 10px 27px;
+    display: block;
+    background: $white;
+    border-radius: 4px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+    transition: all 0.1s linear;
+    top: 0;
+    &:hover {
+      text-decoration: none;
+      color: $blue;
+      top: -2px;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 2px solid $orange;
+      border-radius: 50%;
+      top: 17px;
+      left: 9px;
+    }
+  }
 }

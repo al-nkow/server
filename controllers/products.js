@@ -1,6 +1,8 @@
 const Product = require('../models/Product');
 const Position = require('../models/Position');
 const mongoose = require('mongoose');
+const ProductService = require('../services/products');
+const Category = require('../models/Category');
 
 /**
  * CREATE NEW PRODUCT
@@ -126,7 +128,11 @@ exports.search = async (req, res) => {
   // .limit(10)
   // .exec(function(err, docs) { ... });
 
-  res.status(200).json({ searchResult: result });
+  const productsWithCatNames = await ProductService.addCategoryNames(
+    result,
+  );
+
+  res.status(200).json({ searchResult: productsWithCatNames });
 
   // const { productId } = req.params;
   // const updates = { ...req.body };

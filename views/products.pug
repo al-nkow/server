@@ -1,0 +1,81 @@
+meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+title BOCO
+//link(rel="shortcut icon" type="image/png" href="landing/favicon.png")
+//link(
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css")
+//link(href="landing/styles.css" rel="stylesheet")
+link(href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet")
+link(rel="stylesheet" href="/frontend/style.css")
+
+body
+  nav.site-header.navbar.shadow-sm
+    div.container.d-flex.justify-content-between
+      a.site-header__link.navbar-brand.d-flex.align-items-center(href="/")
+        img.site-header__logo(src="/images/logo_long.png")
+      div
+        span.site-header__city.mr-5.p-2.d-none.d-sm-inline-block
+          include parts/point.pug
+          span.ml-2 Санкт-Петербург
+        a.site-header__link(class="p-2" href="/admin") Авторизоваться
+
+
+  .container.p-3
+    .row
+      .col-6
+        div(class="input-group")
+          input(
+            type="text"
+            id="searchInp"
+            class="form-control"
+            placeholder="Название товара"
+            aria-label="Recipient's username"
+            aria-describedby="searchBtn"
+          )
+          div(class="input-group-append")
+            button(class="btn btn-outline-secondary" type="button" id="searchBtn") Найти
+
+  hr
+
+  .container
+    .row(id="productsListWrap")
+      if products
+        each product in products
+          .col-4
+            .card.mb-3
+              if product.image
+                img.card-img-top(src=product.image alt="")
+              else
+                img.card-img-top(src="images/noimg.png" alt="")
+              .card-body
+                h5.card-title=product.name
+                h6.card-subtitle.mb-2.text-muted=product.brand
+                p.card-text
+                  .row
+                    if product.width
+                      .col-6 Ширина:
+                      .col-6=product.width + 'см'
+                    if product.height
+                      .col-6 Высота:
+                      .col-6=product.height + 'см'
+                    if product.thickness
+                      .col-6 Толщина:
+                      .col-6=product.thickness + 'см'
+                    if product.volumeL
+                      .col-6 Объем:
+                      .col-6=product.volumeL + 'л'
+                    if product.volumeM
+                      .col-6 Объем:
+                      .col-6=product.volumeM + 'м.куб'
+                    if product.weight
+                      .col-6 Вес:
+                      .col-6=product.weight + 'кг'
+                    if product.area
+                      .col-6 Площадь:
+                      .col-6=product.area + 'м.кв'
+                if product.categoryName
+                  p.card-text
+                    small.text-muted=product.categoryName
+
+  // ===============================================================
+  script(src="/frontend/main.js")

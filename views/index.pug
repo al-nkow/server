@@ -10,24 +10,27 @@ html
     //link(href="landing/styles.css" rel="stylesheet")
     link(href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet")
     link(rel="stylesheet" href="/frontend/style.css")
+
   body
-    nav.site-header.navbar.sticky-top.shadow-sm
+    nav.site-header.navbar.shadow-sm
       div.container.d-flex.justify-content-between
-        a.site-header.navbar-brand.d-flex.align-items-center(href="#")
-          include parts/beaver.pug
-          span BoCo
+        a.site-header__link.navbar-brand.d-flex.align-items-center(href="/")
+          img.site-header__logo(src="/images/logo_long.png")
         div
-          a(class="p-2" href="#") Категории
-          a(class="p-2" href="#") Авторизоваться
-    .jumbotron.jumbotron-fluid
-      .container.text-center.search-wrap
+          span.site-header__city.mr-5.p-2.d-none.d-sm-inline-block
+            include parts/point.pug
+            span.ml-2 Санкт-Петербург
+          a.site-header__link(class="p-2" href="/admin") Авторизоваться
+
+    .main-search.jumbotron.jumbotron-fluid.mb-0
+      .container.text-center
         p(class="lead font-weight-normal mb-5")
           | Начните поиск строительных материалов вместе с BoberCo - крупнейшей базой данных товаров
           | магазинов и гипермаркетов Санкт-Петербурга, насчитывающей несколько тысяч наименований
-        div(class="input-group main-search-input")
-          input(type="text" class="form-control" placeholder="Название товара" aria-label="Recipient's username" aria-describedby="button-addon2")
+        div(class="input-group main-search__input")
+          input(type="text" id="searchInp" class="form-control" placeholder="Название товара" aria-label="Recipient's username" aria-describedby="searchBtn")
           div(class="input-group-append")
-            button(class="btn btn-outline-secondary" type="button" id="button-addon2") Найти
+            button(class="btn btn-outline-secondary" type="button" id="searchBtn") Найти
 
 
 
@@ -47,19 +50,21 @@ html
 
 
     // ================ CATEGORIES ================
-    .categories-section.p-5
+    .categories-section.p-2.p-sm-2.p-md-5
       .container
         .row.text-center
           each category in categories
-            .col-4.p-2= category.name
+            .col-xs-12.col-sm-6.p-2.text-left
+              a(href="/").categories-section__item.text-left= category.name
 
 
     .shops-section.p-5
       .container
         .row.text-center
           each shop in shops
-            .col-3.p-2
-              img.shop-img(src=shop.image alt="")
+            .col-6.col-sm-6.col-md-3
+              .shops-section__item.p-2
+                img.shops-section__image(src=shop.image alt="")
 
       //input.search-inp(id="searchInp" type="text" name="search")
       //button(class="btn btn-lg btn-bd-primary" id="searchBtn") отправить
@@ -68,8 +73,17 @@ html
       //div(id="productsList")
 
 
-    footer.container.py-5 Footer
+    .footer-section
+      footer.container.py-5 BoberCo
     div.underfooter
-      .container.p-2 &copy; 2019-2020 All rights reserved
+      .container.p-2 &copy; 2019-2020 BOCO Все права защищены
     // ===============================================================
     //script(src="/frontend/main.js")
+
+    script.
+      document.getElementById('searchBtn').addEventListener('click', function () {
+        var inpValue = document.getElementById('searchInp').value;
+        if (inpValue) {
+            window.location.href = '/products?search=' + inpValue;
+        }
+      });

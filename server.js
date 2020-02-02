@@ -2,9 +2,6 @@ const express = require('express');
 const connectDb = require('./config/db');
 const addDefaultUser = require('./config/defaultAdmin');
 
-const Category = require('./models/Category');
-const Shop = require('./models/Shop');
-
 const app = express();
 
 // Connect Database
@@ -43,9 +40,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get('/', (req, res) => {
-//   res.send('API Running');
-// });
+// response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
 
 // Define routes
 app.use('/api/auth', require('./routes/api/auth'));
@@ -57,6 +52,7 @@ app.use('/api/categories', require('./routes/api/categories'));
 app.use('/api/products', require('./routes/api/products'));
 app.use('/api/positions', require('./routes/api/positions'));
 app.use('/api/import', require('./routes/api/import'));
+app.use('/', require('./routes/static/static'));
 
 const PORT = process.env.PORT || 5000;
 
@@ -86,37 +82,6 @@ app.listen(PORT, () => {
 // // Create the database connection
 // var connection = mongoose.createConnection(dbURI);
 
-// LANDING PAGE ======
-app.get('/', async (req, res) => {
-  // const content = await Content.findOne({ key: 'main_content' })
-  //   .select('season main about programs benefits prizes teachers contacts');
-  // const reviews = await Review.find().sort({ 'order': -1 });
-  // const news = await News.find().sort({ 'date': -1 });
-  // const faq = await Faq.find().select('_id answer question');
-  // const partners = await Partners.find();
-  // const docsList = await Doc.find();
-  //
-  // const docs = { policy: {}, offer: {}};
-  // if (docsList) docsList.forEach(item => docs[item.name] = item);
-  //
-  // const data = { content, reviews, news, faq, partners, docs };
-  // res.render('landing/index', data, function(err, html) {
-
-  const data = {};
-
-  try {
-    data.categories = await Category.find();
-    data.shops = await Shop.find();
-    console.log('>>>>>>', data);
-  } catch (e) {
-    console.log('>>>>>>', e);
-  }
-
-  res.render('index', data, function(err, html) {
-    res.send(html);
-  });
-});
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   res.status(404);
@@ -144,3 +109,34 @@ app.use((req, res, next) => {
 // app.use(express.favicon("public/images/favicon.ico"));
 // or
 // app.use('/favicon.ico', express.static('images/favicon.ico'));
+
+// =====================
+/*
+console.log('\x1b[31m', 'I am RED');
+
+Reset = "\x1b[0m"
+Bright = "\x1b[1m"
+Dim = "\x1b[2m"
+Underscore = "\x1b[4m"
+Blink = "\x1b[5m"
+Reverse = "\x1b[7m"
+Hidden = "\x1b[8m"
+
+FgBlack = "\x1b[30m"
+FgRed = "\x1b[31m"
+FgGreen = "\x1b[32m"
+FgYellow = "\x1b[33m"
+FgBlue = "\x1b[34m"
+FgMagenta = "\x1b[35m"
+FgCyan = "\x1b[36m"
+FgWhite = "\x1b[37m"
+
+BgBlack = "\x1b[40m"
+BgRed = "\x1b[41m"
+BgGreen = "\x1b[42m"
+BgYellow = "\x1b[43m"
+BgBlue = "\x1b[44m"
+BgMagenta = "\x1b[45m"
+BgCyan = "\x1b[46m"
+BgWhite = "\x1b[47m"
+ */
