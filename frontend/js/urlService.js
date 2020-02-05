@@ -25,7 +25,8 @@ const urlService = () => {
       queryString = queryString
         ? queryString + '&'
         : queryString + '?';
-      queryString += key + '=' + objectParams[key];
+      if (objectParams[key])
+        queryString += key + '=' + objectParams[key];
     }
     return queryString;
   }

@@ -4,7 +4,7 @@ body
   include parts/header.pug
   .container.p-3
     .row
-      .col-6
+      .col-12.col-sm-6
         div(class="input-group")
           input(
             type="text"
@@ -16,6 +16,15 @@ body
           )
           div(class="input-group-append")
             button(class="btn btn-outline-secondary" type="button" id="searchBtn") Найти
+      .col-6
+        if categories
+          div.form-group
+            label(for="categorySelect") Категория
+            select.form-control(id="categorySelect")
+              option(value="") Все
+              each category in categories
+                option(value=category._id)=category.name
+
 
   hr
 
@@ -23,7 +32,7 @@ body
     .row(id="productsListWrap")
       if products
         each product in products
-          .col-4
+          .col-12.col-sm-4
             a.product-card.card.mb-3(href= "/prices?product=" + product._id)
               if product.image
                 img.card-img-top(src=product.image alt="")
@@ -32,6 +41,8 @@ body
               .card-body
                 h5.card-title=product.name
                 h6.card-subtitle.mb-2.text-muted=product.brand
+                if product.description
+                  p.card-text=product.description
                 p.card-text
                   .row
                     if product.width
@@ -58,6 +69,8 @@ body
                 if product.categoryName
                   p.card-text
                     small.text-muted=product.categoryName
+      else
+        div По Вашему запросу ничего не найдено, попробуйте изменить параметры поиска и повторить попытку
 
   // ===============================================================
   script(src="/frontend/main.js")

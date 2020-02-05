@@ -3,6 +3,7 @@ const Position = require('../models/Position');
 const mongoose = require('mongoose');
 const ProductService = require('../services/products');
 const Category = require('../models/Category');
+const { redConsoleColor } = require('../config/constants');
 
 /**
  * CREATE NEW PRODUCT
@@ -111,36 +112,44 @@ exports.update = async (req, res) => {
 };
 
 /**
+ * SEARCH PRODUCT COMMON PART
+ * @param params
+ * @returns {Promise<*[]|*>}
+ */
+exports.commonSearch = async params => {
+  try {
+    const { search: searchStr, ...rest } = params;
+    let products;
+
+    if (searchStr) {
+      products = await Product.find(
+        {
+          $text: { $search: searchStr },
+          ...rest,
+        },
+        { score: { $meta: 'textScore' } },
+      ).sort({ score: { $meta: 'textScore' } });
+    } else {
+      products = await Product.find({ ...rest });
+    }
+
+    return products && products.length
+      ? await ProductService.addCategoryNames(products)
+      : products;
+  } catch (e) {
+    console.error(
+      redConsoleColor,
+      'ERROR GETTING DATA FOR PRODUCTS PAGE: ',
+      e,
+    );
+    return [];
+  }
+};
+
+/**
  * SEARCH PRODUCT
  */
 exports.search = async (req, res) => {
-  const searchStr = req.body.search;
-
-  // db.messages.find({$text: {$search: "\"cook food\""}}, {score: {$meta: "textScore"}}).sort({score:{$meta:"textScore"}})
-
-  const result = await Product.find(
-    {
-      $text: { $search: searchStr },
-    },
-    { score: { $meta: 'textScore' } },
-  ).sort({ score: { $meta: 'textScore' } });
-  // .skip(20)
-  // .limit(10)
-  // .exec(function(err, docs) { ... });
-
-  const productsWithCatNames = await ProductService.addCategoryNames(
-    result,
-  );
-
-  res.status(200).json({ searchResult: productsWithCatNames });
-
-  // const { productId } = req.params;
-  // const updates = { ...req.body };
-  //
-  // try {
-  //   await Product.findByIdAndUpdate(productId, updates);
-  //   res.status(200).json({ message: 'Product updated' });
-  // } catch (err) {
-  //   return res.status(500).json({ error: err });
-  // }
+  const result = await exports.commonSearch(req.body);
+  res.status(200).json({ searchResult: result });
 };

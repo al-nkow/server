@@ -6,27 +6,22 @@ const Position = require('../models/Position');
 const { redConsoleColor } = require('../config/constants');
 const ProductService = require('../services/products');
 const PositionService = require('../services/positions');
+const ProductsController = require('../controllers/products');
 
 /**
  * PRODUCTS PAGE
  */
 exports.products = async (req, res) => {
-  const searchStr = req.query.search;
-
-  // if !searchStr ?????
-
   const data = {};
-
-  // TRY CATCH!!!!!!!
-
-  if (searchStr) {
-    const products = await Product.find(
-      {
-        $text: { $search: searchStr },
-      },
-      { score: { $meta: 'textScore' } },
-    ).sort({ score: { $meta: 'textScore' } });
-    data.products = await ProductService.addCategoryNames(products);
+  try {
+    data.products = await ProductsController.commonSearch(req.query);
+    data.categories = await Category.find();
+  } catch (e) {
+    console.error(
+      redConsoleColor,
+      'ERROR GETTING DATA FOR PRODUCTS PAGE: ',
+      e,
+    );
   }
 
   res.render('products', data, function(err, html) {

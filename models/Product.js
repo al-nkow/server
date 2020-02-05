@@ -7,6 +7,9 @@ let ProductSchema = new Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+  },
   brand: {
     type: String,
   },
@@ -42,6 +45,7 @@ let ProductSchema = new Schema({
   },
 });
 
+// db.messages.createIndex( { "year":1, "name": "text"} )
 ProductSchema.index({ name: 'text' });
 // ProductSchema.index({name: 'text', 'profile.something': 'text'});
 

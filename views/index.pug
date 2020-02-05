@@ -55,8 +55,7 @@ html
         .row.text-center
           each category in categories
             .col-xs-12.col-sm-6.p-2.text-left
-              a(href="/").categories-section__item.text-left= category.name
-
+              a(href="/products?category=" + category._id).categories-section__item.text-left= category.name
 
     .shops-section.p-5
       .container
