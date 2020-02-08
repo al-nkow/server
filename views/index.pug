@@ -23,16 +23,20 @@ html
           a.site-header__link(class="p-2" href="/admin") Авторизоваться
 
     .main-search.jumbotron.jumbotron-fluid.mb-0
-      .container.text-center
+      form(id="searchForm").container.text-center
         p(class="lead font-weight-normal mb-5")
           | Начните поиск строительных материалов вместе с BoberCo - крупнейшей базой данных товаров
           | магазинов и гипермаркетов Санкт-Петербурга, насчитывающей несколько тысяч наименований
         div(class="input-group main-search__input")
-          input(type="text" id="searchInp" class="form-control" placeholder="Название товара" aria-label="Recipient's username" aria-describedby="searchBtn")
+          input.form-control(
+            id="searchInp"
+            type="text"
+            placeholder="Название товара"
+            aria-label="Product name"
+            aria-describedby="searchBtn"
+          )
           div(class="input-group-append")
-            button(class="btn btn-outline-secondary" type="button" id="searchBtn") Найти
-
-
+            button.btn.btn-outline-secondary(type="submit") Найти
 
     // each newsItem in news
     //   if newsItem.link
@@ -57,6 +61,7 @@ html
             .col-xs-12.col-sm-6.p-2.text-left
               a(href="/products?category=" + category._id).categories-section__item.text-left= category.name
 
+    // ================ SHOPS =====================
     .shops-section.p-5
       .container
         .row.text-center
@@ -65,22 +70,14 @@ html
               .shops-section__item.p-2
                 img.shops-section__image(src=shop.image alt="")
 
-      //input.search-inp(id="searchInp" type="text" name="search")
-      //button(class="btn btn-lg btn-bd-primary" id="searchBtn") отправить
-      //button(type="button" class="btn btn-lg btn-block btn-outline-primary") Sign up for free
-      //
-      //div(id="productsList")
-
-
     .footer-section
       footer.container.py-5 BoberCo
     div.underfooter
       .container.p-2 &copy; 2019-2020 BOCO Все права защищены
-    // ===============================================================
-    //script(src="/frontend/main.js")
 
     script.
-      document.getElementById('searchBtn').addEventListener('click', function () {
+      document.getElementById('searchForm').addEventListener('submit', function (e) {
+        e.preventDefault();
         var inpValue = document.getElementById('searchInp').value;
         if (inpValue) {
             window.location.href = '/products?search=' + inpValue;

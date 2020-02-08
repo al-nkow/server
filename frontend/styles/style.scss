@@ -88,3 +88,64 @@ body {
 .products-search {
   border-bottom: 1px solid rgba(0,0,0,.125);
 }
+
+.product-filters-button {
+  background: $blue;
+  border-color: $blue;
+  &:hover {
+    background: #1a85b9;
+    border-color: #1a85b9;
+  }
+  &__amount-wrap {
+    display: inline-block;
+    vertical-align: middle;
+    border: 2px solid $white;
+    margin-left: 10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    position: relative;
+    margin-top: -2px;
+  }
+  &__amount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.products-page-wrap {
+  overflow: hidden;
+}
+
+.products-filters-block {
+  @media (max-width: 576px) {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.9);
+    color: $white;
+    padding: 60px 20px 20px 20px;
+    transform: translate(100%, 0);
+    transition: all 0.2s $transition;
+  }
+  &__toggle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid red;
+    display: none;
+    @media (max-width: 576px) {
+      display: block;
+    }
+  }
+  &.active {
+    transform: translate(0, 0);
+  }
+}

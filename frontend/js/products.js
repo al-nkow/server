@@ -4,11 +4,15 @@ import windowScrollService from './windowScrollService';
 
 const Products = () => {
   const PRODUCTS_PORTION_SIZE = 9;
-  const searchBtn = document.getElementById('searchBtn');
+  const searchForm = document.getElementById('searchForm');
   const searchInp = document.getElementById('searchInp');
   const categorySelect = document.getElementById('categorySelect');
   const brandSelect = document.getElementById('brandSelect');
   const baseUrl = window.location.href.split('?')[0];
+  const filtersBlock = document.getElementById(
+    'productsFiltersBlock',
+  );
+  const filtersAmount = document.getElementById('filtersAmount');
 
   let fullProductsList = [];
   let productsPortion = [];
@@ -16,7 +20,8 @@ const Products = () => {
   /**
    * Submit search form
    */
-  function searchClickHandler() {
+  function searchFormSubmitHandler(event) {
+    event.preventDefault();
     addParameterToUrl('search', searchInp.value);
     searchRequest();
   }
@@ -74,6 +79,8 @@ const Products = () => {
    */
   function searchRequest() {
     const body = urlService.getUrlParamsAsObject();
+    filtersAmount.innerHTML = Object.keys(body).length;
+
     if (body.search) body.search = decodeURIComponent(body.search);
     if (body.brand) body.brand = decodeURIComponent(body.brand);
 
@@ -153,11 +160,20 @@ const Products = () => {
     categorySelectChangeHandler,
   );
   brandSelect.addEventListener('change', brandSelectChangeHandler);
-  searchBtn.addEventListener('click', searchClickHandler);
+  searchForm.addEventListener('submit', searchFormSubmitHandler);
   initFilterValues();
   initFromToInputsChangeListeners();
   windowScrollService(showProductsPortion);
   searchRequest();
+
+  // =========================
+  ['productsFiltersToggle', 'productsFiltersToggleHead'].forEach(
+    id => {
+      document.getElementById(id).addEventListener('click', () => {
+        filtersBlock.classList.toggle('active');
+      });
+    },
+  );
 };
 
 export default Products;

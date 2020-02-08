@@ -11,7 +11,7 @@ const renderProductsList = (data, clear) => {
 
   data.forEach(item => {
     const card = document.createElement('div');
-    card.classList.add('col-4');
+    card.classList.add('col-12', 'col-md-6', 'col-lg-4');
 
     const props = [
       {
