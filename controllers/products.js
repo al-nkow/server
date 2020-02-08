@@ -117,7 +117,7 @@ exports.commonSearch = async params => {
   try {
     const { search: searchStr, ...rest } = params;
 
-    // TODO: function GET_FIND_filters
+    // TODO: function GET_FIND_filter_params
 
     // ============================
     // ============================
@@ -160,7 +160,7 @@ exports.commonSearch = async params => {
       : await Product.find({ ...restQueryMatchedParams });
 
     return products && products.length
-      ? await ProductService.addCategoryNames(products)
+      ? await ProductService.addExtraInfo(products)
       : products;
   } catch (e) {
     console.error(
@@ -177,5 +177,6 @@ exports.commonSearch = async params => {
  */
 exports.search = async (req, res) => {
   const result = await exports.commonSearch(req.body);
+  console.log('XXX>>>>>>', result[0]);
   res.status(200).json({ searchResult: result });
 };

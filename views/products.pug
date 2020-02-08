@@ -59,6 +59,9 @@ body
                         if product.area
                           .col-6 Площадь:
                           .col-6=product.area + 'м.кв'
+                    if product.minPrice
+                      p.card-text
+                        b='Цена от ' +  product.minPrice + 'руб.'
                     if product.categoryName
                       p.card-text
                         small.text-muted=product.categoryName

@@ -1,26 +1,25 @@
 const Category = require('../models/Category');
+const Position = require('../models/Position');
 const { redConsoleColor } = require('../config/constants');
 
 /**
- * Add category name to each product
+ * Add additional information to each product
  * @param {array} products
- * @returns {Promise<[]>}
+ * @returns {array}
  */
-exports.addCategoryNames = async products => {
+exports.addExtraInfo = async products => {
   try {
-    const categories = await Category.find();
-    const matchCategory = categories.reduce((res, item) => {
-      res[item._id] = item.name;
-      return res;
-    }, {});
-
+    const matchCategory = await getMatchCategory();
     const result = [];
 
-    products.forEach(item => {
+    for (const item of products) {
       const prodItem = { ...item.toObject() };
+
       prodItem.categoryName = matchCategory[prodItem.category] || '';
+      prodItem.minPrice = await getMinPrice(item._id);
+
       result.push(prodItem);
-    });
+    }
 
     return result;
   } catch (e) {
@@ -31,3 +30,25 @@ exports.addCategoryNames = async products => {
     );
   }
 };
+
+/**
+ * Get product min price
+ * @param {string} productId
+ */
+async function getMinPrice(productId) {
+  const positions = await Position.find({ productId });
+  const prices = positions.map(posItem => posItem.price);
+  return prices && prices.length ? Math.min(...prices) : null;
+}
+
+/**
+ * Get object matching categories
+ * @returns {array}
+ */
+async function getMatchCategory() {
+  const categories = await Category.find();
+  return categories.reduce((res, item) => {
+    res[item._id] = item.name;
+    return res;
+  }, {});
+}
