@@ -14,6 +14,7 @@ const Products = () => {
   );
   const filtersAmount = document.getElementById('filtersAmount');
 
+  let searchTimeout;
   let fullProductsList = [];
   let productsPortion = [];
 
@@ -53,7 +54,10 @@ const Products = () => {
         const str = inpValue.replace(/[^+\d]/g, '');
         event.target.value = str;
         addParameterToUrl(key, str);
-        searchRequest();
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function() {
+          searchRequest();
+        }, 500);
       });
     });
   }
