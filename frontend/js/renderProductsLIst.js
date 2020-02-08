@@ -1,7 +1,7 @@
-const renderProductsList = data => {
+const renderProductsList = (data, clear) => {
   const wrap = document.getElementById('productsListWrap');
 
-  if (!data || !data.searchResult || !data.searchResult.length) {
+  if (!data || !data.length) {
     wrap.innerHTML =
       'По Вашему запросу ничего не найдено, попробуйте изменить параметры поиска и повторить попытку';
     return;
@@ -9,7 +9,7 @@ const renderProductsList = data => {
 
   const fragment = document.createDocumentFragment();
 
-  data.searchResult.forEach(item => {
+  data.forEach(item => {
     const card = document.createElement('div');
     card.classList.add('col-4');
 
@@ -72,9 +72,13 @@ const renderProductsList = data => {
           'images/noimg.png'}" alt="">
         <div class="card-body">
           <h5 class="card-title">${item.name}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            ${item.brand}
-          </h6>
+          ${
+            item.brand
+              ? '<h6 class="card-subtitle mb-2 text-muted">' +
+                item.brand +
+                '</h6>'
+              : ''
+          }
           <p class="card-text">
             <div class="row">
               ${propsLayout}
@@ -100,7 +104,7 @@ const renderProductsList = data => {
       <a>
     `;
 
-    wrap.innerHTML = '';
+    if (clear) wrap.innerHTML = '';
     fragment.appendChild(card);
   });
 

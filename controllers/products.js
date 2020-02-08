@@ -177,6 +177,5 @@ exports.commonSearch = async params => {
  */
 exports.search = async (req, res) => {
   const result = await exports.commonSearch(req.body);
-  console.log('XXX>>>>>>', result[0]);
   res.status(200).json({ searchResult: result });
 };

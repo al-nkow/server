@@ -1,12 +1,17 @@
 import urlService from './urlService';
 import renderProductsList from './renderProductsList';
+import windowScrollService from './windowScrollService';
 
 const Products = () => {
+  const PRODUCTS_PORTION_SIZE = 9;
   const searchBtn = document.getElementById('searchBtn');
   const searchInp = document.getElementById('searchInp');
   const categorySelect = document.getElementById('categorySelect');
   const brandSelect = document.getElementById('brandSelect');
   const baseUrl = window.location.href.split('?')[0];
+
+  let fullProductsList = [];
+  let productsPortion = [];
 
   /**
    * Submit search form
@@ -48,6 +53,9 @@ const Products = () => {
     });
   }
 
+  /**
+   * Set the values of all filters according to the url parameters
+   */
   function initFilterValues() {
     const queryParams = urlService.getUrlParamsAsObject();
     const searchInputValue = queryParams.search;
@@ -61,6 +69,9 @@ const Products = () => {
     if (categoryValue) categorySelect.value = categoryValue;
   }
 
+  /**
+   * Perform search request
+   */
   function searchRequest() {
     const body = urlService.getUrlParamsAsObject();
     if (body.search) body.search = decodeURIComponent(body.search);
@@ -79,11 +90,30 @@ const Products = () => {
     fetch(SEARCH_URL, fetchData)
       .then(response => response.json())
       .then(function(res) {
-        renderProductsList(res);
+        const data =
+          res && res.searchResult ? res.searchResult : null;
+        // renderProductsList(data, true); // - render full list
+        fullProductsList = data;
+        showProductsPortion(true);
       })
       .catch(function(error) {
-        console.log('ERROR >>>>>>', error);
+        console.log('SEARCH ERROR:', error);
       });
+  }
+
+  /**
+   * Render or append portion of products in to products list wrap section
+   * @param {boolean} clear - do we need to clear block if no products?
+   */
+  function showProductsPortion(clear) {
+    if ((!fullProductsList || !fullProductsList.length) && !clear)
+      return;
+
+    productsPortion =
+      fullProductsList && fullProductsList.length
+        ? fullProductsList.splice(0, PRODUCTS_PORTION_SIZE)
+        : [];
+    renderProductsList(productsPortion, clear);
   }
 
   /**
@@ -100,11 +130,19 @@ const Products = () => {
       window.history.pushState({ path: url }, '', url);
   }
 
+  /**
+   * Category select change handler
+   * @param event
+   */
   function categorySelectChangeHandler(event) {
     addParameterToUrl('category', event.target.value);
     searchRequest();
   }
 
+  /**
+   * Brand select change handler
+   * @param event
+   */
   function brandSelectChangeHandler(event) {
     addParameterToUrl('brand', event.target.value);
     searchRequest();
@@ -114,12 +152,12 @@ const Products = () => {
     'change',
     categorySelectChangeHandler,
   );
-
   brandSelect.addEventListener('change', brandSelectChangeHandler);
-
   searchBtn.addEventListener('click', searchClickHandler);
   initFilterValues();
   initFromToInputsChangeListeners();
+  windowScrollService(showProductsPortion);
+  searchRequest();
 };
 
 export default Products;
