@@ -86,7 +86,7 @@ const renderProductsList = (data, clear) => {
           </p>
           ${
             item.minPrice
-              ? '<p class="card-text">' +
+              ? '<p class="card-text product-card__price">' +
                 'Цена от ' +
                 item.minPrice +
                 'руб.' +

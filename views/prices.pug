@@ -40,22 +40,44 @@ body
               p.card-text
                 small.text-muted=category.name
 
-    if positions && positions.length
-      table.table.prices-table
-        thead
-          tr
-            th(scope="col") Магазин
-            th(scope="col") Цена
-            th(scope="col") Артикул
-            th(scope="col") Ссылка
-        tbody
+    .mb-3.mobile-prices
+      .row
+        if positions && positions.length
           each position in positions
+            .col-12.mb-3
+              .price-card.p-2
+                .row.mb-2
+                  .col-6
+                    img.price-card__image(src=position.shop.image alt="")
+                  .col-6.price-card__price
+                    span=position.price + ' руб.'
+                .row.text-muted.mb-2
+                  .col-6
+                    small Артикул:
+                  .col-6
+                    small=position.article
+                .row
+                  .col-12
+                    a.btn.btn-success.btn-block(href=position.link target="_blank") В магазин
+
+    .mb-3.desktop-prices
+      if positions && positions.length
+        table.table.prices-table
+          thead
             tr
-              th(scope="row")
-                img.prices-table__image(src=position.shop.image alt="")
-              td=position.price + ' руб.'
-              td=position.article
-              td
-                a.btn.btn-success(href=position.link target="_blank") В магазин
-    else
-      div К сожалению, в настоящее время этот товар не представлен в ассортименте магазинов
+              th(scope="col") Магазин
+              th(scope="col") Цена
+              th(scope="col") Артикул
+              th(scope="col") Ссылка
+          tbody
+            each position in positions
+              tr
+                th(scope="row")
+                  img.prices-table__image(src=position.shop.image alt="")
+                td=position.price + ' руб.'
+                td=position.article
+                td
+                  a.btn.btn-success(href=position.link target="_blank") В магазин
+
+    if !positions || !positions.length
+      .p-3 К сожалению, в настоящее время этот товар не представлен в ассортименте магазинов
