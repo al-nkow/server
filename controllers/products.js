@@ -2,7 +2,6 @@ const Product = require('../models/Product');
 const Position = require('../models/Position');
 const mongoose = require('mongoose');
 const ProductService = require('../services/products');
-const Category = require('../models/Category');
 const { redConsoleColor } = require('../config/constants');
 
 /**
@@ -113,25 +112,52 @@ exports.update = async (req, res) => {
 
 /**
  * SEARCH PRODUCT COMMON PART
- * @param params
- * @returns {Promise<*[]|*>}
  */
 exports.commonSearch = async params => {
   try {
     const { search: searchStr, ...rest } = params;
-    let products;
 
-    if (searchStr) {
-      products = await Product.find(
-        {
-          $text: { $search: searchStr },
-          ...rest,
-        },
-        { score: { $meta: 'textScore' } },
-      ).sort({ score: { $meta: 'textScore' } });
-    } else {
-      products = await Product.find({ ...rest });
-    }
+    // TODO: function GET_FIND_filters
+
+    // ============================
+    // ============================
+    const restQueryMatchedParams = {};
+    if (rest.category)
+      restQueryMatchedParams.category = rest.category;
+
+    if (rest.brand) restQueryMatchedParams.brand = rest.brand;
+
+    [
+      'height',
+      'width',
+      'thickness',
+      'weight',
+      'volumeL',
+      'volumeM',
+      'area',
+    ].forEach(filterKey => {
+      const keyFrom = `${filterKey}From`;
+      const keyTo = `${filterKey}To`;
+      if (rest[keyFrom] || rest[keyTo]) {
+        restQueryMatchedParams[filterKey] = {};
+        if (rest[keyFrom])
+          restQueryMatchedParams[filterKey].$gte = rest[keyFrom];
+        if (rest[keyTo])
+          restQueryMatchedParams[filterKey].$lte = rest[keyTo];
+      }
+    });
+    // ============================
+    // ============================
+
+    const products = searchStr
+      ? await Product.find(
+          {
+            $text: { $search: searchStr },
+            ...restQueryMatchedParams,
+          },
+          { score: { $meta: 'textScore' } },
+        ).sort({ score: { $meta: 'textScore' } })
+      : await Product.find({ ...restQueryMatchedParams });
 
     return products && products.length
       ? await ProductService.addCategoryNames(products)

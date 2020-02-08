@@ -16,61 +16,59 @@ body
           )
           div(class="input-group-append")
             button(class="btn btn-outline-secondary" type="button" id="searchBtn") Найти
-      .col-6
-        if categories
-          div.form-group
-            label(for="categorySelect") Категория
-            select.form-control(id="categorySelect")
-              option(value="") Все
-              each category in categories
-                option(value=category._id)=category.name
-
 
   hr
 
   .container
-    .row(id="productsListWrap")
-      if products
-        each product in products
-          .col-12.col-sm-4
-            a.product-card.card.mb-3(href= "/prices?product=" + product._id)
-              if product.image
-                img.card-img-top(src=product.image alt="")
-              else
-                img.card-img-top(src="images/noimg.png" alt="")
-              .card-body
-                h5.card-title=product.name
-                h6.card-subtitle.mb-2.text-muted=product.brand
-                if product.description
-                  p.card-text=product.description
-                p.card-text
-                  .row
-                    if product.width
-                      .col-6 Ширина:
-                      .col-6=product.width + 'мм'
-                    if product.height
-                      .col-6 Высота:
-                      .col-6=product.height + 'мм'
-                    if product.thickness
-                      .col-6 Толщина:
-                      .col-6=product.thickness + 'мм'
-                    if product.volumeL
-                      .col-6 Объем:
-                      .col-6=product.volumeL + 'л'
-                    if product.volumeM
-                      .col-6 Объем:
-                      .col-6=product.volumeM + 'м.куб'
-                    if product.weight
-                      .col-6 Вес:
-                      .col-6=product.weight + 'кг'
-                    if product.area
-                      .col-6 Площадь:
-                      .col-6=product.area + 'м.кв'
-                if product.categoryName
-                  p.card-text
-                    small.text-muted=product.categoryName
-      else
-        div По Вашему запросу ничего не найдено, попробуйте изменить параметры поиска и повторить попытку
+    .row
+      .col-9
+        .row(id="productsListWrap")
+          if products && products.length
+            each product in products
+              .col-12.col-sm-4
+                a.product-card.card.mb-3(href= "/prices?product=" + product._id)
+                  if product.image
+                    img.card-img-top(src=product.image alt="")
+                  else
+                    img.card-img-top(src="images/noimg.png" alt="")
+                  .card-body
+                    h5.card-title=product.name
+                    h6.card-subtitle.mb-2.text-muted=product.brand
+                    if product.description
+                      p.card-text=product.description
+                    p.card-text
+                      .row
+                        if product.width
+                          .col-6 Ширина:
+                          .col-6=product.width + 'мм'
+                        if product.height
+                          .col-6 Высота:
+                          .col-6=product.height + 'мм'
+                        if product.thickness
+                          .col-6 Толщина:
+                          .col-6=product.thickness + 'мм'
+                        if product.volumeL
+                          .col-6 Объем:
+                          .col-6=product.volumeL + 'л'
+                        if product.volumeM
+                          .col-6 Объем:
+                          .col-6=product.volumeM + 'м.куб'
+                        if product.weight
+                          .col-6 Вес:
+                          .col-6=product.weight + 'кг'
+                        if product.area
+                          .col-6 Площадь:
+                          .col-6=product.area + 'м.кв'
+                    if product.categoryName
+                      p.card-text
+                        small.text-muted=product.categoryName
+          else
+            div По Вашему запросу ничего не найдено, попробуйте изменить параметры поиска и повторить попытку
+      .col-3
+        include parts/filters.pug
+
+
+
 
   // ===============================================================
   script(src="/frontend/main.js")

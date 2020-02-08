@@ -1,0 +1,65 @@
+if categories
+  .form-group
+    label(for="categorySelect") Категория
+    select.form-control.form-control-sm(id="categorySelect")
+      option(value="") Все
+      each category in categories
+        option(value=category._id)=category.name
+
+if brands
+  .form-group
+    label(for="brandSelect") Производитель
+    select.form-control.form-control-sm(id="brandSelect")
+      option(value="") Все
+      each brand in brands
+        option(value=brand.name)=brand.name
+
+.form-group
+  label Параметры
+  .input-group.input-group-sm
+    .input-group-prepend
+      span.input-group-text.filter-range-label Высота (мм)
+    input.form-control(id="heightFrom" type="text" placeholder="От")
+    input.form-control(id="heightTo" type="text" placeholder="До")
+
+.form-group
+  .input-group.input-group-sm
+    .input-group-prepend
+      span.input-group-text.filter-range-label Ширина (мм)
+    input.form-control(id="widthFrom" type="text" placeholder="От")
+    input.form-control(id="widthTo" type="text" placeholder="До")
+
+.form-group
+  .input-group.input-group-sm
+    .input-group-prepend
+      span.input-group-text.filter-range-label Толщина (мм)
+    input.form-control(id="thicknessFrom" type="text" placeholder="От")
+    input.form-control(id="thicknessTo" type="text" placeholder="До")
+
+.form-group
+  .input-group.input-group-sm
+    .input-group-prepend
+      span.input-group-text.filter-range-label Вес (кг)
+    input.form-control(id="weightFrom" type="text" placeholder="От")
+    input.form-control(id="weightTo" type="text" placeholder="До")
+
+.form-group
+  .input-group.input-group-sm
+    .input-group-prepend
+      span.input-group-text.filter-range-label Объем (л)
+    input.form-control(id="volumeLFrom" type="text" placeholder="От")
+    input.form-control(id="volumeLTo" type="text" placeholder="До")
+
+.form-group
+  .input-group.input-group-sm
+    .input-group-prepend
+      span.input-group-text.filter-range-label Объем (м.куб)
+    input.form-control(id="volumeMFrom" type="text" placeholder="От")
+    input.form-control(id="volumeMTo" type="text" placeholder="До")
+
+.form-group
+  .input-group.input-group-sm
+    .input-group-prepend
+      span.input-group-text.filter-range-label Площадь (м.кв)
+    input.form-control(id="areaFrom" type="text" placeholder="От")
+    input.form-control(id="areaTo" type="text" placeholder="До")

@@ -1,8 +1,10 @@
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+const Brand = require('../models/Brand');
 const Shop = require('../models/Shop');
 const Position = require('../models/Position');
 const mongoose = require('mongoose');
+const { redConsoleColor } = require('../config/constants');
 
 /**
  * DELETE ALL PRODUCTS AND POSITIONS
@@ -10,6 +12,7 @@ const mongoose = require('mongoose');
 exports.deleteAllProductsAndPositions = async (req, res) => {
   try {
     Product.collection.drop();
+    Brand.collection.drop();
     Position.collection.drop();
     return res
       .status(200)
@@ -33,6 +36,8 @@ exports.publish = async (req, res) => {
         currentProduct.category,
       );
 
+      await saveBrand(currentProduct.brand);
+
       const newProduct = new Product({
         ...currentProduct,
         _id: new mongoose.Types.ObjectId(),
@@ -51,7 +56,29 @@ exports.publish = async (req, res) => {
 };
 
 /**
+ * Save brand if not found
+ * @param {string} brandName
+ * @returns {Promise}
+ */
+async function saveBrand(brandName) {
+  if (!brandName) return;
+  try {
+    const foundBrand = await Brand.findOne({ name: brandName });
+    if (!foundBrand) {
+      const newBrand = new Brand({
+        _id: new mongoose.Types.ObjectId(),
+        name: brandName,
+      });
+      await newBrand.save();
+    }
+  } catch (error) {
+    console.error(redConsoleColor, 'SAVE BRAND ERROR: ', error);
+  }
+}
+
+/**
  * Add category ID to the new product
+ * if no category is found - create a new one
  */
 async function getCategoryId(currentProductCategoryName) {
   if (!currentProductCategoryName) return;
@@ -73,7 +100,7 @@ async function getCategoryId(currentProductCategoryName) {
  * Create a new category
  */
 async function createNewCategory(name) {
-  // TRY CATCH ????
+  // TODO TRY CATCH ????
   const newCategory = new Category({
     name: name,
     comments: 'Создана автоматически',

@@ -17,7 +17,6 @@ exports.addCategoryNames = async products => {
     const result = [];
 
     products.forEach(item => {
-      console.log('>>>>>>', item);
       const prodItem = { ...item.toObject() };
       prodItem.categoryName = matchCategory[prodItem.category] || '';
       result.push(prodItem);

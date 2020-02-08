@@ -1,12 +1,11 @@
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+const Brand = require('../models/Brand');
 const Shop = require('../models/Shop');
 const Position = require('../models/Position');
-// const mongoose = require('mongoose');
-const { redConsoleColor } = require('../config/constants');
-const ProductService = require('../services/products');
 const PositionService = require('../services/positions');
 const ProductsController = require('../controllers/products');
+const { redConsoleColor } = require('../config/constants');
 
 /**
  * PRODUCTS PAGE
@@ -15,6 +14,7 @@ exports.products = async (req, res) => {
   const data = {};
   try {
     data.products = await ProductsController.commonSearch(req.query);
+    data.brands = await Brand.find();
     data.categories = await Category.find();
   } catch (e) {
     console.error(
@@ -52,7 +52,7 @@ exports.home = async (req, res) => {
   const data = {};
 
   try {
-    data.categories = await Category.find();
+    data.categories = await Category.find().select('name _id');
     data.shops = await Shop.find();
   } catch (e) {
     console.error(
