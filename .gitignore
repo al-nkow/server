@@ -26,3 +26,5 @@ yarn-error.log*
 .idea/*
 
 /static/uploads/*
+
+/config/default.json

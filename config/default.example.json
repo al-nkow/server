@@ -1,0 +1,7 @@
+{
+  "mongoURI": "mongodb://localhost:27017/bdname",
+  "jwtSecret": "SomEsECretKey02347",
+  "defaultUserEmail": "admin@admin.com",
+  "defaultUserPassword": "qwerty",
+  "jwtSecretRefreshToken": "Some34Se5cr48etTokE56N"
+}
