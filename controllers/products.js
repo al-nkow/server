@@ -55,24 +55,10 @@ exports.getAll = async (req, res) => {
   }
 
   try {
-    // const count = await Product.countDocuments();
     const count = await Product.find(filter).countDocuments();
     const products = await Product.find(filter)
       .skip(skip)
       .limit(limit);
-
-    // здесь надо возвращать count не все документы а столько сколько найдено!
-    // db.restaurants.find( { "cuisine": "Italian", "address.zipcode": "10075" } ).count();
-    // {
-    //   "address": {
-    //   "building": "1007",
-    //     "coord": [ -73.856077, 40.848447 ],
-    //     "street": "Morris Park Ave",
-    //     "zipcode": "10462"
-    // },
-    //   "borough": "Bronx",
-    //   "cuisine": "Bakery",
-    //   ......
 
     res.status(200).json({ list: products, count });
   } catch (err) {

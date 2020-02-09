@@ -6,51 +6,49 @@ const mongoose = require('mongoose');
 /**
  * SIGN IN USER
  */
-exports.userLogin = async (req, res) => {
-  const { email, password } = req.body;
-
-  const foundUser = await User.findOne({ email: email });
-  if (!foundUser)
-    return res.status(401).json({ message: 'Auth failed' });
-
-  const isMatch = await foundUser.isValidPassword(password); // isValidPassword - custom method
-
-  if (!isMatch)
-    return res.status(401).json({ message: 'Auth failed' });
-
-  return res.status(500).json({ error: 'pizda' });
-
-  const token = jwt.sign(
-    {
-      email: email,
-      userId: foundUser._id,
-    },
-    process.env.SECRET_OR_KEY,
-    { expiresIn: '1h' },
-  );
-
-  // ==========
-  const refreshToken = jwt.sign(
-    {
-      email: email,
-      userId: foundUser._id,
-    },
-    process.env.SECRET_REFRESH_TOKEN,
-    { expiresIn: '1d' },
-  );
-  const decoded = jwt.verify(token, process.env.SECRET_OR_KEY);
-  foundUser.refreshToken = refreshToken;
-  foundUser.save();
-  // ==========
-
-  return res.status(200).json({
-    message: 'Auth successful',
-    token: token,
-    refreshToken: refreshToken,
-    expires_in: decoded ? decoded.exp : '',
-    id: foundUser._id,
-  });
-};
+// exports.userLogin = async (req, res) => {
+//   const { email, password } = req.body;
+//
+//   const foundUser = await User.findOne({ email: email });
+//   if (!foundUser)
+//     return res.status(401).json({ message: 'Auth failed' });
+//
+//   const isMatch = await foundUser.isValidPassword(password); // isValidPassword - custom method
+//
+//   if (!isMatch)
+//     return res.status(401).json({ message: 'Auth failed' });
+//
+//   const token = jwt.sign(
+//     {
+//       email: email,
+//       userId: foundUser._id,
+//     },
+//     process.env.SECRET_OR_KEY,
+//     { expiresIn: '1h' },
+//   );
+//
+//   // ==========
+//   const refreshToken = jwt.sign(
+//     {
+//       email: email,
+//       userId: foundUser._id,
+//     },
+//     process.env.SECRET_REFRESH_TOKEN,
+//     { expiresIn: '1d' },
+//   );
+//   const decoded = jwt.verify(token, process.env.SECRET_OR_KEY);
+//   foundUser.refreshToken = refreshToken;
+//   foundUser.save();
+//   // ==========
+//
+//   return res.status(200).json({
+//     message: 'Auth successful',
+//     token: token,
+//     refreshToken: refreshToken,
+//     expires_in: decoded ? decoded.exp : '',
+//     id: foundUser._id,
+//   });
+// };
 
 // ============================================================
 // ============================================================

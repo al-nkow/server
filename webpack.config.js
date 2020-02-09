@@ -2,14 +2,12 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 
-module.exports = {
-  mode: 'production',
+const config = {
   entry: './frontend/index.js',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname + '/static/', 'frontend'),
   },
-  watch: true,
   module: {
     rules: [
       {
@@ -50,4 +48,13 @@ module.exports = {
       // chunkFilename: '[id].css',
     }),
   ],
+};
+
+module.exports = (env, argv) => {
+  if (argv.mode === 'development') {
+    config.devtool = 'source-map';
+    config.watch = true;
+  }
+
+  return config;
 };
