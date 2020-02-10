@@ -1,17 +1,6 @@
-html
-  head
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
-    title BOCO
-    //link(rel="shortcut icon" type="image/png" href="landing/favicon.png")
-    //link(
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css")
-    //link(href="landing/styles.css" rel="stylesheet")
-    link(href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet")
-    link(rel="stylesheet" href="/frontend/style.css")
-
-  body
+include parts/meta.pug
++my-include('BOCO')
+body
     nav.site-header.navbar.shadow-sm
       div.container.d-flex.justify-content-between
         a.site-header__link.navbar-brand.d-flex.align-items-center(href="/")
