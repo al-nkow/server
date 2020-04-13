@@ -45,13 +45,13 @@ app.use((req, res, next) => {
 // Define routes
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/users', require('./routes/api/users'));
-app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/shops', require('./routes/api/shops'));
 app.use('/api/categories', require('./routes/api/categories'));
 app.use('/api/products', require('./routes/api/products'));
 app.use('/api/positions', require('./routes/api/positions'));
 app.use('/api/import', require('./routes/api/import'));
+app.use('/api/me', require('./routes/api/me'));
 app.use('/', require('./routes/static/static'));
 
 const PORT = process.env.PORT || 5000;

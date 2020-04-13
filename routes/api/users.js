@@ -80,7 +80,7 @@ router.post(
       const newUser = User({
         name,
         email,
-        avatar,
+        gravatar,
         password,
       });
 

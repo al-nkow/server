@@ -18,6 +18,9 @@ let UserSchema = new Schema({
     type: String,
     required: true,
   },
+  gravatar: {
+    type: String,
+  },
   avatar: {
     type: String,
   },

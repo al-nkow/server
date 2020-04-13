@@ -60,6 +60,8 @@ exports.login = async (req, res) => {
     refreshToken: refreshToken,
     expiresIn: decoded ? decoded.exp : '',
     userId: userId,
+    userName: foundUser.name,
+    userEmail: foundUser.email,
   });
 };
 
@@ -125,6 +127,8 @@ exports.token = async (req, res) => {
     refreshToken: refreshToken,
     expiresIn: decoded ? decoded.exp : '',
     userId: userId,
+    userName: foundUser.name,
+    userEmail: foundUser.email,
   });
 };
 
