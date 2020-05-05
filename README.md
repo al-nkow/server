@@ -4,10 +4,11 @@ Node.js, Express, Mongo, Webpack
 ```
 1. npm i
 2. create config/default.json
-3. == Server ==
+3. create folder static/uploads
+4. == Server ==
    - Server development mode: npm run server
    - Server production mode: npm start
-4. == Frontend ==
+5. == Frontend ==
    - Frontend development mode: npm run dev
    - Frontend production mode: npm run build
 ```

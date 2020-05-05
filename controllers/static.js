@@ -30,9 +30,7 @@ exports.products = async (req, res) => {
 };
 
 /**
- * Home page
- * @route GET /
- * @access Public
+ * HOME PAGE
  */
 exports.home = async (req, res) => {
   const data = {};

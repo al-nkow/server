@@ -104,7 +104,6 @@ exports.commonSearch = async params => {
     const { search: searchStr, ...rest } = params;
 
     // TODO: function GET_FIND_filter_params
-
     // ============================
     // ============================
     const restQueryMatchedParams = {};
@@ -124,6 +123,7 @@ exports.commonSearch = async params => {
     ].forEach(filterKey => {
       const keyFrom = `${filterKey}From`;
       const keyTo = `${filterKey}To`;
+
       if (rest[keyFrom] || rest[keyTo]) {
         restQueryMatchedParams[filterKey] = {};
         if (rest[keyFrom])

@@ -27,7 +27,7 @@ router.get('/', ShopsController.getAll);
 
 /**
  * Delete shop by ID
- * @route GET api/shops/ID
+ * @route DELETE api/shops/ID
  * @access Private
  */
 router.delete('/:shopId', auth, ShopsController.delete);
