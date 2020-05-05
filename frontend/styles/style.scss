@@ -148,10 +148,29 @@ body {
     left: 10px;
     width: 30px;
     height: 30px;
-    border: 1px solid red;
     display: none;
     @media (max-width: 576px) {
       display: block;
+    }
+    &:before {
+      content: '';
+      height: 2px;
+      background: #ffffff;
+      position: absolute;
+      top: 45%;
+      left: -3px;
+      width: 120%;
+      transform: rotate(45deg);
+    }
+    &:after {
+      content: '';
+      height: 2px;
+      background: #ffffff;
+      position: absolute;
+      top: 45%;
+      left: -3px;
+      width: 120%;
+      transform: rotate(-45deg);
     }
   }
   &.active {
@@ -183,5 +202,12 @@ body {
   display: block;
   @media (max-width: 576px) {
     display: none;
+  }
+}
+
+.prices-card {
+  &__image {
+    max-height: 162px;
+    width: auto;
   }
 }

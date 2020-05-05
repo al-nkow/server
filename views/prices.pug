@@ -3,10 +3,10 @@ include parts/meta.pug
 body
   include parts/header.pug
   .container.p-3
-    .card.mb-3
+    .card.mb-3.prices-card
       div.row.no-gutters
         div.col-md-3
-          img(src=(product.image ? product.image : "/images/noimg.png") class="card-img" alt="")
+          img(src=(product.image ? product.image : "/images/noimg.png") class="card-img prices-card__image" alt="")
         div.col-md-9
           div.card-body
             h5.card-title=product.name
