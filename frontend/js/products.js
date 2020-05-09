@@ -14,6 +14,23 @@ const Products = () => {
   );
   const filtersAmount = document.getElementById('filtersAmount');
 
+  const fromToInputIds = [
+    'heightFrom',
+    'heightTo',
+    'widthFrom',
+    'widthTo',
+    'thicknessFrom',
+    'thicknessTo',
+    'weightFrom',
+    'weightTo',
+    'volumeLFrom',
+    'volumeLTo',
+    'volumeMFrom',
+    'volumeMTo',
+    'areaFrom',
+    'areaTo',
+  ];
+
   let searchTimeout;
   let fullProductsList = [];
   let productsPortion = [];
@@ -23,31 +40,36 @@ const Products = () => {
    */
   function searchFormSubmitHandler(event) {
     event.preventDefault();
-    addParameterToUrl('search', searchInp.value);
+    const searchValue = clearValue(searchInp.value);
+
+    addParameterToUrl('search', searchValue);
     searchRequest();
+  }
+
+  /**
+   * Replace all but numbers and letters
+   */
+  function clearValue(value) {
+    return value && typeof value === 'string'
+      ? value.replace(/[^\s0-9а-яА-Яa-zA-Z]/gi, '')
+      : '';
+  }
+
+  /**
+   * Search input validation
+   */
+  function initSearchInputValidation() {
+    searchInp.addEventListener('keyup', function(event) {
+      const value = clearValue(event.target.value);
+      event.target.value = value;
+    })
   }
 
   /**
    * Init filter inputs (from/to) change listeners
    */
   function initFromToInputsChangeListeners() {
-    const inputIds = [
-      'heightFrom',
-      'heightTo',
-      'widthFrom',
-      'widthTo',
-      'thicknessFrom',
-      'thicknessTo',
-      'weightFrom',
-      'weightTo',
-      'volumeLFrom',
-      'volumeLTo',
-      'volumeMFrom',
-      'volumeMTo',
-      'areaFrom',
-      'areaTo',
-    ];
-    inputIds.forEach(key => {
+    fromToInputIds.forEach(key => {
       const element = document.getElementById(key);
       element.addEventListener('input', function(event) {
         const { value: inpValue } = event.target;
@@ -70,6 +92,11 @@ const Products = () => {
     const searchInputValue = queryParams.search;
     const categoryValue = queryParams.category;
     const brandValue = queryParams.brand;
+
+    fromToInputIds.forEach(item => {
+      const inpValue = queryParams[item];
+      if (inpValue) document.getElementById(item).value = inpValue;
+    });
 
     if (searchInputValue)
       searchInp.value = decodeURIComponent(searchInputValue);
@@ -169,8 +196,8 @@ const Products = () => {
   initFromToInputsChangeListeners();
   windowScrollService(showProductsPortion);
   searchRequest();
+  initSearchInputValidation();
 
-  // =========================
   ['productsFiltersToggle', 'productsFiltersToggleHead'].forEach(
     id => {
       document.getElementById(id).addEventListener('click', () => {
