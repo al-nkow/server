@@ -103,58 +103,22 @@ exports.commonSearch = async params => {
   try {
     const { search: searchStr, ...rest } = params;
 
-    // TODO: function GET_FIND_filter_params
-    // ============================
-    // ============================
-    const restQueryMatchedParams = {};
-    if (rest.category)
-      restQueryMatchedParams.category = rest.category;
+    const fromToParams = getFromToParams(rest);
+    
+    const searchParams = {
+      ...fromToParams,
+      ...adddIfPresent(rest, 'category'),
+      ...adddIfPresent(rest, 'brand'),
+    };
 
-    if (rest.brand) restQueryMatchedParams.brand = rest.brand;
+    const products = searchStr 
+      ? await fullTextSearch(searchParams, searchStr)
+      : await Product.find({ ...searchParams })
 
-    [
-      'height',
-      'width',
-      'thickness',
-      'weight',
-      'volumeL',
-      'volumeM',
-      'area',
-    ].forEach(filterKey => {
-      const keyFrom = `${filterKey}From`;
-      const keyTo = `${filterKey}To`;
-
-      if (rest[keyFrom] || rest[keyTo]) {
-        restQueryMatchedParams[filterKey] = {};
-        if (rest[keyFrom])
-          restQueryMatchedParams[filterKey].$gte = rest[keyFrom];
-        if (rest[keyTo])
-          restQueryMatchedParams[filterKey].$lte = rest[keyTo];
-      }
-    });
-    // ============================
-    // ============================
-
-    const products = searchStr
-      ? await Product.find(
-          {
-            $text: { $search: searchStr },
-            ...restQueryMatchedParams,
-          },
-          { score: { $meta: 'textScore' } },
-        ).sort({ score: { $meta: 'textScore' } })
-      : await Product.find({ ...restQueryMatchedParams });
-
-    return products && products.length
-      ? await ProductService.addExtraInfo(products)
-      : products;
+    if (products && products.length) await ProductService.addExtraInfo(products);
+    return products;
   } catch (e) {
-    console.error(
-      redConsoleColor,
-      'ERROR GETTING DATA FOR PRODUCTS PAGE: ',
-      e,
-    );
-    return [];
+    return commonSearchErrorHandler(e);
   }
 };
 
@@ -165,3 +129,95 @@ exports.search = async (req, res) => {
   const result = await exports.commonSearch(req.body);
   res.status(200).json({ searchResult: result });
 };
+
+// =============================================================================
+
+/**
+ * Full text search. If no items found - search by regexp.
+ * @param {object} searchParams 
+ * @param {string} searchStr
+ */
+async function fullTextSearch(searchParams, searchStr) {
+  const metaTextScore = { score: { $meta: 'textScore' } };
+  const products =  await Product.find(
+    {
+      $text: { $search: searchStr },
+      ...searchParams,
+    },
+    metaTextScore
+  ).sort(metaTextScore); // sorts in descending order
+
+  if (products && products.length) {
+    return products;
+  } else {
+    // if no items found - search by regexp
+    var searchRegex = new RegExp(searchStr, 'gi');
+    var regexSearchOptions = {
+      "name": {
+        "$regex": searchRegex
+      }
+    };
+    return await Product.find({ ...regexSearchOptions, ...searchParams});
+  }
+}
+
+/**
+ * Returns object with `from - to` params (`$gte`, `$lte`)
+ * @param {object} params - filter params. Example: 
+ * { width: '10', height: '200', area '62' }
+ * @return {object}
+ * example of returned value:
+ * {
+ *  height: { '$gte': '1', '$lte': '500' },
+ *  width:  { '$gte': '4', '$lte': '600' },
+ *  weight: { '$gte': '5', '$lte': '1000' },
+ * }
+ */
+function getFromToParams(params) {
+  const fields = [
+    'height',
+    'width',
+    'thickness',
+    'weight',
+    'volumeL',
+    'volumeM',
+    'area',
+  ];
+  const query = {};
+
+  fields.forEach(filterKey => {
+    const keyFrom = `${filterKey}From`;
+    const keyTo = `${filterKey}To`;
+    const fromParam = params[keyFrom];
+    const toParam = params[keyTo];
+
+    if (fromParam || toParam) query[filterKey] = {};
+    if (fromParam) query[filterKey].$gte = fromParam;
+    if (toParam) query[filterKey].$lte = toParam;
+  });
+
+  return query;
+}
+
+/**
+ * Return object {paramName: value} if paramName present in reqParams
+ * @param {object} reqParams
+ * @param {string} paramName
+ * @return {object|null}
+ */
+function adddIfPresent(reqParams, paramName) {
+  const value = reqParams[paramName];
+  return value ? { [paramName]: value } : null;
+}
+
+/**
+ * Common search error handler
+ */
+function commonSearchErrorHandler(e) {
+  console.error(
+    redConsoleColor,
+    'ERROR GETTING DATA FOR PRODUCTS PAGE: ',
+    e,
+  );
+  return [];
+}
