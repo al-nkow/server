@@ -1,4 +1,4 @@
-.products-filters-block(id="productsFiltersBlock")
+form.products-filters-block(id="productsFiltersBlock")
   div.products-filters-block__toggle(id="productsFiltersToggle")
   if categories
     .form-group
@@ -65,3 +65,6 @@
         span.input-group-text.filter-range-label Площадь (м.кв)
       input.form-control(id="areaFrom" type="text" placeholder="От")
       input.form-control(id="areaTo" type="text" placeholder="До")
+
+  .filter-results(id="countFilters") Показать <span id="filterResult">0</span> товаров
+  .filters-clear(id="clearFilters") Очистить фильтры

@@ -136,6 +136,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+    overflow: auto;
     background: rgba(0,0,0,0.9);
     color: $white;
     padding: 60px 20px 20px 20px;
@@ -209,5 +210,102 @@ body {
   &__image {
     max-height: 162px;
     width: auto;
+  }
+}
+
+.filter-results {
+  cursor: pointer;
+  background: #ef7f1b;
+  padding: 10px;
+  border-radius: 4px;
+  color: #333333;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  display: none;
+  @media (max-width: 576px) {
+    display: block;
+  }
+}
+
+.filters-clear {
+  cursor: pointer;
+  background: #008cd1;
+  padding: 10px;
+  border-radius: 4px;
+  color: #333333;
+  text-align: center;
+  display: none;
+  @media (max-width: 576px) {
+    display: block;
+  }
+}
+
+.opt-title {
+  font-size: 20px;
+  padding: 10px 10px 0 10px;
+}
+
+.opt-info {
+  display: inline-block;
+  padding: 10px;
+}
+
+.opt-price {
+  font-weight: bold;
+  font-size: 18px;
+  color: $blue;
+}
+
+.opt-desc {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.opt-btn {
+  padding: 10px;
+}
+
+.form-control {
+  border-width: 2px;
+}
+
+.error {
+  border-color: $red;
+}
+
+.btn {
+  .spinner-grow {
+    display: none;
+  }
+  &[disabled] {
+    .spinner-grow {
+      display: inline-block;
+    }
+  }
+}
+
+.coop-modal {
+  .coop-modal-result {
+    display: none;
+  }
+  .coop-modal-error {
+    display: none;
+  }
+  &.success {
+    .coop-modal-base {
+      display: none;
+    }
+    .coop-modal-result {
+      display: block;
+    }
+  }
+  &.failed {
+    .coop-modal-base {
+      display: none;
+    }
+    .coop-modal-error {
+      display: block;
+    }
   }
 }

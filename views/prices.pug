@@ -40,6 +40,22 @@ body
               p.card-text
                 small.text-muted=category.name
 
+    .mb-4
+      if supply && supply.options && supply.options.length && product.bocoArticle
+        .opt-title Оптовые цены:
+        each option in supply.options
+          .opt-info 
+            span.opt-price=option.price
+            |  руб. от 
+            span=option.quantity
+            |  единиц
+        .opt-desc
+          | Вы можете оставить заявку на участие в совместной оптовой закупке - как только 
+          | наберется необходимое количество участников чтобы совершить оптовую закупку - мы с Вами свяжемся.
+          | Для этого заполните форму нажав кнопку Кооперация.
+        .opt-btn
+          .btn.btn-success(type="button" data-toggle="modal" data-target="#coopModal") Кооперация
+
     .mb-3.mobile-prices
       .row
         if positions && positions.length
@@ -81,3 +97,85 @@ body
 
     if !positions || !positions.length
       .p-3 К сожалению, в настоящее время этот товар не представлен в ассортименте магазинов
+
+  .modal.fade.coop-modal(id="coopModal" tabindex="-1" role="dialog" aria-labelledby="coopModalLabel" aria-hidden="true")
+    .modal-dialog.modal-lg(role="document")
+      .modal-content.coop-modal-base
+        .modal-header
+          h5.modal-title(id="coopModalLabel") Кооперация
+          button.close(type="button" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true") &times;
+        .modal-body
+          form(id="coopForm" data-article=product.bocoArticle)
+            .row
+              .col-xs-12.col-sm-6
+                .form-group
+                  label(for="coopFormOrgName") Наименование организации / ИП
+                  input.form-control(type="text" id="coopFormOrgName")
+              .col-xs-12.col-sm-6
+                .form-group
+                  label(for="coopFormINN") ИНН
+                  input.form-control(type="text" id="coopFormINN")
+            .form-group
+              label(for="coopFormName") Фамилия Имя Отчество (если частное лицо)
+              input.form-control(type="text" id="coopFormName")
+            .row
+              .col-xs-12.col-sm-6
+                .form-group
+                  label(for="coopFormEmail") Email адрес
+                  input.form-control(type="email" id="coopFormEmail")
+                  // small.form-text.text-muted(id="emailHelp") Мы нигде не покажем Ваш email
+              .col-xs-12.col-sm-6  
+                .form-group
+                  label(for="coopFormPhone") Телефон
+                  input.form-control(type="text" id="coopFormPhone")
+            .row
+              .col-xs-12.col-sm-6
+                .form-group
+                  label(for="coopFormVolume") Объем покупки (шт)
+                  input.form-control(type="text" id="coopFormVolume")
+              .col-xs-12.col-sm-6
+                .form-group
+                  label(for="coopFormTerm") Срок актуальности покупки
+                  input.form-control(type="date" id="coopFormTerm")
+            .form-group
+              label(for="coopFormComments") Комментарии
+              textarea.form-control(id="coopFormComments" rows="3")
+            .row
+              .col-xs-12.col-sm-6
+                .form-check
+                  input.form-check-input(type="checkbox" id="coopFormMailOnly")
+                  label.form-check-label(for="coopFormMailOnly") Получать сведения только по почте
+              .col-xs-12.col-sm-6
+                .form-check
+                  input.form-check-input(type="checkbox" id="coopFormOrgOnly")
+                  label.form-check-label(for="coopFormOrgOnly") Дружить только с юридическим лицом
+
+        .modal-footer
+          button.btn.btn-secondary(type="button" data-dismiss="modal") Отменить
+          button.btn.btn-success(type="button" id="coopModalSubmit")
+            span.spinner-grow.spinner-grow-sm.mr-1(role="status" aria-hidden)
+            | Отправить заявку
+
+      .modal-content.coop-modal-result
+        .modal-header
+            h5.modal-title Заявка принята
+            button.close(type="button" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+        .modal-body
+          | Ваша заявка принята. Как только наберется необходимое количество 
+          | участников для совершения оптовой закупки - наш менеджер с Вами свяжется.
+        .modal-footer
+          button.btn.btn-success(type="button" data-dismiss="modal") Закрыть
+      
+      .modal-content.coop-modal-error
+        .modal-header
+            h5.modal-title Ошибка
+            button.close(type="button" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") &times;
+        .modal-body
+          div.text-danger Ошибка сервера! Попробуйте повторить позже.
+        .modal-footer
+          button.btn.btn-success(type="button" data-dismiss="modal") Закрыть
+
+  script(src="/frontend/main.js")

@@ -17,8 +17,27 @@ addDefaultUser();
 // static folder
 app.use(express.static('static'));
 
+
+
+
+
+// bodyParser = {
+//   json: {limit: '50mb', extended: true},
+//   urlencoded: {limit: '50mb', extended: true}
+// };
 // Init Middleware
-app.use(express.json({ extended: false })); // body parser (req.body)
+
+// было просто extended: false
+app.use(express.json({ limit: '50mb', extended: true })); // body parser (req.body)
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+
+
+
+
+
+
+
 
 // TODO: разрешить только localhost или какой-то адрес
 app.use((req, res, next) => {
@@ -52,6 +71,9 @@ app.use('/api/products', require('./routes/api/products'));
 app.use('/api/positions', require('./routes/api/positions'));
 app.use('/api/import', require('./routes/api/import'));
 app.use('/api/me', require('./routes/api/me'));
+app.use('/api/wholesale', require('./routes/api/wholesale'));
+app.use('/api/supply', require('./routes/api/supply'));
+app.use('/api/cooperations', require('./routes/api/cooperations'));
 app.use('/', require('./routes/static/static'));
 
 const PORT = process.env.PORT || 5000;

@@ -62,7 +62,7 @@ const Products = () => {
     searchInp.addEventListener('keyup', function(event) {
       const value = clearValue(event.target.value);
       event.target.value = value;
-    })
+    });
   }
 
   /**
@@ -108,7 +108,7 @@ const Products = () => {
   /**
    * Perform search request
    */
-  function searchRequest() {
+  async function searchRequest() {
     const body = urlService.getUrlParamsAsObject();
     filtersAmount.innerHTML = Object.keys(body).length;
 
@@ -125,18 +125,28 @@ const Products = () => {
 
     myHeaders.append('Content-Type', 'application/json');
 
-    fetch(SEARCH_URL, fetchData)
-      .then(response => response.json())
-      .then(function(res) {
-        const data =
-          res && res.searchResult ? res.searchResult : null;
-        // renderProductsList(data, true); // - render full list
-        fullProductsList = data;
-        showProductsPortion(true);
-      })
-      .catch(function(error) {
-        console.log('SEARCH ERROR:', error);
-      });
+    try {
+      const response = await fetch(SEARCH_URL, fetchData);
+      const json = await response.json();
+      const data = json && json.searchResult ? json.searchResult : null;
+      const count = data ? data.length : null;
+
+      setMobileFiltersDataCount(count);
+      // renderProductsList(data, true); // - render full list
+      fullProductsList = data.slice();
+      showProductsPortion(true);
+    } catch (error) {
+      console.log('SEARCH ERROR:', error);
+    }
+  }
+
+  /**
+   * Set result into filters button
+   * @param {number|null} count 
+   */
+  function setMobileFiltersDataCount(count) {
+    const counterEl = document.getElementById('filterResult');
+    counterEl.innerHTML = count || 0;
   }
 
   /**
@@ -198,13 +208,24 @@ const Products = () => {
   searchRequest();
   initSearchInputValidation();
 
-  ['productsFiltersToggle', 'productsFiltersToggleHead'].forEach(
+  ['productsFiltersToggle', 'productsFiltersToggleHead', 'countFilters'].forEach(
     id => {
-      document.getElementById(id).addEventListener('click', () => {
-        filtersBlock.classList.toggle('active');
-      });
+      const element = document.getElementById(id);
+      if (element) {
+        element.addEventListener('click', () => {
+          filtersBlock.classList.toggle('active');
+        });
+      }
     },
   );
+
+  document.getElementById('clearFilters').addEventListener('click', () => {
+    document.getElementById('productsFiltersBlock').reset();
+    if (history.pushState) {
+      window.history.pushState({ path: baseUrl }, '', baseUrl);
+      searchRequest();
+    }
+  });
 };
 
 export default Products;

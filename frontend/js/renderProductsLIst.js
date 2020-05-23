@@ -1,4 +1,5 @@
 const renderProductsList = (data, clear) => {
+
   const wrap = document.getElementById('productsListWrap');
 
   if (!data || !data.length) {

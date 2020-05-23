@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const Position = require('../models/Position');
+const Supply = require('../models/Supply');
 const mongoose = require('mongoose');
 const ProductService = require('../services/products');
 const { redConsoleColor } = require('../config/constants');
@@ -75,6 +76,7 @@ exports.delete = async (req, res) => {
     await Product.deleteOne({ _id: productId });
     // remove all positions associated with this product
     await Position.find({ productId }).remove();
+    await Supply.find({ productId }).remove();
     return res.status(200).json({ message: 'Product deleted' });
   } catch (err) {
     return res.status(500).json({ error: err });

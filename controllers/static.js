@@ -3,6 +3,7 @@ const Category = require('../models/Category');
 const Brand = require('../models/Brand');
 const Shop = require('../models/Shop');
 const Position = require('../models/Position');
+const Supply = require('../models/Supply');
 const PositionService = require('../services/positions');
 const ProductsController = require('../controllers/products');
 const { redConsoleColor } = require('../config/constants');
@@ -64,7 +65,12 @@ exports.prices = async (req, res) => {
       productId: product._id,
     }).sort({ price: 1 });
 
-    const data = { product, category };
+    const supply = await Supply.find({
+      productId: product._id,
+    });
+
+    const data = { product, category, supply: supply[0] };
+
     data.positions = await PositionService.addShopData(positions);
 
     res.render('prices', data, function(err, html) {

@@ -3,9 +3,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 
 const config = {
-  entry: './frontend/index.js',
+  entry: {
+    main: './frontend/index.js',
+    landing: './frontend/js/landing.js',
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname + '/static/', 'frontend'),
   },
   module: {

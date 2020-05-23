@@ -3,6 +3,8 @@ const Category = require('../models/Category');
 const Brand = require('../models/Brand');
 const Shop = require('../models/Shop');
 const Position = require('../models/Position');
+const Wholesale = require('../models/Wholesale');
+const Supply = require('../models/Supply');
 const mongoose = require('mongoose');
 const { redConsoleColor } = require('../config/constants');
 
@@ -14,6 +16,7 @@ exports.deleteAllProductsAndPositions = async (req, res) => {
     Product.collection.drop();
     Brand.collection.drop();
     Position.collection.drop();
+    Supply.collection.drop();
     return res
       .status(200)
       .json({ message: 'All products and collections removed' });
@@ -29,6 +32,8 @@ exports.publish = async (req, res) => {
   const importedProducts = req.body.data;
 
   try {
+    const wholesaleList = await Wholesale.find();
+
     for (const item of importedProducts) {
       const currentProduct = item.product;
 
@@ -44,7 +49,26 @@ exports.publish = async (req, res) => {
       });
       const createdProduct = await newProduct.save();
 
+      // TODO!!!!! вытащить getShops из этого цикла - 
+      // ты на каждой итерации делаешь запрос const appShops = await Shop.find();
+      // и такую же хуйню везде поправить!!!!!
+      // если товаров 15000 - это столько раз получить данные?? ты ахуел???
       await createPositions(item.shops, createdProduct._id);
+
+      // ОПТОВАЯ ХЕРНЯ =====================
+      await createSupply(item.wholesale, createdProduct._id, wholesaleList);
+
+      // item.wholesale
+      // productId: createdProduct._id
+      // price: item.wholesale.price
+      // quantity: item.wholesale.quantity
+      // wholesaleId: ??????
+      //
+      // 1. Нужен новый метод - get wholesale
+      // 2. 
+
+
+
     }
   } catch (err) {
     return res.status(500).json({ error: err });
@@ -54,6 +78,59 @@ exports.publish = async (req, res) => {
     .status(201)
     .json({ message: 'Table imported successfully!' });
 };
+
+// =============================================================================
+// =============================================================================
+// =============================================================================
+async function createSupply(importedWholesale, productId, wholesaleList) {
+  try {
+    // console.log('================================');
+    // console.log('================================');
+    // console.log('================================');
+    // console.log(importedWholesale, wholesaleList);
+    // console.log('================================');
+    // console.log('================================');
+    // console.log('================================');
+
+    const supply = {
+      productId,
+      options: []
+    };
+    
+    
+    for (let key in importedWholesale) {
+      const { price, quantity } = importedWholesale[key];
+      const foundWholesale = wholesaleList.find(wholesaleItem => {
+        return wholesaleItem.key === key;
+      });
+
+      supply.options.push({
+        wholesaleId: foundWholesale._id,
+        price,
+        quantity,
+      });
+
+    }
+
+    console.log('SUPPLY >>>>>>>', supply);
+    // Supply
+    const newSupply = new Supply({
+      ...supply,
+      _id: new mongoose.Types.ObjectId(),
+    });
+    const createdSupply = await newSupply.save();
+
+    console.log('RESULT: >>>>>>>', createdSupply);
+
+  } catch(e) {
+    console.log('SAVE SUPPLY ERROR: ', e);
+  }
+}
+// =============================================================================
+// =============================================================================
+// =============================================================================
+
+
 
 /**
  * Save brand if not found

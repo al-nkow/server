@@ -1,74 +1,67 @@
 include parts/meta.pug
 +my-include('BOCO')
 body
-    nav.site-header.navbar.shadow-sm
-      div.container.d-flex.justify-content-between
-        a.site-header__link.navbar-brand.d-flex.align-items-center(href="/")
-          img.site-header__logo(src="/images/logo_long.png")
-        div
-          span.site-header__city.mr-5.p-2.d-none.d-sm-inline-block
-            include parts/point.pug
-            span.ml-2 Санкт-Петербург
-          a.site-header__link(class="p-2" href="/admin") Авторизоваться
+  nav.site-header.navbar.shadow-sm
+    div.container.d-flex.justify-content-between
+      a.site-header__link.navbar-brand.d-flex.align-items-center(href="/")
+        img.site-header__logo(src="/images/logo_long.png")
+      div
+        span.site-header__city.mr-5.p-2.d-none.d-sm-inline-block
+          include parts/point.pug
+          span.ml-2 Санкт-Петербург
+        a.site-header__link(class="p-2" href="/admin") Авторизоваться
 
-    .main-search.jumbotron.jumbotron-fluid.mb-0
-      form(id="searchForm").container.text-center
-        p(class="lead font-weight-normal mb-5")
-          | Начните поиск строительных материалов вместе с BoberCo - крупнейшей базой данных товаров
-          | магазинов и гипермаркетов Санкт-Петербурга, насчитывающей несколько тысяч наименований
-        div(class="input-group main-search__input")
-          input.form-control(
-            id="searchInp"
-            type="text"
-            placeholder="Название товара"
-            aria-label="Product name"
-            aria-describedby="searchBtn"
-          )
-          div(class="input-group-append")
-            button.btn.btn-outline-secondary(type="submit") Найти
+  .main-search.jumbotron.jumbotron-fluid.mb-0
+    form(id="searchForm").container.text-center
+      p(class="lead font-weight-normal mb-5")
+        | Начните поиск строительных материалов вместе с BoberCo - крупнейшей базой данных товаров
+        | магазинов и гипермаркетов Санкт-Петербурга, насчитывающей несколько тысяч наименований
+      div(class="input-group main-search__input")
+        input.form-control(
+          id="searchInp"
+          type="text"
+          placeholder="Название товара"
+          aria-label="Product name"
+          aria-describedby="searchBtn"
+        )
+        div(class="input-group-append")
+          button.btn.btn-outline-secondary(type="submit") Найти
 
-    // each newsItem in news
-    //   if newsItem.link
-    //     a.news-item(href=newsItem.link target="_blank")
-    //       img(src=newsItem.image)
-    //       .news-body
-    //         .news-date= moment(newsItem.date).format("DD MMMM YYYY, HH:MM")
-    //         .news-title= newsItem.title
-    //   else
-    //     .news-item
-    //       img(src=newsItem.image)
-    //       .news-body
-    //         .news-date= moment(newsItem.date).format("DD MMMM YYYY, HH:MM")
-    //         .news-title= newsItem.title
+  // each newsItem in news
+  //   if newsItem.link
+  //     a.news-item(href=newsItem.link target="_blank")
+  //       img(src=newsItem.image)
+  //       .news-body
+  //         .news-date= moment(newsItem.date).format("DD MMMM YYYY, HH:MM")
+  //         .news-title= newsItem.title
+  //   else
+  //     .news-item
+  //       img(src=newsItem.image)
+  //       .news-body
+  //         .news-date= moment(newsItem.date).format("DD MMMM YYYY, HH:MM")
+  //         .news-title= newsItem.title
 
 
-    // ================ CATEGORIES ================
-    .categories-section.p-2.p-sm-2.p-md-5
-      .container
-        .row.text-center
-          each category in categories
-            .col-xs-12.col-sm-6.p-2.text-left
-              a(href="/products?category=" + category._id).categories-section__item.text-left= category.name
+  // ================ CATEGORIES ================
+  .categories-section.p-2.p-sm-2.p-md-5
+    .container
+      .row.text-center
+        each category in categories
+          .col-xs-12.col-sm-6.p-2.text-left
+            a(href="/products?category=" + category._id).categories-section__item.text-left= category.name
 
-    // ================ SHOPS =====================
-    .shops-section.p-5
-      .container
-        .row.text-center
-          each shop in shops
-            .col-6.col-sm-6.col-md-3
-              .shops-section__item.p-2
-                img.shops-section__image(src=shop.image alt="")
+  // ================ SHOPS =====================
+  .shops-section.p-5
+    .container
+      .row.text-center
+        each shop in shops
+          .col-6.col-sm-6.col-md-3
+            .shops-section__item.p-2
+              img.shops-section__image(src=shop.image alt="")
 
-    .footer-section
-      footer.container.py-5 BoberCo
-    div.underfooter
-      .container.p-2 &copy; 2019-2020 BOCO Все права защищены
+  .footer-section
+    footer.container.py-5 BoberCo
+  .underfooter
+    .container.p-2 &copy; 2019-2020 BOCO Все права защищены
 
-    script.
-      document.getElementById('searchForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-        var inpValue = document.getElementById('searchInp').value;
-        if (inpValue) {
-            window.location.href = '/products?search=' + inpValue;
-        }
-      });
+  script(src="/frontend/landing.js")
