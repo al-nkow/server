@@ -13,7 +13,7 @@ const CoopForm = () => {
   const coopFormPhone = document.getElementById('coopFormPhone');
   const coopFormVolume = document.getElementById('coopFormVolume');
   const coopFormTerm = document.getElementById('coopFormTerm');
-  const coopFormComments = document.getElementById('coopFormTerm');
+  const coopFormComments = document.getElementById('coopFormComments');
   const coopFormMailOnly = document.getElementById('coopFormMailOnly');
   const coopFormOrgOnly = document.getElementById('coopFormOrgOnly');
 

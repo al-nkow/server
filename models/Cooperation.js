@@ -40,12 +40,14 @@ const CooperationSchema = new Schema(
       type: String,
     },
     orgOnly: {
-      type: String,
-      required: true,
+      type: Boolean,
+      default: false,
+    },
+    mailOnly: {
+      type: Boolean,
+      default: false,
     },
   },
 );
-
-// CooperationSchema.index({ "expireAt": 1 }, { expireAfterSeconds: 0 }); // same as db.createIndex
 
 module.exports = mongoose.model('Cooperation', CooperationSchema);

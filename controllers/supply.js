@@ -5,6 +5,7 @@ const Supply = require('../models/Supply');
  * GET ALL SUPPLIES
  */
 exports.getAll = async (req, res) => {
+  console.log('>>>>>>>', req.query);
   try {
     const list = await Supply.find(req.query).sort({ date: -1 });
     res.status(200).json({ list });

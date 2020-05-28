@@ -16,10 +16,10 @@ router.post(
 );
 
 /**
- * Get all supplies
- * @route GET api/supply
+ * Get all cooperations
+ * @route GET api/cooperations
  * @access Public
  */
-// router.get('/', SupplyController.getAll);
+router.get('/', CoopController.getAll);
 
 module.exports = router;
