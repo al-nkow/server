@@ -32,7 +32,7 @@ router.post(
 
 /**
  * Delete category by ID
- * @route GET api/categories/ID
+ * @route DELETE api/categories/ID
  * @access Private
  */
 router.delete('/:categoryId', auth, CategoriesController.delete);

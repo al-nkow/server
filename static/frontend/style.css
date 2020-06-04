@@ -88,6 +88,7 @@ body {
       left: 9px; }
 
 .product-card {
+  position: relative;
   color: #333333;
   -webkit-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
@@ -313,6 +314,40 @@ body {
 
 .coop-modal.failed .coop-modal-error {
   display: block; }
+
+.opt-coops {
+  margin-left: 10px;
+  color: #e15659; }
+  @media (max-width: 768px) {
+    .opt-coops {
+      display: block;
+      margin-left: 0;
+      margin-top: 10px; } }
+
+.opt-coops-amount {
+  margin: 0 5px;
+  font-weight: bold; }
+
+.has-coop-wrap {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background: #30394a;
+  z-index: 1; }
+
+.has-coop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  fill: #ffffff;
+  width: 20px;
+  height: 20px; }
 
 
 /*# sourceMappingURL=style.css.map*/

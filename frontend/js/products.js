@@ -13,6 +13,7 @@ const Products = () => {
     'productsFiltersBlock',
   );
   const filtersAmount = document.getElementById('filtersAmount');
+  const coopCheckbox = document.getElementById('cooperationsOnly');
 
   const fromToInputIds = [
     'heightFrom',
@@ -188,6 +189,15 @@ const Products = () => {
   }
 
   /**
+   * Coop checkbox change handler
+   * @param event 
+   */
+  function coopCheckboxChangeHandler (event) {
+    addParameterToUrl('coopOnly', event.target.checked);
+    searchRequest();
+  };
+
+  /**
    * Brand select change handler
    * @param event
    */
@@ -200,6 +210,7 @@ const Products = () => {
     'change',
     categorySelectChangeHandler,
   );
+  coopCheckbox.addEventListener('change', coopCheckboxChangeHandler);
   brandSelect.addEventListener('change', brandSelectChangeHandler);
   searchForm.addEventListener('submit', searchFormSubmitHandler);
   initFilterValues();

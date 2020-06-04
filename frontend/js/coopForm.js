@@ -158,6 +158,19 @@ const CoopForm = () => {
       const response = await fetch(SUBMIT_URL, fetchData);
       if (response.status !== 200) throw new Error();
       coopModal.classList.add('success');
+
+      // update value
+      const coopAmount = document.getElementById('coopAmount');
+      if (coopAmount) {
+        const amount = coopAmount.innerHTML;
+        coopAmount.innerHTML = +amount + +data.amount;
+      } else {
+        const coop = document.getElementById('opt-coops');
+        coop.innerHTML = `<span class="opt-coops">
+          Уже есть заявки на покупку <span class="opt-coops-amount">${data.amount}</span> единиц товара!
+          </span>`;
+      }
+
     } catch (err) {
       console.log('SAVE SUPPLY ERROR: ', err);
       coopModal.classList.add('failed');

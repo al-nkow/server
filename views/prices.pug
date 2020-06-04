@@ -55,6 +55,12 @@ body
           | Для этого заполните форму нажав кнопку Кооперация.
         .opt-btn
           .btn.btn-success(type="button" data-toggle="modal" data-target="#coopModal") Кооперация
+          span.opt-coops(id="opt-coops")
+            if amount
+              span
+                | Уже есть заявки на покупку
+                span.opt-coops-amount(id="coopAmount")=amount
+                | единиц товара!
 
     .mb-3.mobile-prices
       .row

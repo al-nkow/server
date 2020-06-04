@@ -5,6 +5,7 @@ const Shop = require('../models/Shop');
 const Position = require('../models/Position');
 const Wholesale = require('../models/Wholesale');
 const Supply = require('../models/Supply');
+const Cooperation = require('../models/Cooperation');
 const mongoose = require('mongoose');
 const { redConsoleColor } = require('../config/constants');
 
@@ -17,6 +18,7 @@ exports.deleteAllProductsAndPositions = async (req, res) => {
     Brand.collection.drop();
     Position.collection.drop();
     Supply.collection.drop();
+    Cooperation.collection.drop();
     return res
       .status(200)
       .json({ message: 'All products and collections removed' });
@@ -84,19 +86,10 @@ exports.publish = async (req, res) => {
 // =============================================================================
 async function createSupply(importedWholesale, productId, wholesaleList) {
   try {
-    // console.log('================================');
-    // console.log('================================');
-    // console.log('================================');
-    // console.log(importedWholesale, wholesaleList);
-    // console.log('================================');
-    // console.log('================================');
-    // console.log('================================');
-
     const supply = {
       productId,
       options: []
     };
-    
     
     for (let key in importedWholesale) {
       const { price, quantity } = importedWholesale[key];
@@ -109,10 +102,8 @@ async function createSupply(importedWholesale, productId, wholesaleList) {
         price,
         quantity,
       });
-
     }
 
-    console.log('SUPPLY >>>>>>>', supply);
     // Supply
     const newSupply = new Supply({
       ...supply,
@@ -120,7 +111,7 @@ async function createSupply(importedWholesale, productId, wholesaleList) {
     });
     const createdSupply = await newSupply.save();
 
-    console.log('RESULT: >>>>>>>', createdSupply);
+    // console.log('RESULT: >>>>>>>', createdSupply);
 
   } catch(e) {
     console.log('SAVE SUPPLY ERROR: ', e);
@@ -129,8 +120,6 @@ async function createSupply(importedWholesale, productId, wholesaleList) {
 // =============================================================================
 // =============================================================================
 // =============================================================================
-
-
 
 /**
  * Save brand if not found

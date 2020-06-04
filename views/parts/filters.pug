@@ -17,6 +17,11 @@ form.products-filters-block(id="productsFiltersBlock")
           option(value=brand.name)=brand.name
 
   .form-group
+    .form-check
+      input.form-check-input(type="checkbox" id="cooperationsOnly")
+      label.form-check-label(for="cooperationsOnly") Только кооперации
+
+  .form-group
     label Параметры
     .input-group.input-group-sm
       .input-group-prepend

@@ -5,6 +5,19 @@ const mongoose = require('mongoose');
 const MailService = require('../services/mail');
 
 /**
+ * DELETE COOPERATION
+ */
+exports.delete = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Cooperation.deleteOne({ _id: id });
+    return res.status(200).json({ message: 'Cooperation deleted' });
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+};
+
+/**
  * CREATE NEW COOPERATION
  */
 exports.create = async (req, res) => {

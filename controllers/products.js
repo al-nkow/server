@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const Cooperation = require('../models/Cooperation');
 const Position = require('../models/Position');
 const Supply = require('../models/Supply');
 const mongoose = require('mongoose');
@@ -128,8 +129,29 @@ exports.commonSearch = async params => {
  * SEARCH PRODUCT
  */
 exports.search = async (req, res) => {
-  const result = await exports.commonSearch(req.body);
-  res.status(200).json({ searchResult: result });
+  try {
+    const allCooperations = await Cooperation.find();
+    const coopIds = allCooperations.map(item => item.bocoArticle);
+    const setCoopIds = new Set(coopIds);
+  
+    const coopOnly = req.body.coopOnly;
+    const result = await exports.commonSearch(req.body);
+  
+    const readyForUse = result.reduce((res, item) => {
+      const hasCooperation = setCoopIds.has(item.bocoArticle);
+      if (coopOnly && hasCooperation || !coopOnly) {
+        res.push({
+          ...item._doc,
+          hasCooperation,
+        });
+      }
+      return res;
+    }, []);
+  
+    res.status(200).json({ searchResult: readyForUse });
+  } catch(e) {
+    console.log('SEARCH ERROR: ', e);
+  }
 };
 
 // =============================================================================
