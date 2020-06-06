@@ -74,10 +74,15 @@ exports.getAll = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const { productId } = req.params;
+    const foundProduct = await Product.findById(productId);
+    const { bocoArticle } = foundProduct;
+    
     await Product.deleteOne({ _id: productId });
     // remove all positions associated with this product
     await Position.find({ productId }).remove();
     await Supply.find({ productId }).remove();
+    await Cooperation.deleteMany({ bocoArticle });
+
     return res.status(200).json({ message: 'Product deleted' });
   } catch (err) {
     return res.status(500).json({ error: err });

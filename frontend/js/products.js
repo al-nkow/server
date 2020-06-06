@@ -93,6 +93,7 @@ const Products = () => {
     const searchInputValue = queryParams.search;
     const categoryValue = queryParams.category;
     const brandValue = queryParams.brand;
+    const coopOnlyValue = queryParams.coopOnly;
 
     fromToInputIds.forEach(item => {
       const inpValue = queryParams[item];
@@ -104,6 +105,9 @@ const Products = () => {
     if (brandValue)
       brandSelect.value = decodeURIComponent(brandValue);
     if (categoryValue) categorySelect.value = categoryValue;
+    if (coopOnlyValue === 'true') {
+      coopCheckbox.checked = true;
+    }
   }
 
   /**

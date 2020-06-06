@@ -73,7 +73,7 @@ const renderProductsList = (data, clear) => {
       }">
         ${item.hasCooperation ? `<div class="has-coop-wrap">${thumbUp}</div>` : ''}
         <img class="card-img-top" src="${item.image ||
-          'images/noimg.png'}" alt="">
+          '/images/noimg.png'}" alt="">
         <div class="card-body">
           <h5 class="card-title">${item.name}</h5>
           ${

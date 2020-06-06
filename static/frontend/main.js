@@ -402,6 +402,7 @@ const Products = () => {
     const searchInputValue = queryParams.search;
     const categoryValue = queryParams.category;
     const brandValue = queryParams.brand;
+    const coopOnlyValue = queryParams.coopOnly;
     fromToInputIds.forEach(item => {
       const inpValue = queryParams[item];
       if (inpValue) document.getElementById(item).value = inpValue;
@@ -409,6 +410,10 @@ const Products = () => {
     if (searchInputValue) searchInp.value = decodeURIComponent(searchInputValue);
     if (brandValue) brandSelect.value = decodeURIComponent(brandValue);
     if (categoryValue) categorySelect.value = categoryValue;
+
+    if (coopOnlyValue === 'true') {
+      coopCheckbox.checked = true;
+    }
   }
   /**
    * Perform search request
@@ -604,7 +609,7 @@ const renderProductsList = (data, clear) => {
     card.innerHTML = `
       <a class="product-card card mb-3" href="/prices?product=${item._id}">
         ${item.hasCooperation ? `<div class="has-coop-wrap">${thumbUp}</div>` : ''}
-        <img class="card-img-top" src="${item.image || 'images/noimg.png'}" alt="">
+        <img class="card-img-top" src="${item.image || '/images/noimg.png'}" alt="">
         <div class="card-body">
           <h5 class="card-title">${item.name}</h5>
           ${item.brand ? '<h6 class="card-subtitle mb-2 text-muted">' + item.brand + '</h6>' : ''}

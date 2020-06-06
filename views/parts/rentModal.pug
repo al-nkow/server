@@ -1,0 +1,65 @@
+.modal.fade.coop-modal(id="rentModal" tabindex="-1" role="dialog" aria-labelledby="rentModalLabel" aria-hidden="true")
+  .modal-dialog.modal-lg(role="document")
+    .modal-content.coop-modal-base
+      .modal-header
+        h5.modal-title(id="rentModalLabel") Аренда ячейки
+        button.close(type="button" data-dismiss="modal" aria-label="Close")
+          span(aria-hidden="true") &times;
+      .modal-body
+        form(id="rentForm")
+          .row
+            .col-xs-12.col-sm-6
+              .form-group
+                label(for="rentFormOrgName") Наименование организации / ИП
+                input.form-control(type="text" id="rentFormOrgName")
+            .col-xs-12.col-sm-6
+              .form-group
+                label(for="rentFormINN") ИНН
+                input.form-control(type="text" id="rentFormINN")
+          .form-group
+            label(for="rentFormName") Фамилия Имя Отчество (если частное лицо)
+            input.form-control(type="text" id="rentFormName")
+          .row
+            .col-xs-12.col-sm-6
+              .form-group
+                label(for="rentFormEmail") Email адрес
+                input.form-control(type="email" id="rentFormEmail")
+                // small.form-text.text-muted(id="emailHelp") Мы нигде не покажем Ваш email
+            .col-xs-12.col-sm-6  
+              .form-group
+                label(for="rentFormPhone") Телефон
+                input.form-control(type="text" id="rentFormPhone")
+          .form-group
+            label(for="rentFormComments") Комментарии
+            textarea.form-control(id="rentFormComments" rows="3")
+          .row
+            .col-xs-12.col-sm-6
+              .form-check
+                input.form-check-input(type="checkbox" id="rentFormMailOnly")
+                label.form-check-label(for="rentFormMailOnly") Получать сведения только по почте
+
+      .modal-footer
+        button.btn.btn-secondary(type="button" data-dismiss="modal") Отменить
+        button.btn.btn-success(type="button" id="rentModalSubmit")
+          span.spinner-grow.spinner-grow-sm.mr-1(role="status" aria-hidden)
+          | Отправить заявку
+
+    .modal-content.coop-modal-result
+      .modal-header
+          h5.modal-title Заявка принята
+          button.close(type="button" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true") &times;
+      .modal-body
+        | Ваша заявка принята. Hаш менеджер свяжется с Вами в ближайшее время.
+      .modal-footer
+        button.btn.btn-success(type="button" data-dismiss="modal") Закрыть
+    
+    .modal-content.coop-modal-error
+      .modal-header
+          h5.modal-title Ошибка
+          button.close(type="button" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true") &times;
+      .modal-body
+        div.text-danger Ошибка сервера! Попробуйте повторить позже.
+      .modal-footer
+        button.btn.btn-success(type="button" data-dismiss="modal") Закрыть

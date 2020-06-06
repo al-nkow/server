@@ -1,3 +1,10 @@
+import RentForm from './rentForm';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import '../styles/style.scss';
+
+RentForm();
+
 document.getElementById('searchForm').addEventListener('submit', function (e) {
   e.preventDefault();
   var inpValue = document.getElementById('searchInp').value;

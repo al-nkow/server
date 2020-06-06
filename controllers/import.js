@@ -5,7 +5,7 @@ const Shop = require('../models/Shop');
 const Position = require('../models/Position');
 const Wholesale = require('../models/Wholesale');
 const Supply = require('../models/Supply');
-const Cooperation = require('../models/Cooperation');
+// const Cooperation = require('../models/Cooperation');
 const mongoose = require('mongoose');
 const { redConsoleColor } = require('../config/constants');
 
@@ -18,7 +18,7 @@ exports.deleteAllProductsAndPositions = async (req, res) => {
     Brand.collection.drop();
     Position.collection.drop();
     Supply.collection.drop();
-    Cooperation.collection.drop();
+    // Cooperation.collection.drop();
     return res
       .status(200)
       .json({ message: 'All products and collections removed' });

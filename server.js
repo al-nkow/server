@@ -74,6 +74,7 @@ app.use('/api/me', require('./routes/api/me'));
 app.use('/api/wholesale', require('./routes/api/wholesale'));
 app.use('/api/supply', require('./routes/api/supply'));
 app.use('/api/cooperations', require('./routes/api/cooperations'));
+app.use('/api/rent', require('./routes/api/rent'));
 app.use('/', require('./routes/static/static'));
 
 const PORT = process.env.PORT || 5000;

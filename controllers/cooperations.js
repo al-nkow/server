@@ -76,8 +76,6 @@ async function notifyIfPossible(bocoArticle) {
   
       if (cooperationIsPossible) {
         MailService.send({
-          from: '"BOBERCO INFO" <bobercoru@gmail.com>',
-          to: 'al.nkow@gmail.com',
           subject: 'BOBERCO кооперация',
           text: 'Поступила новая заявка на кооперацию' + productId,
           html: mailBody,
