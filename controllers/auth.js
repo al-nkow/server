@@ -20,49 +20,52 @@ const getToken = (email, userId, secret, exp) => {
  * SIGN IN USER
  */
 exports.login = async (req, res) => {
-  const errors = validationResult(req);
+  try {
+    const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    return res.status(400).json({
-      errors: errors.array(),
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array(),
+      });
+    }
+
+    const { email, password } = req.body;
+    const foundUser = await User.findOne({ email: email });
+
+    if (!foundUser)
+      return res.status(401).json({ message: 'Auth failed' });
+
+    const isMatch = await foundUser.isValidPassword(password);
+
+    if (!isMatch)
+      return res.status(401).json({ message: 'Auth failed' });
+
+    const userId = foundUser._id;
+    const token = getToken(email, userId, JWT_SECRET, '1h');
+    const refreshToken = getToken(
+      email,
+      userId,
+      JWT_SECRET_REFRESH_TOKEN,
+      '1d',
+    );
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    foundUser.refreshToken = refreshToken;
+    foundUser.save();
+
+    return res.status(200).json({
+      message: 'Auth successful',
+      token: token,
+      refreshToken: refreshToken,
+      expiresIn: decoded ? decoded.exp : '',
+      userId: userId,
+      userName: foundUser.name,
+      userEmail: foundUser.email,
     });
+
+  } catch(e) {
+    console.log('LOGIN ERROR: ', e);
   }
-
-  // TODO !!!!! ADD TRY CATCH!!!!!
-
-  const { email, password } = req.body;
-  const foundUser = await User.findOne({ email: email });
-
-  if (!foundUser)
-    return res.status(401).json({ message: 'Auth failed' });
-
-  const isMatch = await foundUser.isValidPassword(password);
-
-  if (!isMatch)
-    return res.status(401).json({ message: 'Auth failed' });
-
-  const userId = foundUser._id;
-  const token = getToken(email, userId, JWT_SECRET, '1h');
-  const refreshToken = getToken(
-    email,
-    userId,
-    JWT_SECRET_REFRESH_TOKEN,
-    '1d',
-  );
-  const decoded = jwt.verify(token, JWT_SECRET);
-
-  foundUser.refreshToken = refreshToken;
-  foundUser.save();
-
-  return res.status(200).json({
-    message: 'Auth successful',
-    token: token,
-    refreshToken: refreshToken,
-    expiresIn: decoded ? decoded.exp : '',
-    userId: userId,
-    userName: foundUser.name,
-    userEmail: foundUser.email,
-  });
 };
 
 /**
@@ -94,8 +97,6 @@ exports.token = async (req, res) => {
     res.status(401).json({ message: 'Auth failed' });
 
   const userId = foundUser._id;
-
-  // return res.status(200).json({ error: 'pizda' });
 
   // New token
   const token = jwt.sign(

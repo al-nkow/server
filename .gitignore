@@ -28,3 +28,5 @@ yarn-error.log*
 /static/uploads/*
 
 /config/default.json
+
+READMEHIDDEN.md

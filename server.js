@@ -17,10 +17,6 @@ addDefaultUser();
 // static folder
 app.use(express.static('static'));
 
-
-
-
-
 // bodyParser = {
 //   json: {limit: '50mb', extended: true},
 //   urlencoded: {limit: '50mb', extended: true}
@@ -30,13 +26,6 @@ app.use(express.static('static'));
 // было просто extended: false
 app.use(express.json({ limit: '50mb', extended: true })); // body parser (req.body)
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
-
-
-
-
-
-
-
 
 
 // TODO: разрешить только localhost или какой-то адрес

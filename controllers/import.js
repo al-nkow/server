@@ -30,11 +30,15 @@ exports.deleteAllProductsAndPositions = async (req, res) => {
 /**
  * SAVE IMPORTED DATA TO SERVER
  */
+
+// var arr = [{ name: 'Star Wars' }, { name: 'The Empire Strikes Back' }];
+// Movies.insertMany(arr, function(error, docs) {});
 exports.publish = async (req, res) => {
   const importedProducts = req.body.data;
 
   try {
     const wholesaleList = await Wholesale.find();
+    const appShops = await Shop.find();
 
     for (const item of importedProducts) {
       const currentProduct = item.product;
@@ -51,30 +55,15 @@ exports.publish = async (req, res) => {
       });
       const createdProduct = await newProduct.save();
 
-      // TODO!!!!! вытащить getShops из этого цикла - 
-      // ты на каждой итерации делаешь запрос const appShops = await Shop.find();
-      // и такую же хуйню везде поправить!!!!!
-      // если товаров 15000 - это столько раз получить данные?? ты ахуел???
-      await createPositions(item.shops, createdProduct._id);
-
-      // ОПТОВАЯ ХЕРНЯ =====================
+      await createPositions(item.shops, createdProduct._id, appShops);
       await createSupply(item.wholesale, createdProduct._id, wholesaleList);
-
-      // item.wholesale
-      // productId: createdProduct._id
-      // price: item.wholesale.price
-      // quantity: item.wholesale.quantity
-      // wholesaleId: ??????
-      //
-      // 1. Нужен новый метод - get wholesale
-      // 2. 
-
-
 
     }
   } catch (err) {
     return res.status(500).json({ error: err });
   }
+
+  Product.createIndexes();
 
   return res
     .status(201)
@@ -166,13 +155,16 @@ async function getCategoryId(currentProductCategoryName) {
  * Create a new category
  */
 async function createNewCategory(name) {
-  // TODO TRY CATCH ????
-  const newCategory = new Category({
-    name: name,
-    comments: 'Создана автоматически',
-    _id: new mongoose.Types.ObjectId(),
-  });
-  return await newCategory.save();
+  try {
+    const newCategory = new Category({
+      name: name,
+      comments: 'Создана автоматически',
+      _id: new mongoose.Types.ObjectId(),
+    });
+    return await newCategory.save();
+  } catch(e) {
+    console.log('CREATE NEW CATEGORY ERROR: ', e);
+  }
 }
 
 /**
@@ -199,10 +191,8 @@ async function createNewPosition(
 /**
  * Create positions for product item
  */
-async function createPositions(currentShops, createdProductId) {
+async function createPositions(currentShops, createdProductId, appShops) {
   if (currentShops && Object.keys(currentShops).length) {
-    const appShops = await Shop.find();
-
     for (const shop of appShops) {
       const { key } = shop;
       if (key) {

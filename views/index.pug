@@ -28,7 +28,7 @@ body
           button.btn.btn-outline-secondary(type="submit") Найти
 
   // ================ COOPERATIONS ==============
-  .cooperations-section.p-5
+  .cooperations-section.p-xs-2.p-sm-5
     .container
       .row
         .col-xs-12.col-sm-6
@@ -47,7 +47,7 @@ body
             .block-description
               | Также Вы можете посмотреть товары по которым уже есть заявки на кооперацию,
               | для этого перейдите по ссылке ниже
-          a.btn.btn-info(href="/products/?coopOnly=true") Есть заявки
+          a.btn.btn-info.mb-3(href="/products/?coopOnly=true") Есть заявки
 
   // ================ CATEGORIES ================
   .categories-section.p-2.p-sm-2.p-md-5
@@ -58,7 +58,7 @@ body
             a(href="/products?category=" + category._id).categories-section__item.text-left= category.name
 
   // ================ RENT ======================
-  .rent-section.p-5
+  .rent-section.p-xs-2.p-sm-5
     .container
         .row
           .col-xs-12.col-sm-6
@@ -72,8 +72,8 @@ body
                 | Чтобы оставить заявку на аренду - нажмите на кнопку ниже и заполните форму.
                 | Менеджер свяжется с Вами в ближайшее время чтобы уточнить детали и рассказать о
                 | дальнейших действиях.
-            .btn.btn-info(type="button" data-toggle="modal" data-target="#rentModal") Оставить заявку
-          .col-xs-12.col-sm-6
+            .btn.btn-info.mb-3(type="button" data-toggle="modal" data-target="#rentModal") Оставить заявку
+          .col-xs-12.col-sm-6.order-first.order-sm-last
             img.block-img(src="/images/rent.png")
 
   // ================ SHOPS =====================

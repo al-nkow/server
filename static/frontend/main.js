@@ -337,6 +337,7 @@ const Products = () => {
   const filtersBlock = document.getElementById('productsFiltersBlock');
   const filtersAmount = document.getElementById('filtersAmount');
   const coopCheckbox = document.getElementById('cooperationsOnly');
+  const productsListWrap = document.getElementById('productsListWrap');
   const fromToInputIds = ['heightFrom', 'heightTo', 'widthFrom', 'widthTo', 'thicknessFrom', 'thicknessTo', 'weightFrom', 'weightTo', 'volumeLFrom', 'volumeLTo', 'volumeMFrom', 'volumeMTo', 'areaFrom', 'areaTo'];
   let searchTimeout;
   let fullProductsList = [];
@@ -422,6 +423,12 @@ const Products = () => {
 
   async function searchRequest() {
     const body = _urlService__WEBPACK_IMPORTED_MODULE_0__["default"].getUrlParamsAsObject();
+
+    if (isEmpty(body)) {
+      productsListWrap.innerHTML = '<div class="col-12">Задайте какие-нибудь параметры поиска!</div>';
+      return false;
+    }
+
     filtersAmount.innerHTML = Object.keys(body).length;
     if (body.search) body.search = decodeURIComponent(body.search);
     if (body.brand) body.brand = decodeURIComponent(body.brand);
@@ -435,17 +442,46 @@ const Products = () => {
     myHeaders.append('Content-Type', 'application/json');
 
     try {
+      // start loading
+      productsListWrap.innerHTML = '<div class="loader">Loading...</div>';
+      disableControls(true);
       const response = await fetch(SEARCH_URL, fetchData);
       const json = await response.json();
       const data = json && json.searchResult ? json.searchResult : null;
-      const count = data ? data.length : null;
+      const count = data ? data.length : null; // end loading
+
+      disableControls(false);
       setMobileFiltersDataCount(count); // renderProductsList(data, true); // - render full list
 
       fullProductsList = data.slice();
       showProductsPortion(true);
     } catch (error) {
       console.log('SEARCH ERROR:', error);
+      disableControls(false);
     }
+  }
+  /**
+   * Check if object is empty
+   * @param {object} obj 
+   */
+
+
+  function isEmpty(obj) {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) return false;
+    }
+
+    return true;
+  }
+  /**
+   * Disable or enable ol filters and search input
+   * @param {boolean} val 
+   */
+
+
+  function disableControls(val) {
+    const elements = [...filtersBlock.elements, ...searchForm.elements];
+    elements.forEach(item => item.disabled = val);
   }
   /**
    * Set result into filters button
@@ -535,7 +571,7 @@ const Products = () => {
     }
   });
   document.getElementById('clearFilters').addEventListener('click', () => {
-    document.getElementById('productsFiltersBlock').reset();
+    filtersBlock.reset();
 
     if (history.pushState) {
       window.history.pushState({

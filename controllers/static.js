@@ -74,6 +74,19 @@ exports.prices = async (req, res) => {
     const supply = await Supply.findOne({
       productId: product._id,
     });
+
+
+    console.log('>>>>>>>>>>>>>>>>>>');
+    console.log('>>>>>>>>>>>>>>>>>>');
+    console.log('>>>>>>>>>>>>>>>>>>');
+    console.log(product, supply);
+    console.log('>>>>>>>>>>>>>>>>>>');
+    console.log('>>>>>>>>>>>>>>>>>>');
+    console.log('>>>>>>>>>>>>>>>>>>');
+    console.log('>>>>>>>>>>>>>>>>>>');
+
+
+
     
     const data = { product, category, supply: supply, amount };
     
