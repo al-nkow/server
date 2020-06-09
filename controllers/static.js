@@ -15,7 +15,7 @@ const { redConsoleColor } = require('../config/constants');
 exports.products = async (req, res) => {
   const data = {};
   try {
-    data.products = await ProductsController.commonSearch(req.query);
+    // data.products = await ProductsController.commonSearch(req.query);
     data.brands = await Brand.find();
     data.categories = await Category.find();
   } catch (e) {
@@ -75,19 +75,6 @@ exports.prices = async (req, res) => {
       productId: product._id,
     });
 
-
-    console.log('>>>>>>>>>>>>>>>>>>');
-    console.log('>>>>>>>>>>>>>>>>>>');
-    console.log('>>>>>>>>>>>>>>>>>>');
-    console.log(product, supply);
-    console.log('>>>>>>>>>>>>>>>>>>');
-    console.log('>>>>>>>>>>>>>>>>>>');
-    console.log('>>>>>>>>>>>>>>>>>>');
-    console.log('>>>>>>>>>>>>>>>>>>');
-
-
-
-    
     const data = { product, category, supply: supply, amount };
     
     data.positions = await PositionService.addShopData(positions);

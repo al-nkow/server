@@ -3,7 +3,7 @@ const Cooperation = require('../models/Cooperation');
 const Position = require('../models/Position');
 const Supply = require('../models/Supply');
 const mongoose = require('mongoose');
-const ProductService = require('../services/products');
+// const ProductService = require('../services/products');
 const { redConsoleColor } = require('../config/constants');
 
 /**
@@ -123,7 +123,7 @@ exports.commonSearch = async params => {
       ? await fullTextSearch(searchParams, searchStr)
       : await Product.find({ ...searchParams })
 
-    if (products && products.length) await ProductService.addExtraInfo(products);
+    // if (products && products.length) await ProductService.addExtraInfo(products);
     return products;
   } catch (e) {
     return commonSearchErrorHandler(e);
@@ -138,12 +138,19 @@ exports.search = async (req, res) => {
     const allCooperations = await Cooperation.find();
     const coopIds = allCooperations.map(item => item.bocoArticle);
     const setCoopIds = new Set(coopIds);
-  
+
+    // '_id': { $in: [
+    //     mongoose.Types.ObjectId('4ed3ede8844f0f351100000c'),
+    //     mongoose.Types.ObjectId('4ed3f117a844e0471100000d'), 
+    //     mongoose.Types.ObjectId('4ed3f18132f50c491100000e')
+    // ]}
+
     const coopOnly = req.body.coopOnly;
-    const result = await exports.commonSearch(req.body);
+    const result = await exports.commonSearch(req.body, coopIds);
   
     const readyForUse = result.reduce((res, item) => {
       const hasCooperation = setCoopIds.has(item.bocoArticle);
+      
       if (coopOnly && hasCooperation || !coopOnly) {
         res.push({
           ...item._doc,

@@ -1,3 +1,5 @@
+// TODO проверить - похоже этот сервис нигде не используется
+
 const Category = require('../models/Category');
 const Position = require('../models/Position');
 const { redConsoleColor } = require('../config/constants');
@@ -25,7 +27,7 @@ exports.addExtraInfo = async products => {
   } catch (e) {
     console.log(
       redConsoleColor,
-      'ERROR ADDING CATEGORY NAMES TO PRODUCT: ',
+      'ERROR ADDING EXTRA INFO TO PRODUCT: ',
       e,
     );
   }
