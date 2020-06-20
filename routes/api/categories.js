@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const upload = require('../../middleware/upload');
 const auth = require('../../middleware/auth');
 const { check } = require('express-validator');
 const CategoriesController = require('../../controllers/categories');
@@ -27,6 +28,7 @@ router.post(
   '/',
   auth,
   [check('name', 'Name is required').exists()],
+  upload.single('categoryImage'),
   CategoriesController.create,
 );
 
@@ -42,6 +44,12 @@ router.delete('/:categoryId', auth, CategoriesController.delete);
  * @route PUT api/categories/ID
  * @access Private
  */
-router.put('/:categoryId', auth, CategoriesController.update);
+router.put(
+  '/:categoryId',
+  auth,
+  [check('name', 'Name is required').exists()],
+  upload.single('categoryImage'),
+  CategoriesController.update,
+);
 
 module.exports = router;
