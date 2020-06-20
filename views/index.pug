@@ -54,8 +54,10 @@ body
     .container
       .row.text-center
         each category in categories
-          .col-xs-12.col-sm-6.p-2.text-left
-            a(href="/products?category=" + category._id).categories-section__item.text-left= category.name
+          .col-xs-6.col-sm-3.p-2.text-left
+            a.categories-section__item.text-left(href="/products?category=" + category._id)
+              img.categories-section__thumb(src=category.image alt="")
+              div= category.name
 
   // ================ RENT ======================
   .rent-section.p-xs-2.p-sm-5

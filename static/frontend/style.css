@@ -60,10 +60,14 @@ body {
 
 .categories-section {
   background: url("/images/gplaypattern.png"); }
+  .categories-section__thumb {
+    width: 100%;
+    display: block;
+    margin-bottom: 5px; }
   .categories-section__item {
     color: #333333;
     position: relative;
-    padding: 10px 10px 10px 27px;
+    padding: 10px;
     display: block;
     background: #ffffff;
     border-radius: 4px;
@@ -77,15 +81,6 @@ body {
       text-decoration: none;
       color: #008cd1;
       top: -2px; }
-    .categories-section__item:before {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border: 2px solid #ef7f1a;
-      border-radius: 50%;
-      top: 17px;
-      left: 9px; }
 
 .product-card {
   position: relative;
@@ -403,5 +398,4 @@ body {
     transform: rotate(360deg); } }
 
 
-/*# sourceMappingURL=style.css.map*/
 /*# sourceMappingURL=style.css.map*/

@@ -38,7 +38,7 @@ exports.home = async (req, res) => {
   const data = {};
 
   try {
-    data.categories = await Category.find().select('name _id');
+    data.categories = await Category.find().select('name _id image');
     data.shops = await Shop.find();
   } catch (e) {
     console.error(

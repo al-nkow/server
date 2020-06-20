@@ -29,10 +29,15 @@ body {
 
 .categories-section {
   background: url('/images/gplaypattern.png');
+  &__thumb {
+    width: 100%;
+    display: block;
+    margin-bottom: 5px;
+  }
   &__item {
     color: $text;
     position: relative;
-    padding: 10px 10px 10px 27px;
+    padding: 10px;
     display: block;
     background: $white;
     border-radius: 4px;
@@ -44,16 +49,16 @@ body {
       color: $blue;
       top: -2px;
     }
-    &:before {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border: 2px solid $orange;
-      border-radius: 50%;
-      top: 17px;
-      left: 9px;
-    }
+    // &:before {
+    //   content: '';
+    //   position: absolute;
+    //   width: 10px;
+    //   height: 10px;
+    //   border: 2px solid $orange;
+    //   border-radius: 50%;
+    //   top: 17px;
+    //   left: 9px;
+    // }
   }
 }
 
