@@ -27,7 +27,8 @@
     "popper.js": "^1.16.1",
     "prettier": "^1.18.2",
     "pug": "^2.0.4",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "siema": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",

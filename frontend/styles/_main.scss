@@ -1,0 +1,196 @@
+.bc-nav-block {
+  padding: 28px 0;
+}
+.bc-auth {
+  svg {
+    &:hover {
+      path {
+        fill: $blue;
+      }
+    }
+  }
+}
+.bc-logo {
+  svg {
+    width: 136px;
+    height: 40px;
+    margin-top: -6px;
+  }
+}
+.bc-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: $lightText;
+  flex-wrap: wrap;
+}
+.bc-search {
+  @media (max-width: 992px) {
+    order: 4;
+    width: 100%;
+    margin-top: 14px;
+  }
+  position: relative;
+  margin-bottom: 0;
+  width: 500px;
+  &__lupa {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    fill: $lightText;
+    z-index: 100;
+  }
+  input {
+    padding-left: 36px;
+    border: 1px solid $lightText;
+    border-radius: 2px;
+    box-shadow: none!important;
+    &:focus {
+      border: 1px solid $lightText;
+    }
+  }
+  button {
+    border-radius: 2px;
+    background: $blue;
+    color: #ffffff;
+    padding-left: 26px;
+    padding-right: 26px;
+    box-shadow: none!important;
+    &:hover {
+      background: $darkBlue;
+    }
+    &:active {
+      background: #0276b1!important;
+    }
+  }
+}
+.bc-city {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &__marker {
+    margin-right: 10px;
+    margin-top: -2px;
+  }
+}
+
+.bc-slide {
+  padding: 20px 20px 60px 20px;
+  position: relative;
+  overflow: hidden;
+  &__circle {
+    width: 400px;
+    height: 400px;
+    background: $midGrey;
+    position: absolute;
+    right: 0;
+    bottom: -93px;
+    border-radius: 50%;
+  }
+  &__img {
+    position: absolute;
+    bottom: 0;
+    right: 67px;
+    height: 320px;
+    &.large {
+      height: 285px;
+      right: 0;
+    }
+    &.middle {
+      right: 35px;
+    }
+  }
+  &__title {
+    color: $darkGrey;
+    font-size: 42px;
+    line-height: 52px;
+    font-weight: bold;
+    font-family: Futura, Ubuntu, Helvetica, Arial, sans-serif;
+    margin-bottom: 10px;
+  }
+  &__info {
+    font-size: 16px;
+    color: $darkGrey;
+    margin-bottom: 40px;
+    width: 420px;
+  }
+  &__btn {
+    cursor: pointer;
+    color: $darkGrey;
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid $blue;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 10px 20px;
+    text-decoration: none;
+    &:hover {
+      background: $blue;
+      color: $white;
+      text-decoration: none;
+    }
+    &:active {
+      background: $darkBlue;
+    }
+  }
+  @media (max-width: 992px) {
+    padding: 10px 10px 40px 10px;
+    .bc-slide__circle {
+      width: 330px;
+      height: 330px;
+    }
+    .bc-slide__img {
+      height: 275px;
+      right: 40px;
+    }
+    .bc-slide__title {
+      font-size: 34px;
+      line-height: 44px;
+    }
+    .bc-slide__info {
+      font-size: 14px;
+      width: 286px;
+    }
+  }
+}
+
+.bc-main-slider {
+  position: relative;
+  &__arrow {
+    cursor: pointer;
+    z-index: 100;
+    background: #ffffff;
+    position: absolute;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: all 0.1s linear;
+    &:hover {
+      svg {
+        path {
+          stroke: $darkBlue;
+        }
+      }
+    }
+    &:active {
+      bottom: 19px;
+    }
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &.left {
+      right: 100px;
+    }
+    &.right {
+      right: 40px;
+    }
+  }
+}
