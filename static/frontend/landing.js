@@ -109,6 +109,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const categoriesBlock = document.getElementById('categoriesBlock');
+const showMoreCategories = document.getElementById('showMoreCategories');
 Object(_rentForm__WEBPACK_IMPORTED_MODULE_0__["default"])();
 
 function initSiema() {
@@ -140,6 +142,10 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
     var searchVal = inpValue.replace(/[^\s0-9а-яА-Яa-zA-Z]/gi, '');
     window.location.href = '/products?search=' + searchVal;
   }
+});
+showMoreCategories.addEventListener('click', function () {
+  categoriesBlock.classList.add('all-visible');
+  this.style.display = 'none';
 });
 initSiema();
 

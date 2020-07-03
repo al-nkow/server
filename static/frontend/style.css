@@ -123,9 +123,10 @@
     margin-top: -2px; }
 
 .bc-slide {
-  padding: 20px 20px 60px 20px;
+  padding: 20px 0 60px 0;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  min-height: 354px; }
   .bc-slide__circle {
     width: 400px;
     height: 400px;
@@ -175,19 +176,48 @@
       background: #2171A4; }
   @media (max-width: 992px) {
     .bc-slide {
-      padding: 10px 10px 40px 10px; }
+      padding: 10px 10px 40px 10px;
+      min-height: 320px; }
       .bc-slide .bc-slide__circle {
         width: 330px;
         height: 330px; }
       .bc-slide .bc-slide__img {
         height: 275px;
         right: 40px; }
+        .bc-slide .bc-slide__img.large {
+          right: 0;
+          height: 256px; }
       .bc-slide .bc-slide__title {
         font-size: 34px;
         line-height: 44px; }
       .bc-slide .bc-slide__info {
         font-size: 14px;
         width: 286px; } }
+  @media (max-width: 767px) {
+    .bc-slide {
+      min-height: 557px;
+      padding-bottom: 288px; }
+      .bc-slide .bc-slide__circle {
+        right: 50%;
+        -webkit-transform: translate(50%, 0);
+            -ms-transform: translate(50%, 0);
+                transform: translate(50%, 0); }
+      .bc-slide .bc-slide__img {
+        right: 50%;
+        -webkit-transform: translate(50%, 0);
+            -ms-transform: translate(50%, 0);
+                transform: translate(50%, 0); }
+        .bc-slide .bc-slide__img.large {
+          right: 50%; }
+      .bc-slide .bc-slide__title {
+        font-size: 28px;
+        line-height: 36px; }
+      .bc-slide .bc-slide__info {
+        width: auto;
+        margin-bottom: 30px; }
+      .bc-slide .bc-slide__btn {
+        width: 100%;
+        text-align: center; } }
 
 .bc-main-slider {
   position: relative; }
@@ -220,9 +250,88 @@
       right: 100px; }
     .bc-main-slider__arrow.right {
       right: 40px; }
+    @media (max-width: 767px) {
+      .bc-main-slider__arrow {
+        bottom: 90px; }
+        .bc-main-slider__arrow:active {
+          bottom: 90px; }
+        .bc-main-slider__arrow.left {
+          right: auto;
+          left: 0; }
+        .bc-main-slider__arrow.right {
+          right: 0; } }
+
+.bc-slider-block {
+  margin-bottom: 80px; }
+  @media (max-width: 767px) {
+    .bc-slider-block {
+      margin-bottom: 50px; } }
+
+.bc-block-title {
+  font-size: 38px;
+  text-align: center;
+  font-family: Futura, Ubuntu, Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  margin-bottom: 40px; }
+  @media (max-width: 767px) {
+    .bc-block-title {
+      font-size: 32px;
+      line-height: 42px; } }
+
+.bc-categories {
+  margin-bottom: 40px; }
+  .bc-categories .more {
+    display: none; }
+  .bc-categories.all-visible .more {
+    display: block; }
+
+.bc-category-card {
+  display: block;
+  background: #f2f3f5;
+  border-radius: 2px;
+  padding: 20px;
+  text-align: center;
+  -webkit-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  transition: all 0.1s linear; }
+  .bc-category-card:hover {
+    text-decoration: none;
+    -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+            box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    margin-top: -2px; }
+  .bc-category-card__title {
+    color: #30394a; }
+  .bc-category-card__image {
+    max-width: 80%;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); }
+  .bc-category-card__image-area {
+    height: 190px;
+    position: relative;
+    margin-bottom: 10px; }
+
+.bc-controls {
+  text-align: right; }
+  .bc-controls__button {
+    cursor: pointer;
+    padding-bottom: 2px;
+    border-bottom: 2px solid #008BD0;
+    color: #008BD0; }
+    .bc-controls__button:hover {
+      border: none;
+      padding-bottom: 4px; }
+
+.bc-categoies-block {
+  padding: 0 10px; }
 
 body {
-  font-family: 'Ubuntu', sans-serif; }
+  font-family: 'Ubuntu', sans-serif;
+  color: #30394a; }
 
 .footer-section {
   background: #333333;

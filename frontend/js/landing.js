@@ -4,6 +4,9 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import '../styles/style.scss';
 import Siema from 'siema';
 
+const categoriesBlock = document.getElementById('categoriesBlock');
+const showMoreCategories = document.getElementById('showMoreCategories');
+
 RentForm();
 
 function initSiema() {
@@ -37,6 +40,11 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
       var searchVal = inpValue.replace(/[^\s0-9а-яА-Яa-zA-Z]/gi, '')
       window.location.href = '/products?search=' + searchVal;
   }
+});
+
+showMoreCategories.addEventListener('click', function() {
+  categoriesBlock.classList.add('all-visible');
+  this.style.display = 'none';
 });
 
 initSiema();

@@ -49,7 +49,7 @@ body
           svg(width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg")
             path(d="M17.8735 13.0001L9.66674 6.16113V10.2645H0.0921631V15.7357H9.66674V19.8391L17.8735 13.0001ZM21.9769 22.5747H11.0345V25.3103H21.9769C23.4815 25.3103 24.7125 24.0793 24.7125 22.5747V3.42554C24.7125 1.92096 23.4815 0.689941 21.9769 0.689941H11.0345V3.42554H21.9769V22.5747Z" fill="#71809C")
   // ===========================================================================
-  .bc-carousel
+  .bc-slider-block
     .container
       .bc-main-slider
         .bc-main-slider__arrow.left.siema-prev
@@ -92,6 +92,21 @@ body
               | выводиться цена Вашего магазина со ссылкой
               | на страницу товара на Вашем сайте
             a(href="/products/").bc-slide__btn Подробнее
+  // ===========================================================================
+  .bc-categoies-block
+    .container
+      .bc-block-title Категории товаров
+      .bc-categories(id="categoriesBlock")
+        .row.text-center
+          each category, index in categories
+            .col-xs-6.col-sm-4.col-lg-3.p-2(class= index > 7 ? 'more' : '')
+              a.bc-category-card(href="/products?category=" + category._id)
+                .bc-category-card__image-area
+                  img.bc-category-card__image(src=category.image alt="")
+                .bc-category-card__title= category.name
+      if categories.length > 8
+        .bc-controls
+          span.bc-controls__button(id="showMoreCategories") Посмотреть все категории товаров
 
 
 
@@ -99,6 +114,10 @@ body
 
 
 
+
+
+
+  // ===========================================================================
 
   div(style="height: 600px")
   // ================ COOPERATIONS ==============
