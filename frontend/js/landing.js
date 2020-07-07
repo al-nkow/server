@@ -32,6 +32,23 @@ function initSiema() {
   next.addEventListener('click', () => mainSiema.next());
 }
 
+function initScrollTo() {
+  const scrolls = document.getElementsByClassName('scroll-to');
+
+  [...scrolls].forEach(item => {
+    item.addEventListener('click', () => {
+      const target = item.dataset ? item.dataset.target : null;
+      const targetEl = document.getElementsByClassName(target)[0];
+      const viewportOffset = targetEl.getBoundingClientRect();
+      const top = viewportOffset.top + window.pageYOffset;
+      window.scrollTo({
+        top,
+        behavior: 'smooth'
+      });
+    });
+  });
+}
+
 
 document.getElementById('searchForm').addEventListener('submit', function (e) {
   e.preventDefault();
@@ -48,3 +65,4 @@ showMoreCategories.addEventListener('click', function() {
 });
 
 initSiema();
+initScrollTo();

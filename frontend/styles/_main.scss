@@ -1,321 +1,178 @@
-.bc-nav-block {
-  padding: 28px 0;
-}
-.bc-auth {
-  svg {
-    &:hover {
-      path {
-        fill: $blue;
-      }
-    }
-  }
-}
-.bc-logo {
-  svg {
-    width: 136px;
-    height: 40px;
-    margin-top: -6px;
-  }
-}
-.bc-nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  color: $lightText;
-  flex-wrap: wrap;
-}
-.bc-search {
-  @media (max-width: 992px) {
-    order: 4;
-    width: 100%;
-    margin-top: 14px;
-  }
-  position: relative;
-  margin-bottom: 0;
-  width: 500px;
-  &__lupa {
-    position: absolute;
-    top: 9px;
-    left: 10px;
-    width: 20px;
-    height: 20px;
-    fill: $lightText;
-    z-index: 100;
-  }
-  input {
-    padding-left: 36px;
-    border: 1px solid $lightText;
-    border-radius: 2px;
-    box-shadow: none!important;
-    &:focus {
-      border: 1px solid $lightText;
-    }
-  }
-  button {
-    border-radius: 2px;
-    background: $blue;
-    color: #ffffff;
-    padding-left: 26px;
-    padding-right: 26px;
-    box-shadow: none!important;
-    &:hover {
-      background: $darkBlue;
-    }
-    &:active {
-      background: #0276b1!important;
-    }
-  }
-}
-.bc-city {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  &__marker {
-    margin-right: 10px;
-    margin-top: -2px;
-  }
-}
-
-.bc-slide {
-  padding: 20px 0 60px 0;
-  position: relative;
-  overflow: hidden;
-  min-height: 354px;
-  &__circle {
-    width: 400px;
-    height: 400px;
-    background: $midGrey;
-    position: absolute;
-    right: 0;
-    bottom: -93px;
-    border-radius: 50%;
-  }
-  &__img {
-    position: absolute;
-    bottom: 0;
-    right: 67px;
-    height: 320px;
-    &.large {
-      height: 285px;
-      right: 0;
-    }
-    &.middle {
-      right: 35px;
-    }
-  }
-  &__title {
-    color: $darkGrey;
-    font-size: 42px;
-    line-height: 52px;
-    font-weight: bold;
-    font-family: Futura, Ubuntu, Helvetica, Arial, sans-serif;
-    margin-bottom: 10px;
-  }
-  &__info {
-    font-size: 16px;
-    color: $darkGrey;
-    margin-bottom: 40px;
-    width: 420px;
-  }
-  &__btn {
-    cursor: pointer;
-    color: $darkGrey;
-    display: inline-block;
-    font-size: 16px;
-    border: 2px solid $blue;
-    box-sizing: border-box;
-    border-radius: 3px;
-    padding: 10px 20px;
-    text-decoration: none;
-    &:hover {
-      background: $blue;
-      color: $white;
-      text-decoration: none;
-    }
-    &:active {
-      background: $darkBlue;
-    }
-  }
-  @media (max-width: 992px) {
-    padding: 10px 10px 40px 10px;
-    min-height: 320px;
-    .bc-slide__circle {
-      width: 330px;
-      height: 330px;
-    }
-    .bc-slide__img {
-      height: 275px;
-      right: 40px;
-      &.large {
-        right: 0;
-        height: 256px;
-      }
-    }
-    .bc-slide__title {
-      font-size: 34px;
-      line-height: 44px;
-    }
-    .bc-slide__info {
-      font-size: 14px;
-      width: 286px;
-    }
-  }
-  @media (max-width: 767px) {
-    min-height: 557px;
-    padding-bottom: 288px;
-    .bc-slide__circle {
-      right: 50%;
-      transform: translate(50%, 0);
-    }
-    .bc-slide__img {
-      right: 50%;
-      transform: translate(50%, 0);
-      &.large {
-        right: 50%;
-      }
-    }
-    .bc-slide__title {
-      font-size: 28px;
-      line-height: 36px;
-    }
-    .bc-slide__info {
-      width: auto;
-      margin-bottom: 30px;
-    }
-    .bc-slide__btn {
-      width: 100%;
-      text-align: center;
-    }
-  }
-}
-
-.bc-main-slider {
-  position: relative;
-  &__arrow {
-    cursor: pointer;
-    z-index: 100;
-    background: #ffffff;
-    position: absolute;
-    bottom: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    transition: all 0.1s linear;
-    &:hover {
-      svg {
-        path {
-          stroke: $darkBlue;
-        }
-      }
-    }
-    &:active {
-      bottom: 19px;
-    }
-    svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    &.left {
-      right: 100px;
-    }
-    &.right {
-      right: 40px;
-    }
-    @media (max-width: 767px) {
-      bottom: 90px;
-      &:active {
-        bottom: 90px;
-      }
-      &.left {
-        right: auto;
-        left: 0;  
-      }
-      &.right {
-        right: 0;
-      }
-    }
-  }
-}
-
-.bc-slider-block {
-  margin-bottom: 80px;
-  @media (max-width: 767px) {
-    margin-bottom: 50px;
-  }
-}
-
 .bc-block-title {
   font-size: 38px;
   text-align: center;
-  font-family: Futura, Ubuntu, Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  margin-bottom: 40px;
+  @include font-futura;
+  margin-bottom: 60px;
+  &.small {
+    font-size: 32px;
+    line-height: 42px;
+  }
   @media (max-width: 767px) {
     font-size: 32px;
     line-height: 42px;
   }
 }
 
-.bc-categories {
-  margin-bottom: 40px;
-  .more {
-    display: none;
-  }
-  &.all-visible {
-    .more {
-      display: block;
-    }
-  }
-}
-
-.bc-category-card {
-  display: block;
-  background: $lightGrey;
-  border-radius: 2px;
-  padding: 20px;
-  text-align: center;
-  transition: all 0.1s linear;
-  &:hover {
-    text-decoration: none;
-    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
-    margin-top: -2px;
-  }
-  &__title {
-    color: $darkGrey;
-  }
-  &__image {
-    max-width: 80%;
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  &__image-area {
-    height: 190px;
-    position: relative;
-    margin-bottom: 10px;
-  }
-}
-
 .bc-controls {
   text-align: right;
-  &__button {
-    cursor: pointer;
-    padding-bottom: 2px;
-    border-bottom: 2px solid $blue;
+}
+.link-button {
+  cursor: pointer;
+  padding-bottom: 2px;
+  border-bottom: 2px solid $blue;
+  color: $blue;
+  &:hover {
+    border: none;
+    padding-bottom: 4px;
+    text-decoration: none;
     color: $blue;
-    &:hover {
-      border: none;
-      padding-bottom: 4px;
+  }
+}
+
+.bc-btn {
+  cursor: pointer;
+  font-weight: 500;
+  color: $darkGrey;
+  display: inline-block;
+  font-size: 16px;
+  border: 2px solid $blue;
+  box-sizing: border-box;
+  border-radius: 3px;
+  padding: 10px 20px;
+  text-decoration: none;
+  &:hover {
+    background: $blue;
+    color: $white;
+    text-decoration: none;
+  }
+  &:active {
+    background: $darkBlue;
+  }
+}
+
+// ========================================
+
+.bc-coop-cards-block {
+  padding: 0 5px;
+  margin-bottom: 100px;
+}
+
+.bc-card {
+  border: 1px solid $midGrey;
+  box-sizing: border-box;
+  border-radius: 3px;
+  padding: 10px 10px 20px 10px;
+  margin-bottom: 40px;
+  position: relative;
+  &__image-wrap {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  &__image {
+    display: block;
+    max-width: 100%;
+    max-height: 200px;
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 17px;
+  }
+  &__brand {
+    color: $blue;
+    font-weight: 500;
+    margin-bottom: 17px;
+  }
+  &__like {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: $blue;
+    svg {
+      @include pos-center;
+      margin-top: -2px;
     }
   }
 }
 
-.bc-categoies-block {
-  padding: 0 10px;
+// ========================================
+
+.bc-rent-block {
+  padding: 0 5px;
+  margin-bottom: 100px;
+}
+.bc-rent {
+  &__image {
+    display: block;
+    max-width: 100%;
+    @media (max-width: 576px) {
+      margin-bottom: 20px;
+    }
+  }
+  &__text {
+    max-width: 400px;
+    padding-top: 60px;
+    margin-bottom: 40px;
+    @media (max-width: 767px) {
+      padding-top: 0;
+    }
+    @media (max-width: 576px) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+// ========================================
+
+.bc-partners-block {
+  padding: 0 5px;
+  margin-bottom: 100px;
+}
+
+.bc-partners {
+  padding-top: 20px;
+  @media (max-width: 576px) {
+    padding-top: 0;
+  }
+  &__image {
+    max-width: 100%;
+    max-height: 60px;
+    margin-bottom: 40px;
+  }
+}
+
+// ========================================
+
+.bc-footer {
+  padding: 20px 0;
+  background: $lightGrey;
+  font-size: 14px;
+  &__top {
+    margin-bottom: 60px;
+  }
+  &__title {
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  &__link {
+    color: $lightText;
+    display: block;
+    cursor: pointer;
+    &:hover {
+      color: $darkGrey;
+      text-decoration: none;
+    }
+  }
+}
+
+.bc-underfooter {
+  padding: 20px 0;
+  color: $lightText;
+  font-size: 14px;
 }

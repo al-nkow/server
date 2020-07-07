@@ -1,0 +1,135 @@
+.bc-hands-block {
+  margin-bottom: 40px;
+}
+.bc-hands {
+  height: 600px;
+  background: $lightGrey;
+  position: relative;
+  &__circle {
+    @include pos-center;
+    @include circle(50%);
+    svg {
+      @include pos-center;
+      width: 60%;
+    }
+  }
+  &__info {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+  &__desc {
+    width: 400px;
+    margin: 0 auto;
+  }
+  &__title {
+    @include font-futura;
+    font-size: 38px;
+    margin-bottom: 10px;
+  }
+  .link-button {
+    margin-left: 5px;
+    display: inline-block;
+  }
+  &__left {
+    width: 34%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+  &__right {
+    width: 34%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+  @media (max-width: 992px) {
+    height: 440px;
+    .bc-hands__title {
+      font-size: 32px;
+    }
+    .bc-hands__left {
+      width: 32%;
+    }
+    .bc-hands__right {
+      width: 32%;
+    }
+    .bc-hands__desc {
+      width: 300px;
+    }
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+.bc-cooperation-card {
+  margin-bottom: 40px;
+  &__head {
+    height: 320px;
+    background: $lightGrey;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    @media (max-width: 1200px) {
+      height: 260px;
+    }
+    @media (max-width: 992px) {
+      height: 200px;
+    }
+    @media (max-width: 767px) {
+      height: 160px;
+    }
+    @media (max-width: 576px) {
+      height: 320px;
+    }
+  }
+  &__circle {
+    @include circle(120%);
+    position: absolute;
+    bottom: -170px;
+    right: -120px;
+    background: $midGrey;
+    @media (max-width: 992px) {
+      bottom: -100px;
+      right: -70px;
+    }
+    @media (max-width: 767px) {
+      bottom: -80px;
+      right: -50px;
+    }
+    @media (max-width: 576px) {
+      bottom: -50%;
+      right: -30%;
+    }
+  }
+  &__image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70%;
+    &.first {
+      width: 67%;
+    }
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+}
+.bc-cooperation-block {
+  padding: 0 5px;
+  margin-bottom: 100px;
+  .bc-block-title {
+    display: none;
+  }
+  @media (max-width: 992px) {
+    .bc-block-title {
+      display: block;
+    }
+  }
+}

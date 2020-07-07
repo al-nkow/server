@@ -1,0 +1,61 @@
+.bc-categories {
+  margin-bottom: 40px;
+  .more {
+    display: none;
+  }
+  &.all-visible {
+    .more {
+      display: block;
+    }
+  }
+}
+
+.bc-category-card {
+  display: block;
+  background: $lightGrey;
+  border-radius: 2px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.1s linear;
+  position: relative;
+  top: 0;
+  &:hover {
+    text-decoration: none;
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),
+    0px 2px 2px 0px rgba(0,0,0,0.14),
+    0px 1px 5px 0px rgba(0,0,0,0.12);
+    top: -2px;
+  }
+  &__title {
+    color: $darkGrey;
+  }
+  &__image {
+    max-width: 80%;
+    display: block;
+    @include pos-center;
+  }
+  &__image-area {
+    height: 190px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  &__noimage {
+    @include pos-center;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: $white;
+    svg {
+      width: 86px;
+      @include pos-center;
+      path {
+        fill: $midGrey;
+      }
+    }
+  }
+}
+
+.bc-categoies-block {
+  padding: 0 10px;
+  margin-bottom: 100px;
+}

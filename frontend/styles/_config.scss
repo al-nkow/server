@@ -1,6 +1,6 @@
 $blue: #008BD0;
 $darkBlue: #2171A4;
-$midGrey: #D8D9DA;
+$midGrey: #d8d9dA;
 $lightGrey: #f2f3f5;
 $darkGrey: #30394a;
 $lightText: #71809C;
@@ -21,3 +21,22 @@ $text: #333333;
 $black: #252525;
 
 $transition: cubic-bezier(0.4, 0.0, 0.2, 1);
+
+@mixin pos-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin circle($size) {
+  width: $size;
+  padding-bottom: $size;
+  background: $white;
+  border-radius: 50%;
+}
+
+@mixin font-futura {
+  font-family: Futura, Ubuntu, Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}

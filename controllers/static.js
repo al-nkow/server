@@ -36,6 +36,12 @@ exports.products = async (req, res) => {
  */
 exports.home = async (req, res) => {
   const data = {};
+  const cooperations = await Cooperation.find();
+
+  if (cooperations && cooperations.length) {
+    const bocoArticles = cooperations.map(c => c.bocoArticle);
+    data.cooProducts = await Product.find({ bocoArticle: { $in: bocoArticles }}).limit(4);
+  }
 
   try {
     data.categories = await Category.find().select('name _id image');

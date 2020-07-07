@@ -1,0 +1,148 @@
+.bc-slide {
+  padding: 20px 0 60px 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 354px;
+  &__circle {
+    width: 400px;
+    height: 400px;
+    background: $midGrey;
+    position: absolute;
+    right: 0;
+    bottom: -93px;
+    border-radius: 50%;
+  }
+  &__img {
+    position: absolute;
+    bottom: 0;
+    right: 67px;
+    height: 320px;
+    &.large {
+      height: 285px;
+      right: 0;
+    }
+    &.middle {
+      right: 35px;
+    }
+  }
+  &__title {
+    color: $darkGrey;
+    font-size: 42px;
+    line-height: 52px;
+    font-weight: bold;
+    font-family: Futura, Ubuntu, Helvetica, Arial, sans-serif;
+    margin-bottom: 10px;
+  }
+  &__info {
+    font-size: 16px;
+    color: $darkGrey;
+    margin-bottom: 40px;
+    width: 420px;
+  }
+  @media (max-width: 992px) {
+    padding: 10px 10px 40px 10px;
+    min-height: 320px;
+    .bc-slide__circle {
+      width: 330px;
+      height: 330px;
+    }
+    .bc-slide__img {
+      height: 275px;
+      right: 40px;
+      &.large {
+        right: 0;
+        height: 256px;
+      }
+    }
+    .bc-slide__title {
+      font-size: 34px;
+      line-height: 44px;
+    }
+    .bc-slide__info {
+      font-size: 14px;
+      width: 286px;
+    }
+  }
+  @media (max-width: 767px) {
+    min-height: 557px;
+    padding-bottom: 288px;
+    .bc-slide__circle {
+      right: 50%;
+      transform: translate(50%, 0);
+    }
+    .bc-slide__img {
+      right: 50%;
+      transform: translate(50%, 0);
+      &.large {
+        right: 50%;
+      }
+    }
+    .bc-slide__title {
+      font-size: 28px;
+      line-height: 36px;
+    }
+    .bc-slide__info {
+      width: auto;
+      margin-bottom: 30px;
+    }
+    .bc-slide__btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.bc-main-slider {
+  position: relative;
+  &__arrow {
+    cursor: pointer;
+    z-index: 100;
+    background: #ffffff;
+    position: absolute;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: all 0.1s linear;
+    &:hover {
+      svg {
+        path {
+          stroke: $darkBlue;
+        }
+      }
+    }
+    &:active {
+      bottom: 19px;
+    }
+    svg {
+      @include pos-center;
+    }
+    &.left {
+      right: 100px;
+    }
+    &.right {
+      right: 40px;
+    }
+    @media (max-width: 767px) {
+      bottom: 90px;
+      &:active {
+        bottom: 90px;
+      }
+      &.left {
+        right: auto;
+        left: 0;  
+      }
+      &.right {
+        right: 0;
+      }
+    }
+  }
+}
+
+.bc-slider-block {
+  margin-bottom: 80px;
+  @media (max-width: 767px) {
+    margin-bottom: 50px;
+  }
+}
