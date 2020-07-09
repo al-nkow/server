@@ -163,6 +163,7 @@ showMoreCategories.addEventListener('click', function () {
   categoriesBlock.classList.add('all-visible');
   this.style.display = 'none';
 });
+document.getElementById('currentYear').innerHTML = new Date().getFullYear();
 initSiema();
 initScrollTo();
 

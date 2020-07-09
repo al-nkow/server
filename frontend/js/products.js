@@ -13,8 +13,8 @@ const Products = () => {
     'productsFiltersBlock',
   );
   const filtersAmount = document.getElementById('filtersAmount');
-  const coopCheckbox = document.getElementById('cooperationsOnly');
   const productsListWrap = document.getElementById('productsListWrap');
+  const coopBtn = document.getElementById('coopBtn');
 
   const fromToInputIds = [
     'heightFrom',
@@ -107,7 +107,7 @@ const Products = () => {
       brandSelect.value = decodeURIComponent(brandValue);
     if (categoryValue) categorySelect.value = categoryValue;
     if (coopOnlyValue === 'true') {
-      coopCheckbox.checked = true;
+      coopBtn.classList.add('active');
     }
   }
 
@@ -118,7 +118,8 @@ const Products = () => {
     const body = urlService.getUrlParamsAsObject();
 
     if (isEmpty(body)) {
-      productsListWrap.innerHTML = '<div class="col-12">Задайте какие-нибудь параметры поиска!</div>';
+      productsListWrap.innerHTML = '<div class="col-12 no-filters-selected">Задайте какие-нибудь параметры поиска!</div>';
+      fullProductsList = [];
       return false;
     }
 
@@ -180,6 +181,9 @@ const Products = () => {
   function disableControls(val) {
     const elements = [...filtersBlock.elements, ...searchForm.elements];
     elements.forEach(item => item.disabled = val);
+    
+    const btnMethod = val ? 'add' : 'remove';
+    coopBtn.classList[btnMethod]('disabled');
   }
 
   /**
@@ -230,15 +234,6 @@ const Products = () => {
   }
 
   /**
-   * Coop checkbox change handler
-   * @param event 
-   */
-  function coopCheckboxChangeHandler (event) {
-    addParameterToUrl('coopOnly', event.target.checked);
-    searchRequest();
-  };
-
-  /**
    * Brand select change handler
    * @param event
    */
@@ -247,13 +242,27 @@ const Products = () => {
     searchRequest();
   }
 
+  /**
+   * Only cooperations button
+   */
+  function coopBtnChangeHandler() {
+    const disabled = coopBtn.classList.contains('disabled');
+    if (!disabled) {
+      const selected = coopBtn.classList.contains('active');
+      coopBtn.classList.toggle('active');
+      addParameterToUrl('coopOnly', !selected);
+      searchRequest();
+    }
+  }
+
   categorySelect.addEventListener(
     'change',
     categorySelectChangeHandler,
   );
-  coopCheckbox.addEventListener('change', coopCheckboxChangeHandler);
   brandSelect.addEventListener('change', brandSelectChangeHandler);
+  coopBtn.addEventListener('click', coopBtnChangeHandler);
   searchForm.addEventListener('submit', searchFormSubmitHandler);
+
   initFilterValues();
   initFromToInputsChangeListeners();
   windowScrollService(showProductsPortion);
@@ -278,6 +287,7 @@ const Products = () => {
       searchRequest();
     }
   });
+
 };
 
 export default Products;

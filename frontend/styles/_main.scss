@@ -1,3 +1,7 @@
+.bg-grey {
+  background: $ultraLightGrey;
+}
+
 .bc-block-title {
   font-size: 38px;
   text-align: center;
@@ -16,6 +20,7 @@
 .bc-controls {
   text-align: right;
 }
+
 .link-button {
   cursor: pointer;
   padding-bottom: 2px;
@@ -31,6 +36,7 @@
 
 .bc-btn {
   cursor: pointer;
+  background: $white;
   font-weight: 500;
   color: $darkGrey;
   display: inline-block;
@@ -48,6 +54,51 @@
   &:active {
     background: $darkBlue;
   }
+  &.full {
+    width: 100%;
+    text-align: center;
+  }
+  &.icon {
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      margin-top: -5px;
+      path {
+        fill: $darkGrey;
+      }
+    }
+    &:hover {
+      path {
+        fill: $white;
+      }
+    }
+  }
+  &.active {
+    background: $blue;
+    color: $white;
+    svg {
+      path {
+        fill: $white;
+      }
+    }
+    &:hover {
+      background: $darkBlue;
+    }
+  }
+  &.disabled {
+    opacity: 0.5;
+  }
+}
+
+.bc-btn-desc {
+  padding-top: 5px;
+  font-size: 14px;
+  color: $lightText;
+}
+
+.bc-filter-coop {
+  margin-bottom: 30px;
 }
 
 // ========================================
@@ -58,20 +109,32 @@
 }
 
 .bc-card {
+  background: $white;
+  display: block;
+  color: $darkGrey;
+  transition: all 0.1s linear;
   border: 1px solid $midGrey;
+  &.dark {
+    border: none;
+    background: $lightGrey;
+  }
   box-sizing: border-box;
   border-radius: 3px;
-  padding: 10px 10px 20px 10px;
+  padding: 15px 15px 20px 15px;
   margin-bottom: 40px;
   position: relative;
   &__image-wrap {
+    width: 100%;
     min-height: 200px;
     display: flex;
     align-items: center;
     margin-bottom: 40px;
+    background: url('/images/no-img.png') center no-repeat;
+    background-size: 50%;
   }
   &__image {
     display: block;
+    margin: 0 auto;
     max-width: 100%;
     max-height: 200px;
   }
@@ -99,6 +162,12 @@
       margin-top: -2px;
     }
   }
+  &:hover {
+    text-decoration: none;
+    top: -2px;
+    color: $darkGrey;
+    @include box-shadow;
+  }
 }
 
 // ========================================
@@ -107,6 +176,7 @@
   padding: 0 5px;
   margin-bottom: 100px;
 }
+
 .bc-rent {
   &__image {
     display: block;
@@ -164,6 +234,7 @@
     color: $lightText;
     display: block;
     cursor: pointer;
+    margin-bottom: 3px;
     &:hover {
       color: $darkGrey;
       text-decoration: none;
@@ -175,4 +246,44 @@
   padding: 20px 0;
   color: $lightText;
   font-size: 14px;
+}
+
+// ========================================
+
+.form-group {
+  label {
+    font-weight: 500;
+  }
+  select {
+    border: 1px solid $midGrey;
+  }
+  input {
+    border: 1px solid $midGrey;
+  }
+}
+
+.bc-input-group {
+  &__label {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  &__fields {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    input {
+      padding: .25rem .5rem;
+      font-size: .875rem;
+      height: 31px;
+      width: 47%;
+    }
+  }
+}
+
+.bc-prod-search {
+  padding: 30px 0;
+}
+
+.products-page-wrap {
+  overflow: hidden;
 }

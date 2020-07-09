@@ -1,84 +1,46 @@
 include parts/meta.pug
-+my-include('BOCO: Search results')
-body
-  .products-page-wrap
-    include parts/header.pug
-    .products-search(id="productsSearchBlock")
-      .container.p-3
-        .row
-          .col-12.col-lg-7
-            form.input-group.mb-0(id="searchForm")
-              input(
-                type="text"
++my-include('BOCO Каталог')
+body.bg-grey
+  include parts/header.pug
+  .bc-prod-search(id="productsSearchBlock")
+    .container
+      .row
+        .col-xs-12.col-md-9
+          form.bc-search.products(id="searchForm")
+            .input-group
+              input.form-control(
                 id="searchInp"
-                class="form-control"
+                type="text"
                 placeholder="Название товара"
-                aria-label="Recipient's username"
+                aria-label="Product name"
                 aria-describedby="searchBtn"
               )
               div(class="input-group-append")
-                button(class="btn btn-outline-secondary" type="submit") Найти
-      .container.pb-3.product-filters-button__wrap
-        .row
-          .col-12
-            button.product-filters-button.btn.btn-primary(
-              id="productsFiltersToggleHead"
-              type="button"
-            )
-              span Фильтры
-              span.product-filters-button__amount-wrap
-                span.product-filters-button__amount(id="filtersAmount")
+                button.btn.btn-outline-secondary(type="submit") Найти
+            svg.bc-search__lupa(width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg")
+              path(d="M17.3513 15.7781L11.8327 10.2595C12.689 9.15234 13.1523 7.79872 13.1523 6.37497C13.1523 4.67073 12.4872 3.07274 11.2844 1.86787C10.0817 0.662997 8.47943 0 6.77732 0C5.0752 0 3.47296 0.665122 2.27021 1.86787C1.06534 3.07061 0.402344 4.67073 0.402344 6.37497C0.402344 8.07709 1.06747 9.67933 2.27021 10.8821C3.47296 12.0869 5.07307 12.7499 6.77732 12.7499C8.20106 12.7499 9.55255 12.2867 10.6597 11.4325L16.1783 16.9489C16.1945 16.9651 16.2137 16.978 16.2348 16.9867C16.256 16.9955 16.2786 17 16.3015 17C16.3244 17 16.3471 16.9955 16.3682 16.9867C16.3894 16.978 16.4086 16.9651 16.4248 16.9489L17.3513 16.0246C17.3675 16.0084 17.3803 15.9892 17.3891 15.968C17.3978 15.9469 17.4023 15.9242 17.4023 15.9013C17.4023 15.8784 17.3978 15.8557 17.3891 15.8346C17.3803 15.8135 17.3675 15.7942 17.3513 15.7781ZM10.1433 9.74096C9.24231 10.6398 8.04806 11.135 6.77732 11.135C5.50657 11.135 4.31233 10.6398 3.41133 9.74096C2.51246 8.83996 2.01734 7.64572 2.01734 6.37497C2.01734 5.10423 2.51246 3.90786 3.41133 3.00899C4.31233 2.11012 5.50657 1.61499 6.77732 1.61499C8.04806 1.61499 9.24443 2.10799 10.1433 3.00899C11.0422 3.90998 11.5373 5.10423 11.5373 6.37497C11.5373 7.64572 11.0422 8.84209 10.1433 9.74096Z" fill="#71809C")
+    .container.pb-3.product-filters-button__wrap
+      .row
+        .col-12
+          button.product-filters-button.btn.btn-primary(
+            id="productsFiltersToggleHead"
+            type="button"
+          )
+            span Фильтры
+            span.product-filters-button__amount-wrap
+              span.product-filters-button__amount(id="filtersAmount")
+  // ===========================================================================
 
+  .products-page-wrap
     .products-list(id="productsListBlock")
       .container.p-3
         .row
-          .col-12.col-sm-6.col-md-9
-            .row(id="productsListWrap")
-              //if products && products.length
-              //  each product in products
-              //    .col-12.col-sm-4
-              //      a.product-card.card.mb-3(href= "/prices?product=" + product._id)
-              //        if product.image
-              //          img.card-img-top(src=product.image alt="")
-              //        else
-              //          img.card-img-top(src="images/noimg.png" alt="")
-              //        .card-body
-              //          h5.card-title=product.name
-              //          h6.card-subtitle.mb-2.text-muted=product.brand
-              //          if product.description
-              //            p.card-text=product.description
-              //          p.card-text
-              //            .row
-              //              if product.width
-              //                .col-6 Ширина:
-              //                .col-6=product.width + 'мм'
-              //              if product.height
-              //                .col-6 Высота:
-              //                .col-6=product.height + 'мм'
-              //              if product.thickness
-              //                .col-6 Толщина:
-              //                .col-6=product.thickness + 'мм'
-              //              if product.volumeL
-              //                .col-6 Объем:
-              //                .col-6=product.volumeL + 'л'
-              //              if product.volumeM
-              //                .col-6 Объем:
-              //                .col-6=product.volumeM + 'м.куб'
-              //              if product.weight
-              //                .col-6 Вес:
-              //                .col-6=product.weight + 'кг'
-              //              if product.area
-              //                .col-6 Площадь:
-              //                .col-6=product.area + 'м.кв'
-              //          if product.minPrice
-              //            p.card-text
-              //              b='Цена от ' +  product.minPrice + 'руб.'
-              //          if product.categoryName
-              //            p.card-text
-              //              small.text-muted=product.categoryName
-              //else
-              //  div По Вашему запросу ничего не найдено, попробуйте изменить параметры поиска и повторить попытку
           .col-12.col-sm-6.col-md-3
             include parts/filters.pug
+            img.bc-filter-bobr(src="/images/bobrfilter.png" alt="")
+          .col-12.col-sm-12.col-md-9
+            .row(id="productsListWrap")
+
+  include parts/footer.pug
 
   script(src="/frontend/main.js")

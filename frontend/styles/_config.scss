@@ -2,6 +2,7 @@ $blue: #008BD0;
 $darkBlue: #2171A4;
 $midGrey: #d8d9dA;
 $lightGrey: #f2f3f5;
+$ultraLightGrey: #f8f8f8;
 $darkGrey: #30394a;
 $lightText: #71809C;
 $white: #ffffff;
@@ -39,4 +40,10 @@ $transition: cubic-bezier(0.4, 0.0, 0.2, 1);
 @mixin font-futura {
   font-family: Futura, Ubuntu, Helvetica, Arial, sans-serif;
   font-weight: bold;
+}
+
+@mixin box-shadow {
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),
+    0px 2px 2px 0px rgba(0,0,0,0.14),
+    0px 1px 5px 0px rgba(0,0,0,0.12);
 }

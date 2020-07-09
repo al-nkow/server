@@ -1,5 +1,6 @@
 .bc-nav-block {
   padding: 28px 0;
+  background: $white;
 }
 .bc-auth {
   svg {
@@ -24,6 +25,16 @@
   justify-content: space-between;
   color: $lightText;
   flex-wrap: wrap;
+  &__end {
+    display: flex;
+    flex-direction: row;
+    .bc-city {
+      margin-right: 60px;
+      @media (max-width: 576px) {
+        margin-right: 17px;
+      }
+    }
+  }
 }
 .bc-search {
   @media (max-width: 992px) {
@@ -34,6 +45,15 @@
   position: relative;
   margin-bottom: 0;
   width: 500px;
+  &.products {
+    width: 100%;
+    input {
+      border-color: $midGrey;
+    }
+    button {
+      border: none;
+    }
+  }
   &__lupa {
     position: absolute;
     top: 9px;

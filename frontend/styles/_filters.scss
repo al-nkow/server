@@ -1,0 +1,128 @@
+.products-filters-block {
+  margin-bottom: 40px;
+  @media (max-width: 767px) {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background: rgba(0,0,0,0.9);
+    color: $white;
+    padding: 60px 20px 20px 20px;
+    transform: translate(100%, 0);
+    transition: all 0.2s $transition;
+    margin-bottom: 0;
+  }
+  &__toggle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    display: none;
+    @media (max-width: 767px) {
+      display: block;
+    }
+    &:before {
+      content: '';
+      height: 2px;
+      background: #ffffff;
+      position: absolute;
+      top: 45%;
+      left: -3px;
+      width: 120%;
+      transform: rotate(45deg);
+    }
+    &:after {
+      content: '';
+      height: 2px;
+      background: #ffffff;
+      position: absolute;
+      top: 45%;
+      left: -3px;
+      width: 120%;
+      transform: rotate(-45deg);
+    }
+  }
+  &.active {
+    transform: translate(0, 0);
+  }
+}
+
+.filter-results {
+  cursor: pointer;
+  background: #ef7f1b;
+  padding: 10px;
+  border-radius: 4px;
+  color: #333333;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
+
+.filters-clear {
+  cursor: pointer;
+  background: #008cd1;
+  padding: 10px;
+  border-radius: 4px;
+  color: #333333;
+  text-align: center;
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
+
+.product-filters-button {
+  background: $blue;
+  border-color: $blue;
+  &__wrap{
+    margin-top: 20px;
+    display: none;
+    @media (max-width: 767px) {
+      display: block;
+    }
+  }
+  &:hover {
+    background: #1a85b9;
+    border-color: #1a85b9;
+  }
+  &__amount-wrap {
+    display: inline-block;
+    vertical-align: middle;
+    border: 2px solid $white;
+    margin-left: 10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    position: relative;
+    margin-top: -2px;
+  }
+  &__amount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.no-filters-selected {
+  padding: 20px;
+  min-height: 235px;
+}
+
+.bc-filter-bobr {
+  width: 100%;
+  display: block;
+  margin-bottom: 60px;
+  border-radius: 3px;
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
