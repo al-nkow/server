@@ -111,6 +111,7 @@ __webpack_require__.r(__webpack_exports__);
 const currentUrl = window.location.href;
 if (currentUrl.indexOf('/products') !== -1) Object(_js_products__WEBPACK_IMPORTED_MODULE_0__["default"])();
 if (currentUrl.indexOf('/prices') !== -1) Object(_js_coopForm__WEBPACK_IMPORTED_MODULE_1__["default"])();
+document.getElementById('currentYear').innerHTML = new Date().getFullYear();
 
 /***/ }),
 
@@ -427,6 +428,8 @@ const Products = () => {
     if (isEmpty(body)) {
       productsListWrap.innerHTML = '<div class="col-12 no-filters-selected">Задайте какие-нибудь параметры поиска!</div>';
       fullProductsList = [];
+      filtersAmount.innerHTML = 0;
+      setMobileFiltersDataCount(0);
       return false;
     }
 

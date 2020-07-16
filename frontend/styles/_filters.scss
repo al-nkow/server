@@ -79,39 +79,6 @@
   }
 }
 
-.product-filters-button {
-  background: $blue;
-  border-color: $blue;
-  &__wrap{
-    margin-top: 20px;
-    display: none;
-    @media (max-width: 767px) {
-      display: block;
-    }
-  }
-  &:hover {
-    background: #1a85b9;
-    border-color: #1a85b9;
-  }
-  &__amount-wrap {
-    display: inline-block;
-    vertical-align: middle;
-    border: 2px solid $white;
-    margin-left: 10px;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    position: relative;
-    margin-top: -2px;
-  }
-  &__amount {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
 .no-filters-selected {
   padding: 20px;
   min-height: 235px;
@@ -123,6 +90,12 @@
   margin-bottom: 60px;
   border-radius: 3px;
   @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.product-filters-button {
+  @media (min-width: 768px) {
     display: none;
   }
 }

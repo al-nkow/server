@@ -7,12 +7,10 @@
 @import 'filters';
 @import 'main';
 
-
 body {
   font-family: 'Ubuntu', sans-serif;
   color: $darkGrey;
 }
-
 
 .btn-success {
   background: $green;
@@ -49,13 +47,6 @@ body {
   display: block;
   @media (max-width: 576px) {
     display: none;
-  }
-}
-
-.prices-card {
-  &__image {
-    max-height: 162px;
-    width: auto;
   }
 }
 
@@ -129,8 +120,7 @@ body {
 }
 
 .opt-coops {
-  margin-left: 10px;
-  color: $red;
+  color: $blue;
   @media (max-width: 768px) {
     display: block;
     margin-left: 0;

@@ -50,6 +50,9 @@
     background: $blue;
     color: $white;
     text-decoration: none;
+    .bc-btn__amount-wrap {
+      border-color: $white;
+    }
   }
   &:active {
     background: $darkBlue;
@@ -88,6 +91,23 @@
   }
   &.disabled {
     opacity: 0.5;
+  }
+  &__amount-wrap {
+    display: inline-block;
+    vertical-align: middle;
+    border: 2px solid $darkGrey;
+    margin-left: 10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    position: relative;
+    margin-top: -2px;
+  }
+  &__amount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -161,6 +181,10 @@
       @include pos-center;
       margin-top: -2px;
     }
+    &.in-prices {
+      top: 0;
+      right: 0;
+    }
   }
   &:hover {
     text-decoration: none;
@@ -225,6 +249,9 @@
   font-size: 14px;
   &__top {
     margin-bottom: 60px;
+    @media (max-width: 576px) {
+      padding-top: 30px;
+    }
   }
   &__title {
     margin-bottom: 20px;
@@ -286,4 +313,50 @@
 
 .products-page-wrap {
   overflow: hidden;
+}
+
+// ========================================
+
+.prices {
+  &__page {
+    padding-top: 40px;
+  }
+  &__title {
+    font-size: 38px;
+    @include font-futura;
+    margin-bottom: 30px;
+    @media (max-width: 576px) {
+      font-size: 26px;
+    }
+  }
+}
+
+.prices-card {
+  position: relative;
+  padding: 20px;
+  &__image {
+    max-height: 320px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  &__title {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  &__subtitle {
+    color: $blue;
+    margin-bottom: 15px;
+  }
+  &__main {
+    margin-bottom: 20px;
+  }
+  &__coop-block {
+    padding-top: 20px;
+    border-top: 1px solid $midGrey;
+  }
+  @media (max-width: 576px) {
+    padding: 0;
+  }
 }

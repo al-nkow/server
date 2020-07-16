@@ -120,6 +120,8 @@ const Products = () => {
     if (isEmpty(body)) {
       productsListWrap.innerHTML = '<div class="col-12 no-filters-selected">Задайте какие-нибудь параметры поиска!</div>';
       fullProductsList = [];
+      filtersAmount.innerHTML = 0;
+      setMobileFiltersDataCount(0);
       return false;
     }
 

@@ -8,3 +8,5 @@ const currentUrl = window.location.href;
 
 if (currentUrl.indexOf('/products') !== -1) Products();
 if (currentUrl.indexOf('/prices') !== -1) CoopForm();
+
+document.getElementById('currentYear').innerHTML = new Date().getFullYear();
