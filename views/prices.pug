@@ -6,7 +6,7 @@ body.bg-grey
     .prices__title=product.name
     .card.mb-3.prices-card
       div.row.no-gutters
-        div.col-md-4
+        div.col-md-4.prices-card__image-wrap
           img.prices-card__image(src=(product.image ? product.image : "/images/noimg.png") alt="")
         div.col-md-8
           div.card-body
@@ -53,8 +53,12 @@ body.bg-grey
                       span
                         span.opt-coops-amount(id="coopAmount")=amount
                         | единиц товара в очереди на кооперацию!
-              .bc-card__like.in-prices
-                include parts/like.pug
+                .text-muted.pt-2
+                  small Артикул boco: &nbsp;
+                  small=product.bocoArticle
+              if amount
+                .bc-card__like.in-prices
+                  include parts/like.pug
 
     .mb-4
       if supply && supply.options && supply.options.length && product.bocoArticle
@@ -105,7 +109,9 @@ body.bg-grey
               tr
                 th(scope="row")
                   img.prices-table__image(src=position.shop.image alt="")
-                td=position.price + ' руб.'
+                td
+                  span.prices-table__price=position.price
+                  | руб.
                 td=position.article
                 td
                   a.btn.btn-success(href=position.link target="_blank") В магазин

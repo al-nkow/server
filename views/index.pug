@@ -29,47 +29,7 @@ body
   // ===========================================================================
   .bc-slider-block
     .container
-      .bc-main-slider
-        .bc-main-slider__arrow.left.siema-prev
-          svg(width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg")
-            path(d="M6.49658 1L1.49658 6.5L6.49658 11.5" stroke="#1092D3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
-        .bc-main-slider__arrow.right.siema-next
-          svg(width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg")
-            path(d="M1.49658 1.34448L6.49658 6.84448L1.49658 11.8445" stroke="#1092D3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
-        .siema
-          .bc-slide
-            .bc-slide__circle
-            img.bc-slide__img(src="/images/bobr1.png")
-            .bc-slide__title
-              | Агрегатор строительных<br/>
-              | материалов BoCo
-            .bc-slide__info
-              | BoberCo - крупнейшая база данных товаров магазинов
-              | и гипермаркетов Санкт-Петербурга, насчитывающая
-              | десятки тысяч наименований
-            a(href="/products/").bc-btn Перейти в каталог
-          .bc-slide
-            .bc-slide__circle
-            img.bc-slide__img.middle(src="/images/bobr2.png")
-            .bc-slide__title
-              | Друзья BoCo
-            .bc-slide__info
-              | Скооперируйтесь и приобретайте товары по
-              | оптовым ценам даже если требуется меньшее
-              | количество, чем минимально неободимое
-              | для совершения оптовой закупки
-            .bc-btn.scroll-to(data-target="st-coop") Подробнее
-          .bc-slide
-            .bc-slide__circle
-            img.bc-slide__img.large(src="/images/bobr3.png")
-            .bc-slide__title
-              | Аренда ячейки
-            .bc-slide__info
-              | Арендуйте ячейку и в этом случае в карточках
-              | товаров вместе с остальными ценами будет
-              | выводиться цена Вашего магазина со ссылкой
-              | на страницу товара на Вашем сайте
-            .bc-btn.scroll-to(data-target="st-rent") Подробнее
+      include parts/slider.pug
   // ===========================================================================
   .bc-categoies-block.st-category
     .container
@@ -78,7 +38,7 @@ body
         .row.text-center
           each category, index in categories
             .col-xs-6.col-sm-4.col-lg-3.p-2(class= index > 7 ? 'more' : '')
-              a.bc-category-card.animate__animated.animate__fadeInUp(href="/products?category=" + category._id)
+              a.bc-category-card(href="/products?category=" + category._id)
                 .bc-category-card__image-area
                   if category.image
                     img.bc-category-card__image(src=category.image alt="")
@@ -111,7 +71,7 @@ body
           .bc-cooperation-card
             .bc-cooperation-card__head
               .bc-cooperation-card__circle
-              img.bc-cooperation-card__image.first.animate__animated.animate__fadeInLeft(src="/images/step1.png" alt="")
+              img.bc-cooperation-card__image.first(src="/images/step1.png" alt="")
             .bc-cooperation-card__title Шаг 1
             .bc-cooperation-card__desc 
               | Выберите товар на сайте и заполните заявку на кооперацию с другими покупателями
@@ -119,7 +79,7 @@ body
           .bc-cooperation-card
             .bc-cooperation-card__head
               .bc-cooperation-card__circle
-              img.bc-cooperation-card__image.animate__animated.animate__fadeInDown(src="/images/step2.png" alt="")
+              img.bc-cooperation-card__image(src="/images/step2.png" alt="")
             .bc-cooperation-card__title Шаг 2
             .bc-cooperation-card__desc
               | Чтобы заполнить заявку просто нажмите кнопку Кооперация которая имеется в каждой карточке товара
@@ -127,7 +87,7 @@ body
           .bc-cooperation-card
             .bc-cooperation-card__head
               .bc-cooperation-card__circle
-              img.bc-cooperation-card__image.animate__animated.animate__fadeInRight(src="/images/step3.png" alt="")
+              img.bc-cooperation-card__image(src="/images/step3.png" alt="")
             .bc-cooperation-card__title Шаг 3
             .bc-cooperation-card__desc
               | Как только наберется необходимое количество заявок для совершения оптовой закупки - наш менеджер
@@ -141,7 +101,7 @@ body
       .row
         each card in cooProducts
           .col-xs-12.col-sm-6.col-md-3
-            a.bc-card(href='/prices?product=' + card._id)
+            a.bc-card.wow.bounceInUp(href='/prices?product=' + card._id)
               .bc-card__image-wrap
                 img.bc-card__image(src=card.image)
               .bc-card__title=card.name

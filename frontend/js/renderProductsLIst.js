@@ -21,7 +21,7 @@ const renderProductsList = (data, clear) => {
 
   if (!data || !data.length) {
     wrap.innerHTML =
-      '<div class="col-12">По Вашему запросу ничего не найдено, попробуйте изменить параметры поиска и повторить попытку</div>';
+      '<div class="col-12 no-filters-selected">По Вашему запросу ничего не найдено, попробуйте изменить параметры поиска и повторить попытку</div>';
     return;
   }
 
@@ -89,7 +89,7 @@ const renderProductsList = (data, clear) => {
         ${item.hasCooperation ? `<div class="bc-card__like">${thumbUp}</div>` : ''}
         <div class="bc-card__image-wrap">
           <img class="bc-card__image" src="${item.image ||
-            '/images/noimg.png'}" alt="">
+            '/images/no-img.png'}" alt="">
         </div>
         <div class="bc-card__title">${item.name}</div>
         ${

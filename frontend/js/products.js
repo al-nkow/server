@@ -15,6 +15,7 @@ const Products = () => {
   const filtersAmount = document.getElementById('filtersAmount');
   const productsListWrap = document.getElementById('productsListWrap');
   const coopBtn = document.getElementById('coopBtn');
+  const coopBtnDesc = document.getElementById('coopBtnDesc');
 
   const fromToInputIds = [
     'heightFrom',
@@ -108,6 +109,7 @@ const Products = () => {
     if (categoryValue) categorySelect.value = categoryValue;
     if (coopOnlyValue === 'true') {
       coopBtn.classList.add('active');
+      coopBtnDesc.classList.add('active');
     }
   }
 
@@ -252,6 +254,7 @@ const Products = () => {
     if (!disabled) {
       const selected = coopBtn.classList.contains('active');
       coopBtn.classList.toggle('active');
+      coopBtnDesc.classList.toggle('active');
       addParameterToUrl('coopOnly', !selected);
       searchRequest();
     }

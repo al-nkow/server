@@ -56,7 +56,7 @@
   background: #ef7f1b;
   padding: 10px;
   border-radius: 4px;
-  color: #333333;
+  color: $darkGrey;
   text-align: center;
   margin-top: 30px;
   margin-bottom: 10px;
@@ -71,7 +71,7 @@
   background: #008cd1;
   padding: 10px;
   border-radius: 4px;
-  color: #333333;
+  color: $darkGrey;
   text-align: center;
   display: none;
   @media (max-width: 767px) {

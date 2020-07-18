@@ -5,6 +5,7 @@
 @import 'slider';
 @import 'cooperations';
 @import 'filters';
+@import 'prices';
 @import 'main';
 
 body {
@@ -12,71 +13,26 @@ body {
   color: $darkGrey;
 }
 
+.btn {
+  outline: none!important;
+  box-shadow: none!important;
+}
+
 .btn-success {
-  background: $green;
-  border-color: $green;
-}
-
-.prices-table {
-  &__image {
-    width: 160px;
+  background: $blue;
+  border-color: $blue;
+  &:hover {
+    background: $darkBlue;
+    border-color: $darkBlue;
   }
-}
-
-.price-card {
-  border: 1px solid rgba(0,0,0,.125);
-  border-radius: .25rem;
-  &__image {
-    width: 100%;
+  &:focus {
+    background: $darkestBlue;
+    border-color: $darkestBlue;
   }
-  &__price {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
+  &:active {
+    background: $darkestBlue!important;
+    border-color: $darkestBlue!important;
   }
-}
-
-.mobile-prices {
-  display: none;
-  @media (max-width: 576px) {
-    display: block;
-  }
-}
-.desktop-prices {
-  display: block;
-  @media (max-width: 576px) {
-    display: none;
-  }
-}
-
-.opt-title {
-  font-size: 20px;
-  padding: 10px 10px 0 10px;
-}
-
-.opt-info {
-  display: inline-block;
-  padding: 10px;
-}
-
-.opt-price {
-  font-weight: bold;
-  font-size: 18px;
-  color: $blue;
-}
-
-.opt-desc {
-  padding: 10px;
-  font-size: 14px;
-}
-
-.opt-btn {
-  padding: 10px;
-}
-
-.form-control {
-  border-width: 2px;
 }
 
 .error {
@@ -92,63 +48,6 @@ body {
       display: inline-block;
     }
   }
-}
-
-.coop-modal {
-  .coop-modal-result {
-    display: none;
-  }
-  .coop-modal-error {
-    display: none;
-  }
-  &.success {
-    .coop-modal-base {
-      display: none;
-    }
-    .coop-modal-result {
-      display: block;
-    }
-  }
-  &.failed {
-    .coop-modal-base {
-      display: none;
-    }
-    .coop-modal-error {
-      display: block;
-    }
-  }
-}
-
-.opt-coops {
-  color: $blue;
-  @media (max-width: 768px) {
-    display: block;
-    margin-left: 0;
-    margin-top: 10px;
-  }
-}
-.opt-coops-amount {
-  margin: 0 5px;
-  font-weight: bold;
-}
-.has-coop-wrap {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  background: $dark;
-  z-index: 1;
-}
-.has-coop {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  fill: #ffffff;
-  width: 20px;
-  height: 20px;
 }
 
 .block-img {

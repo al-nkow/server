@@ -49,7 +49,6 @@ function initScrollTo() {
   });
 }
 
-
 document.getElementById('searchForm').addEventListener('submit', function (e) {
   e.preventDefault();
   var inpValue = document.getElementById('searchInp').value;
@@ -65,6 +64,10 @@ showMoreCategories.addEventListener('click', function() {
 });
 
 document.getElementById('currentYear').innerHTML = new Date().getFullYear();
+
+document.getElementsByClassName('bc-slide-link')[0].addEventListener('click', function(e) {
+  e.stopPropagation();
+});
 
 initSiema();
 initScrollTo();

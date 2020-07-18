@@ -339,6 +339,7 @@ const Products = () => {
   const filtersAmount = document.getElementById('filtersAmount');
   const productsListWrap = document.getElementById('productsListWrap');
   const coopBtn = document.getElementById('coopBtn');
+  const coopBtnDesc = document.getElementById('coopBtnDesc');
   const fromToInputIds = ['heightFrom', 'heightTo', 'widthFrom', 'widthTo', 'thicknessFrom', 'thicknessTo', 'weightFrom', 'weightTo', 'volumeLFrom', 'volumeLTo', 'volumeMFrom', 'volumeMTo', 'areaFrom', 'areaTo'];
   let searchTimeout;
   let fullProductsList = [];
@@ -415,6 +416,7 @@ const Products = () => {
 
     if (coopOnlyValue === 'true') {
       coopBtn.classList.add('active');
+      coopBtnDesc.classList.add('active');
     }
   }
   /**
@@ -557,6 +559,7 @@ const Products = () => {
     if (!disabled) {
       const selected = coopBtn.classList.contains('active');
       coopBtn.classList.toggle('active');
+      coopBtnDesc.classList.toggle('active');
       addParameterToUrl('coopOnly', !selected);
       searchRequest();
     }
@@ -626,7 +629,7 @@ const renderProductsList = (data, clear) => {
   const wrap = document.getElementById('productsListWrap');
 
   if (!data || !data.length) {
-    wrap.innerHTML = '<div class="col-12">По Вашему запросу ничего не найдено, попробуйте изменить параметры поиска и повторить попытку</div>';
+    wrap.innerHTML = '<div class="col-12 no-filters-selected">По Вашему запросу ничего не найдено, попробуйте изменить параметры поиска и повторить попытку</div>';
     return;
   }
 
@@ -671,7 +674,7 @@ const renderProductsList = (data, clear) => {
       <a class="bc-card" href="/prices?product=${item._id}">
         ${item.hasCooperation ? `<div class="bc-card__like">${thumbUp}</div>` : ''}
         <div class="bc-card__image-wrap">
-          <img class="bc-card__image" src="${item.image || '/images/noimg.png'}" alt="">
+          <img class="bc-card__image" src="${item.image || '/images/no-img.png'}" alt="">
         </div>
         <div class="bc-card__title">${item.name}</div>
         ${item.brand ? '<div class="bc-card__brand">' + item.brand + '</div>' : ''}

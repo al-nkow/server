@@ -115,6 +115,17 @@
   padding-top: 5px;
   font-size: 14px;
   color: $lightText;
+  .selected {
+    display: none;
+  }
+  &.active {
+    .selected {
+      display: block;
+    }
+    .clean {
+      display: none;
+    }
+  }
 }
 
 .bc-filter-coop {
@@ -182,8 +193,8 @@
       margin-top: -2px;
     }
     &.in-prices {
-      top: 0;
-      right: 0;
+      top: 20px;
+      right: 20px;
     }
   }
   &:hover {
@@ -289,6 +300,10 @@
   }
 }
 
+.form-control {
+  border-radius: 3px;
+}
+
 .bc-input-group {
   &__label {
     margin-bottom: 5px;
@@ -317,46 +332,38 @@
 
 // ========================================
 
-.prices {
-  &__page {
-    padding-top: 40px;
-  }
-  &__title {
-    font-size: 38px;
-    @include font-futura;
-    margin-bottom: 30px;
-    @media (max-width: 576px) {
-      font-size: 26px;
+.coop-modal {
+  input {
+    border-width: 2px;
+    border-color: $midGrey;
+    &.error {
+      border-color: $red;
     }
   }
-}
-
-.prices-card {
-  position: relative;
-  padding: 20px;
-  &__image {
-    max-height: 320px;
-    max-width: 100%;
-    display: block;
-    margin: 0 auto;
+  textarea {
+    border-width: 2px;
+    border-color: $midGrey;
   }
-  &__title {
-    font-size: 16px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+  .coop-modal-result {
+    display: none;
   }
-  &__subtitle {
-    color: $blue;
-    margin-bottom: 15px;
+  .coop-modal-error {
+    display: none;
   }
-  &__main {
-    margin-bottom: 20px;
+  &.success {
+    .coop-modal-base {
+      display: none;
+    }
+    .coop-modal-result {
+      display: block;
+    }
   }
-  &__coop-block {
-    padding-top: 20px;
-    border-top: 1px solid $midGrey;
-  }
-  @media (max-width: 576px) {
-    padding: 0;
+  &.failed {
+    .coop-modal-base {
+      display: none;
+    }
+    .coop-modal-error {
+      display: block;
+    }
   }
 }

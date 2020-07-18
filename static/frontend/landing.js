@@ -164,6 +164,9 @@ showMoreCategories.addEventListener('click', function () {
   this.style.display = 'none';
 });
 document.getElementById('currentYear').innerHTML = new Date().getFullYear();
+document.getElementsByClassName('bc-slide-link')[0].addEventListener('click', function (e) {
+  e.stopPropagation();
+});
 initSiema();
 initScrollTo();
 
