@@ -95,47 +95,48 @@ body
       .bc-controls
         a(href="/products").link-button Перейти в каталог
   // ===========================================================================
-  .bc-coop-cards-block
-    .container
-      .bc-block-title Активные заявки на кооперацию
-      .row
-        each card in cooProducts
-          .col-xs-12.col-sm-6.col-md-3
-            a.bc-card.wow.bounceInUp(href='/prices?product=' + card._id)
-              .bc-card__image-wrap
-                img.bc-card__image(src=card.image)
-              .bc-card__title=card.name
-              if card.brand
-                .bc-card__brand=card.brand
-              .bc-card__params
-                if card.width
-                  .row
-                    .col-6 Ширина:
-                    .col-6=card.width + 'мм'
-                if card.height
-                  .row
-                    .col-6 Высота:
-                    .col-6=card.height + 'мм'
-                if card.thickness
-                  .row
-                    .col-6 Толщина:
-                    .col-6=card.thickness + 'мм'
-                if card.volumeL
-                  .row
-                    .col-6 Объём:
-                    .col-6=card.volumeL + 'м.куб'
-                if card.weight
-                  .row
-                    .col-6 Вес:
-                    .col-6=card.weight + 'кг'
-                if card.area
-                  .row
-                    .col-6 Площадь:
-                    .col-6=card.area + 'м.кв'
-              .bc-card__like
-                include parts/like.pug
-      .bc-controls
-        a(href="/products/?coopOnly=true").link-button Посмотреть все заявки
+  if cooProducts
+    .bc-coop-cards-block
+      .container
+        .bc-block-title Активные заявки на кооперацию
+        .row
+          each card in cooProducts
+            .col-xs-12.col-sm-6.col-md-3
+              a.bc-card.wow.bounceInUp(href='/prices?product=' + card._id)
+                .bc-card__image-wrap
+                  img.bc-card__image(src=card.image)
+                .bc-card__title=card.name
+                if card.brand
+                  .bc-card__brand=card.brand
+                .bc-card__params
+                  if card.width
+                    .row
+                      .col-6 Ширина:
+                      .col-6=card.width + 'мм'
+                  if card.height
+                    .row
+                      .col-6 Высота:
+                      .col-6=card.height + 'мм'
+                  if card.thickness
+                    .row
+                      .col-6 Толщина:
+                      .col-6=card.thickness + 'мм'
+                  if card.volumeL
+                    .row
+                      .col-6 Объём:
+                      .col-6=card.volumeL + 'м.куб'
+                  if card.weight
+                    .row
+                      .col-6 Вес:
+                      .col-6=card.weight + 'кг'
+                  if card.area
+                    .row
+                      .col-6 Площадь:
+                      .col-6=card.area + 'м.кв'
+                .bc-card__like
+                  include parts/like.pug
+        .bc-controls
+          a(href="/products/?coopOnly=true").link-button Посмотреть все заявки
   // ===========================================================================
   .bc-rent-block.st-rent
     .container
