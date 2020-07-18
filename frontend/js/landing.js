@@ -58,10 +58,12 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
   }
 });
 
-showMoreCategories.addEventListener('click', function() {
-  categoriesBlock.classList.add('all-visible');
-  this.style.display = 'none';
-});
+if (showMoreCategories) {
+  showMoreCategories.addEventListener('click', function() {
+    categoriesBlock.classList.add('all-visible');
+    this.style.display = 'none';
+  });
+}
 
 document.getElementById('currentYear').innerHTML = new Date().getFullYear();
 
