@@ -37,7 +37,7 @@ body
       .bc-categories(id="categoriesBlock")
         .row.text-center
           each category, index in categories
-            .col-xs-6.col-sm-4.col-lg-4.p-2(class= index > 7 ? 'more' : '')
+            .col-xs-6.col-sm-4.col-lg-3.p-2(class= index > 7 ? 'more' : '')
               a.bc-category-card(href="/products?category=" + category._id)
                 .bc-category-card__image-area
                   if category.image
