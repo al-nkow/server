@@ -3,9 +3,6 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const ImportController = require('../../controllers/import');
 
-// TODO!!!! ОБЯЗАТЕЛЬНО СДЕЛАТЬ РОЛЬ АДМИНА!!!
-// ТОЛЬКО АДМИН МОЖЕТ УДАЛЯТЬ ТОВАРЫ ИЗ БАЗЫ!!!
-
 /**
  * Delete all products and positions
  * @route DELETE api/import

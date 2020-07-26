@@ -55,7 +55,7 @@ const config = {
 
 module.exports = (env, argv) => {
   if (argv.mode === 'development') {
-    config.devtool = 'source-map';
+    // config.devtool = 'source-map';
     config.watch = true;
   }
 

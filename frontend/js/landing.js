@@ -1,8 +1,11 @@
 import RentForm from './rentForm';
+import smoothscroll from 'smoothscroll-polyfill';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import '../styles/style.scss';
 import Siema from 'siema';
+
+smoothscroll.polyfill();
 
 const categoriesBlock = document.getElementById('categoriesBlock');
 const showMoreCategories = document.getElementById('showMoreCategories');

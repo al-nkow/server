@@ -17,21 +17,13 @@ addDefaultUser();
 // static folder
 app.use(express.static('static'));
 
-// bodyParser = {
-//   json: {limit: '50mb', extended: true},
-//   urlencoded: {limit: '50mb', extended: true}
-// };
-// Init Middleware
-
-// было просто extended: false
-app.use(express.json({ limit: '50mb', extended: true })); // body parser (req.body)
+// bodyParser 
+app.use(express.json({ limit: '50mb', extended: true }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-
-// TODO: разрешить только localhost или какой-то адрес
 app.use((req, res, next) => {
   // Allow CORS
-  res.header('Access-Control-Allow-Origin', '*'); // * - allow from any url
+  res.header('Access-Control-Allow-Origin', '*');
   // res.header('Access-Control-Allow-Origin', 'http://my-cool-page.com')
   // res.header('Access-Control-Allow-Headers', '*');
   res.header(
@@ -73,27 +65,6 @@ app.listen(PORT, () => {
   console.log(`=== Open: http://localhost:${PORT} ===`);
 });
 
-// mongoose.connect('mongodb://localhost:27017/myapi', { // proka4
-//   // useMongoClient: true
-// }).catch(err => {
-//   if (err.message.indexOf("ECONNREFUSED") !== -1) {
-//     console.error("Error: The server was not able to reach MongoDB. Maybe it's not running?");
-//     process.exit(1);
-//   } else {
-//     throw err;
-//   }
-// });
-
-// var address = process.env.MONGO_PORT_27017_TCP_ADDR || '127.0.0.1';
-// var port = process.env.MONGO_PORT_27017_TCP_PORT || '27017';
-// var dbName = process.env.MONGO_DATABASE_NAME || 'hrbase';
-//
-// // Build the connection string
-// var dbURI = `mongodb://${address}:${port}/${dbName}`;
-//
-// // Create the database connection
-// var connection = mongoose.createConnection(dbURI);
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   res.status(404);
@@ -104,22 +75,7 @@ app.use((req, res, next) => {
     return;
   }
 
-  // respond with json
-  // if (req.accepts('json')) {
-  //   res.send({ error: 'Not found' });
-  //   return;
-  // }
-
-  // default to plain-text. send()
-  // res.type('txt').send('Not found');
-
   const error = new Error('Not found');
   error.status = 404;
   next(error);
 });
-
-// app.use(express.favicon("public/images/favicon.ico"));
-// or
-// app.use('/favicon.ico', express.static('images/favicon.ico'));
-
-// =====================

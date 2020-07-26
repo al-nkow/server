@@ -3,7 +3,6 @@ const Cooperation = require('../models/Cooperation');
 const Position = require('../models/Position');
 const Supply = require('../models/Supply');
 const mongoose = require('mongoose');
-// const ProductService = require('../services/products');
 const { redConsoleColor } = require('../config/constants');
 
 /**
@@ -123,7 +122,6 @@ exports.commonSearch = async params => {
       ? await fullTextSearch(searchParams, searchStr)
       : await Product.find({ ...searchParams })
 
-    // if (products && products.length) await ProductService.addExtraInfo(products);
     return products;
   } catch (e) {
     return commonSearchErrorHandler(e);

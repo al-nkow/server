@@ -37,7 +37,7 @@ body
       .bc-categories(id="categoriesBlock")
         .row.text-center
           each category, index in categories
-            .col-xs-6.col-sm-4.col-lg-3.p-2(class= index > 7 ? 'more' : '')
+            .col-xs-6.col-sm-4.col-lg-2.p-2(class= index > 7 ? 'more' : '')
               a.bc-category-card(href="/products?category=" + category._id)
                 .bc-category-card__image-area
                   if category.image
@@ -95,7 +95,7 @@ body
       .bc-controls
         a(href="/products").link-button Перейти в каталог
   // ===========================================================================
-  if cooProducts
+  if cooProducts && cooProducts.length
     .bc-coop-cards-block
       .container
         .bc-block-title Активные заявки на кооперацию
@@ -150,11 +150,11 @@ body
               | Чтобы оставить заявку на аренду - нажмите на кнопку ниже и заполните форму. 
               | Менеджер свяжется с Вами в ближайшее время чтобы уточнить детали 
               | и рассказать о дальнейших действиях.
-            .bc-btn(type="button" data-toggle="modal" data-target="#rentModal") Оставить заявку
+            .bc-btn(data-toggle="modal" data-target="#rentModal") Оставить заявку
   // ===========================================================================
   .bc-partners-block
     .container
-      .bc-block-title.small Наши партёры
+      .bc-block-title.small Сравнение цен магазинов
       .bc-partners.row.text-center
         each shop in shops
           .col-6.col-sm-6.col-md-3

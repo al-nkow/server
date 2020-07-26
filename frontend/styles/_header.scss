@@ -75,7 +75,7 @@
   button {
     border-radius: 2px;
     background: $blue;
-    color: #ffffff;
+    color: $white;
     padding-left: 26px;
     padding-right: 26px;
     box-shadow: none!important;
@@ -84,6 +84,10 @@
     }
     &:active {
       background: #0276b1!important;
+    }
+    &:disabled {
+      background: #0276b1!important;
+      color: $white;
     }
   }
 }
