@@ -45,7 +45,7 @@ body.bg-grey
             if supply && supply.options && supply.options.length && product.bocoArticle
               .prices-card__coop-block
                 div
-                  .bc-btn.icon.mb-3(data-toggle="modal" data-target="#coopModal")
+                  //.bc-btn.icon.mb-3(data-toggle="modal" data-target="#coopModal")
                     include parts/like.pug
                     | Кооперация
                   div.opt-coops(id="opt-coops")
@@ -66,8 +66,8 @@ body.bg-grey
           | Вы можете оставить заявку на участие в совместной оптовой закупке - как только 
           | наберется необходимое количество участников чтобы совершить оптовую закупку - мы с Вами свяжемся.
           | Для этого заполните форму нажав кнопку Кооперация.
-        .opt-title Оптовые цены:
-        each option in supply.options
+        //.opt-title Оптовые цены:
+        //each option in supply.options
           .opt-info 
             span.opt-price=option.price
             |  руб. от 
@@ -75,6 +75,14 @@ body.bg-grey
             |  единиц
 
     .opt-title.mb-2 Сравните цены в магазинах:
+
+
+
+
+
+
+
+
     .mb-3.mobile-prices
       .row
         if positions && positions.length
@@ -94,6 +102,28 @@ body.bg-grey
                 .row
                   .col-12
                     a.btn.btn-success.btn-block(href=position.link target="_blank") В магазин
+        if supply && supply.options && supply.options.length && product.bocoArticle
+          .col-12.mb-3
+            .price-card.p-2
+              .mb-2
+                .mob-prices-opt Оптовая цена
+                .mob-prices-card
+                  each option in supply.options
+                    .mb-2
+                      span.prices-table__price=option.price
+                      |  руб. (от 
+                      span=option.quantity
+                      |  шт)
+              .row.text-muted.mb-2
+                .col-6
+                  small Артикул:
+                .col-6
+                  small=product.bocoArticle
+              .row
+                .col-12
+                  .bc-btn.full.icon.mb-3(data-toggle="modal" data-target="#coopModal")
+                    include parts/like.pug
+                    | Кооперация
 
     .mb-5.desktop-prices
       if positions && positions.length
@@ -115,9 +145,25 @@ body.bg-grey
                 td=position.article
                 td
                   a.btn.btn-success(href=position.link target="_blank") В магазин
+            if supply && supply.options && supply.options.length && product.bocoArticle
+              tr
+                th
+                  .table-prices-opt Оптовая цена
+                td
+                  each option in supply.options
+                    .mb-2
+                      span.prices-table__price=option.price
+                      |  руб. (от 
+                      span=option.quantity
+                      |  шт)
+                td=product.bocoArticle
+                td
+                  .bc-btn.icon.mb-3(data-toggle="modal" data-target="#coopModal")
+                      include parts/like.pug
+                      | Кооперация
 
     if !positions || !positions.length
-      .p-3 К сожалению, в настоящее время этот товар не представлен в ассортименте магазинов
+      .no-prices К сожалению, в настоящее время этот товар не представлен в ассортименте магазинов
 
   include parts/footer.pug
   include parts/coopModal.pug

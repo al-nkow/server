@@ -25,6 +25,7 @@
     @include box-shadow;
   }
   &__title {
+    font-size: 12px;
     color: $darkGrey;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -38,18 +39,18 @@
     @include pos-center;
   }
   &__image-area {
-    height: 190px;
+    height: 100px;
     position: relative;
     margin-bottom: 10px;
   }
   &__noimage {
     @include pos-center;
-    width: 140px;
-    height: 140px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background: $white;
     svg {
-      width: 86px;
+      width: 66px;
       @include pos-center;
       path {
         fill: $midGrey;

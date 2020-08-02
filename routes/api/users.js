@@ -25,6 +25,7 @@ router.delete('/:userId', auth, UsersController.delete);
  */
 router.post(
   '/',
+  auth,
   [
     check('name', 'Name is required')
       .not()

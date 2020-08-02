@@ -135,7 +135,6 @@
 
 .opt-desc {
   padding: 10px;
-  font-size: 14px;
 }
 
 .opt-btn {
@@ -143,6 +142,7 @@
 }
 
 .opt-coops {
+  font-size: 20px;
   color: $blue;
   @media (max-width: 768px) {
     display: block;
@@ -172,4 +172,23 @@
   fill: #ffffff;
   width: 20px;
   height: 20px;
+}
+
+.no-prices {
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
+.table-prices-opt {
+  font-size: 20px;
+  padding: 20px;
+}
+
+.mob-prices-opt {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.mob-prices-card {
+  margin-bottom: 10px;
 }
