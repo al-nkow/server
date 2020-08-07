@@ -7,7 +7,7 @@ body.bg-grey
     .card.mb-3.prices-card
       div.row.no-gutters
         div.col-md-4.prices-card__image-wrap
-          img.prices-card__image(src=(product.image ? product.image : "/images/noimg.png") alt="")
+          img.prices-card__image(class=(product.image ? '' : 'small') src=(product.image ? product.image : "/images/no-img.png") alt="")
         div.col-md-8
           div.card-body
             .prices-card__main
@@ -75,13 +75,6 @@ body.bg-grey
             |  единиц
 
     .opt-title.mb-2 Сравните цены в магазинах:
-
-
-
-
-
-
-
 
     .mb-3.mobile-prices
       .row
