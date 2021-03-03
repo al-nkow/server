@@ -26,7 +26,7 @@
     "nodemailer": "^6.4.6",
     "popper.js": "^1.16.1",
     "prettier": "^1.18.2",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "request": "^2.88.0",
     "siema": "^1.5.1",
     "smoothscroll-polyfill": "^0.4.4"
